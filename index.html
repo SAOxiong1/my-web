@@ -1,0 +1,474 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#f6f2e8">
+  <meta name="description" content="今天吃什么？从粤闽江浙到川湘赣，随机挑一道合口味的家常菜，附上简单菜谱。">
+  <title>食光 · 今天吃什么</title>
+  <style>
+    :root {
+      color-scheme: light;
+      --paper: #f6f2e8;
+      --paper-deep: #eee8d8;
+      --ink: #263a30;
+      --muted: #788076;
+      --green: #2e5a43;
+      --green-dark: #234a36;
+      --orange: #e8794c;
+      --line: #e5dfd1;
+      --card: #fffdf8;
+      --shadow: 0 18px 55px rgb(65 61 46 / 8%);
+      font-family: "PingFang SC", "Hiragino Sans GB", "Microsoft YaHei", system-ui, sans-serif;
+      font-synthesis: none;
+      text-rendering: optimizeLegibility;
+    }
+
+    * { box-sizing: border-box; }
+
+    body {
+      margin: 0;
+      min-width: 320px;
+      background:
+        radial-gradient(ellipse at 12% 8%, rgb(232 121 76 / 7%), transparent 25rem),
+        radial-gradient(ellipse at 88% 40%, rgb(93 132 92 / 7%), transparent 28rem),
+        var(--paper);
+      color: var(--ink);
+    }
+
+    button { font: inherit; }
+    .page-shell { max-width: 1120px; margin: 0 auto; padding: 0 36px 80px; }
+    .topbar { height: 82px; display: flex; align-items: center; justify-content: space-between; border-bottom: 1px solid rgb(38 58 48 / 10%); }
+    .brand { display: flex; align-items: center; gap: 11px; color: var(--ink); text-decoration: none; }
+    .brand-mark { width: 35px; height: 35px; display: grid; place-items: center; border-radius: 12px 12px 12px 4px; background: var(--green); color: #fff9eb; font-size: 19px; transform: rotate(-4deg); }
+    .brand-name { font-family: Georgia, "Noto Serif SC", serif; font-size: 19px; font-weight: 700; letter-spacing: .06em; }
+    .brand-note { color: var(--muted); font-size: 12px; letter-spacing: .08em; }
+    .top-date { color: var(--muted); font-size: 13px; }
+    main { padding-top: 40px; }
+    .intro { display: grid; grid-template-columns: minmax(0, 1fr) minmax(340px, .92fr); align-items: center; gap: 36px; }
+    .eyebrow { display: inline-flex; align-items: center; gap: 9px; color: var(--green); font-size: 11px; font-weight: 750; letter-spacing: .16em; text-transform: uppercase; }
+    .eyebrow::before { content: ""; width: 22px; height: 1px; background: var(--orange); }
+    h1 { margin: 18px 0 12px; color: var(--ink); font-family: Georgia, "Noto Serif SC", "Songti SC", serif; font-size: clamp(42px, 5vw, 65px); font-weight: 700; letter-spacing: -.055em; line-height: 1.14; }
+    h1 em { color: var(--orange); font-style: normal; }
+    .intro-copy { max-width: 420px; margin: 0; color: #73796e; font-size: 15px; line-height: 1.9; }
+    .cta-row { display: flex; align-items: center; gap: 14px; margin-top: 27px; }
+    .primary-button { min-height: 52px; display: inline-flex; align-items: center; justify-content: center; gap: 10px; padding: 0 22px; border: 0; border-radius: 16px 16px 16px 5px; background: var(--green); box-shadow: 0 7px 18px rgb(46 90 67 / 17%); color: #fffdf8; cursor: pointer; font-size: 15px; font-weight: 700; transition: background .2s, transform .2s, box-shadow .2s; }
+    .primary-button:hover:not(:disabled) { transform: translateY(-2px); background: var(--green-dark); box-shadow: 0 10px 24px rgb(46 90 67 / 22%); }
+    .primary-button:active:not(:disabled) { transform: translateY(0); }
+    .primary-button:focus-visible, .chip:focus-visible { outline: 3px solid #e8a181; outline-offset: 3px; }
+    .primary-button:disabled { cursor: not-allowed; opacity: .48; }
+    .button-icon { font-size: 20px; line-height: 1; }
+    .hint { color: var(--muted); font-size: 12px; }
+
+    .art-card { position: relative; min-height: 340px; overflow: hidden; border: 1px solid rgb(92 82 59 / 8%); border-radius: 44% 44% 22px 22px / 17% 17% 22px 22px; background: #e9eadb; box-shadow: var(--shadow); }
+    .art-card::before, .art-card::after { position: absolute; z-index: 1; width: 10px; height: 10px; border-radius: 50%; background: #e6a267; content: ""; opacity: .65; }
+    .art-card::before { top: 21%; left: 12%; }
+    .art-card::after { right: 12%; bottom: 23%; width: 7px; height: 7px; background: #70895c; }
+    .art-label { position: absolute; z-index: 2; right: 24px; bottom: 20px; padding: 8px 12px; border: 1px solid rgb(38 58 48 / 10%); border-radius: 999px; background: rgb(255 253 248 / 82%); color: var(--green); font-size: 11px; letter-spacing: .06em; backdrop-filter: blur(6px); }
+    .dish-art { display: block; width: 100%; height: 340px; }
+    .art-grain { opacity: .12; mix-blend-mode: multiply; }
+
+    .picker { margin-top: 39px; padding: 20px 24px 21px; border: 1px solid rgb(38 58 48 / 8%); border-radius: 20px; background: rgb(255 253 248 / 68%); }
+    .picker-head { display: flex; align-items: baseline; justify-content: space-between; gap: 14px; }
+    .picker-title { margin: 0; font-family: Georgia, "Noto Serif SC", "Songti SC", serif; font-size: 16px; }
+    .picker-note { color: var(--muted); font-size: 11px; }
+    .filter-group { display: flex; align-items: center; gap: 8px; margin-top: 16px; }
+    .filter-label { width: 45px; flex: 0 0 45px; color: #85877c; font-size: 12px; }
+    .chip-list { display: flex; flex-wrap: wrap; gap: 7px; }
+    .chip { min-height: 31px; padding: 0 12px; border: 1px solid transparent; border-radius: 999px; background: #f0eee5; color: #687067; cursor: pointer; font-size: 12px; transition: background .18s, color .18s, border-color .18s; }
+    .chip:hover { border-color: #bac6b6; }
+    .chip[aria-pressed="true"] { border-color: #c9d6c6; background: #e4ecdf; color: var(--green-dark); font-weight: 700; }
+
+    .result-section { padding-top: 43px; }
+    .section-overline { margin: 0 0 9px; color: var(--orange); font-size: 11px; font-weight: 750; letter-spacing: .14em; }
+    .result-heading { display: flex; align-items: end; justify-content: space-between; gap: 18px; margin-bottom: 18px; }
+    .result-heading h2 { margin: 0; font-family: Georgia, "Noto Serif SC", "Songti SC", serif; font-size: clamp(23px, 3vw, 30px); letter-spacing: -.04em; }
+    .result-count { color: var(--muted); font-size: 12px; }
+    .recipe-card { display: grid; grid-template-columns: 1fr 1.12fr; overflow: hidden; border: 1px solid rgb(38 58 48 / 8%); border-radius: 22px; background: var(--card); box-shadow: var(--shadow); }
+    .recipe-summary { padding: 27px 30px; border-right: 1px solid var(--line); }
+    .dish-topline { display: flex; flex-wrap: wrap; align-items: center; gap: 8px; }
+    .tag { display: inline-flex; align-items: center; min-height: 25px; padding: 0 9px; border-radius: 999px; background: #edf0e7; color: var(--green); font-size: 11px; font-weight: 650; }
+    .tag.spice { background: #fbede2; color: #a85234; }
+    .dish-name { margin: 13px 0 7px; font-family: Georgia, "Noto Serif SC", "Songti SC", serif; font-size: 30px; letter-spacing: -.05em; }
+    .dish-desc { margin: 0; color: var(--muted); font-size: 13px; line-height: 1.8; }
+    .dish-meta { display: flex; flex-wrap: wrap; gap: 18px; margin-top: 17px; color: #687067; font-size: 12px; }
+    .dish-meta span { display: inline-flex; align-items: center; gap: 6px; }
+    .recommend-note { display: flex; gap: 9px; margin-top: 21px; padding: 12px 13px; border-radius: 13px; background: #f5f2e9; color: #6d7268; font-size: 12px; line-height: 1.7; }
+    .recommend-note strong { color: var(--green); font-weight: 700; }
+
+    .recipe-details { padding: 27px 30px 29px; }
+    .recipe-details h3 { margin: 0 0 13px; color: var(--ink); font-family: Georgia, "Noto Serif SC", serif; font-size: 16px; }
+    .ingredient-list { display: flex; flex-wrap: wrap; gap: 7px; margin: 0; padding: 0; list-style: none; }
+    .ingredient-list li { padding: 7px 10px; border: 1px solid #ece8de; border-radius: 9px; color: #626a60; font-size: 12px; }
+    .steps { display: grid; gap: 11px; margin: 0; padding: 0; list-style: none; counter-reset: step; }
+    .steps li { position: relative; display: grid; grid-template-columns: 25px 1fr; gap: 9px; color: #666d63; font-size: 12px; line-height: 1.75; counter-increment: step; }
+    .steps li::before { display: grid; width: 23px; height: 23px; place-items: center; border-radius: 50%; background: #e9efe5; color: var(--green); content: counter(step); font-size: 11px; font-weight: 750; }
+    .recipe-divider { height: 1px; margin: 20px 0; background: var(--line); }
+    .empty-state { padding: 35px; border: 1px dashed #c9c7b9; border-radius: 18px; background: rgb(255 253 248 / 60%); color: var(--muted); text-align: center; line-height: 1.8; }
+    footer { display: flex; justify-content: space-between; gap: 16px; margin-top: 26px; padding-top: 15px; border-top: 1px solid rgb(38 58 48 / 10%); color: #929186; font-size: 11px; }
+    .sr-only { position: absolute; width: 1px; height: 1px; overflow: hidden; clip: rect(0, 0, 0, 0); white-space: nowrap; clip-path: inset(50%); }
+
+    @media (max-width: 760px) {
+      .page-shell { padding: 0 20px 55px; }
+      .topbar { height: 68px; }
+      main { padding-top: 27px; }
+      .intro { grid-template-columns: 1fr; gap: 25px; }
+      .intro-copy { max-width: 520px; }
+      .art-card { min-height: 260px; border-radius: 32% 32% 20px 20px / 15% 15% 20px 20px; }
+      .dish-art { height: 285px; }
+      .picker { margin-top: 28px; padding: 17px 16px; }
+      .picker-head { align-items: start; flex-direction: column; gap: 5px; }
+      .filter-group { align-items: start; }
+      .filter-label { padding-top: 7px; }
+      .result-section { padding-top: 34px; }
+      .recipe-card { grid-template-columns: 1fr; }
+      .recipe-summary { border-right: 0; border-bottom: 1px solid var(--line); }
+      .recipe-summary, .recipe-details { padding: 23px 21px; }
+    }
+
+    @media (max-width: 420px) {
+      .page-shell { padding-right: 15px; padding-left: 15px; }
+      .brand-note { display: none; }
+      .top-date { font-size: 11px; }
+      .cta-row { align-items: start; flex-direction: column; }
+      .primary-button { width: 100%; }
+      .art-card { min-height: 220px; }
+      .dish-art { height: 245px; }
+      .chip { padding: 0 10px; }
+      .dish-name { font-size: 26px; }
+      footer { flex-direction: column; gap: 5px; }
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      *, *::before, *::after { scroll-behavior: auto !important; transition-duration: .01ms !important; }
+    }
+  </style>
+</head>
+<body>
+  <div class="page-shell">
+    <header class="topbar">
+      <a class="brand" href="#" aria-label="食光，返回首页">
+        <span class="brand-mark" aria-hidden="true">食</span>
+        <span class="brand-name">食光</span>
+        <span class="brand-note">一日三餐的小灵感</span>
+      </a>
+      <time class="top-date" id="today-date"></time>
+    </header>
+
+    <main>
+      <section class="intro" aria-labelledby="page-title">
+        <div class="intro-text">
+          <span class="eyebrow">A LITTLE TASTE OF HOME</span>
+          <h1 id="page-title">今天，<br><em>吃点什么？</em></h1>
+          <p class="intro-copy">把选择交给好运气。从南方家常菜里，为你挑一道合胃口的。鲜香、微辣，或是想来点热烈的？</p>
+          <div class="cta-row">
+            <button class="primary-button" id="randomize" type="button">
+              <span class="button-icon" aria-hidden="true">✳</span>
+              <span>随机吃一道</span>
+            </button>
+            <span class="hint">点一下，灵感就上桌</span>
+          </div>
+        </div>
+        <div class="art-card" id="art-card" aria-label="今日菜品彩绘插画">
+          <div id="art-holder"></div>
+          <span class="art-label" id="art-label">一口南方家常味</span>
+        </div>
+      </section>
+
+      <section class="picker" aria-labelledby="picker-heading">
+        <div class="picker-head">
+          <h2 class="picker-title" id="picker-heading">先选选今天的口味</h2>
+          <span class="picker-note">只在符合条件的菜里随机 · 也可以全部交给我</span>
+        </div>
+        <div class="filter-group" role="group" aria-label="按菜系筛选">
+          <span class="filter-label">菜系</span>
+          <div class="chip-list" id="region-filters">
+            <button class="chip" type="button" data-region="全部" aria-pressed="true">都可以</button>
+            <button class="chip" type="button" data-region="粤菜" aria-pressed="false">粤菜</button>
+            <button class="chip" type="button" data-region="闽菜" aria-pressed="false">闽菜</button>
+            <button class="chip" type="button" data-region="江浙菜" aria-pressed="false">江浙菜</button>
+            <button class="chip" type="button" data-region="川菜" aria-pressed="false">川菜</button>
+            <button class="chip" type="button" data-region="湘菜" aria-pressed="false">湘菜</button>
+            <button class="chip" type="button" data-region="赣菜" aria-pressed="false">赣菜</button>
+          </div>
+        </div>
+        <div class="filter-group" role="group" aria-label="按辣度筛选">
+          <span class="filter-label">口味</span>
+          <div class="chip-list" id="spice-filters">
+            <button class="chip" type="button" data-spice="全部" aria-pressed="true">不限辣度</button>
+            <button class="chip" type="button" data-spice="清淡" aria-pressed="false">不辣清淡</button>
+            <button class="chip" type="button" data-spice="嗜辣" aria-pressed="false">想吃辣</button>
+          </div>
+        </div>
+      </section>
+
+      <section class="result-section" aria-labelledby="result-heading">
+        <p class="section-overline">TODAY'S LITTLE MENU</p>
+        <div class="result-heading">
+          <h2 id="result-heading">给今天的一道好菜</h2>
+          <span class="result-count" id="result-count" aria-live="polite"></span>
+        </div>
+        <div id="recipe-result" aria-live="polite"></div>
+      </section>
+    </main>
+
+    <footer>
+      <span>愿每一餐，都有一点期待。</span>
+      <span>家常做法仅供参考，食材请按口味调整。</span>
+    </footer>
+  </div>
+
+  <script>
+    const dishes = [
+      {
+        id: "steamed-egg", name: "虾仁蒸水蛋", region: "粤菜", spice: 0, spiceLabel: "清淡不辣",
+        time: "15 分钟", serving: "2 人份", flavor: "嫩滑鲜甜", category: "egg", colors: ["#e6a551", "#5a9a72", "#df7956"],
+        description: "蒸蛋像云一样软嫩，虾仁鲜甜，一勺下去就是熟悉的广东家常味。",
+        tip: "蛋液和温水约 1:1.5，过筛再蒸，表面会更细腻。",
+        ingredients: ["鸡蛋 2 个", "鲜虾仁 6 只", "温水约 180 ml", "生抽 1 勺", "葱花少许"],
+        steps: ["鸡蛋打散，加少许盐；加入约 40℃ 温水拌匀，过筛倒入浅碗。", "盖上盘子或保鲜膜扎小孔，水开后转中小火蒸 8 分钟。", "摆上虾仁再蒸 3 分钟，淋生抽和香油，撒葱花即可。"]
+      },
+      {
+        id: "soy-chicken", name: "葱香豉油鸡", region: "粤菜", spice: 0, spiceLabel: "清香不辣",
+        time: "35 分钟", serving: "2–3 人份", flavor: "咸鲜回甜", category: "chicken", colors: ["#d99451", "#72905d", "#bb6045"],
+        description: "鸡肉浸在葱姜豉油香里，皮亮肉嫩，配一碗热米饭刚刚好。",
+        tip: "关火后让鸡肉在酱汁里浸一会儿，更容易入味。",
+        ingredients: ["鸡腿 2 只", "生抽 4 勺", "老抽 1 勺", "冰糖 15 g", "姜片、葱段适量"],
+        steps: ["鸡腿擦干；锅中放少许油，煸香姜片和葱段。", "加入生抽、老抽、冰糖和小半碗水，煮至冰糖融化。", "放入鸡腿，小火加盖焖 20 分钟，中途翻面；关火浸 10 分钟，斩件淋汁。"]
+      },
+      {
+        id: "scallop-vermicelli", name: "蒜蓉粉丝蒸扇贝", region: "粤菜", spice: 0, spiceLabel: "鲜香不辣",
+        time: "20 分钟", serving: "2 人份", flavor: "蒜香鲜甜", category: "seafood", colors: ["#e8ae63", "#d87652", "#69a184"],
+        description: "蒜香和海味一起蒸出来，粉丝吸足鲜汁，是很讨喜的海鲜小菜。",
+        tip: "蒜蓉用温油激香但别炸黄，蒜味会更柔和。",
+        ingredients: ["扇贝 6 只", "粉丝 1 小把", "蒜末 4 瓣", "生抽 1 勺", "葱花、食用油适量"],
+        steps: ["粉丝用温水泡软；扇贝清理干净，粉丝剪短铺在贝壳上。", "蒜末分成两份，一份用温油炒香，和生抽拌匀后铺在扇贝上。", "水开后蒸 6–8 分钟，撒葱花并淋少许热油。"]
+      },
+      {
+        id: "oyster-omelet", name: "闽味海蛎煎", region: "闽菜", spice: 0, spiceLabel: "鲜香不辣",
+        time: "20 分钟", serving: "2 人份", flavor: "外脆里嫩", category: "seafood", colors: ["#d77b56", "#88a56e", "#e7b45e"],
+        description: "海蛎的鲜、鸡蛋的香和青菜的清甜，在锅里煎成金黄的一张。",
+        tip: "海蛎下锅前轻轻沥干水分，煎出来不容易散。",
+        ingredients: ["鲜海蛎 200 g", "鸡蛋 2 个", "红薯淀粉 2 勺", "小白菜几片", "白胡椒、盐少许"],
+        steps: ["海蛎轻轻冲洗沥干；红薯淀粉加 3 勺水调匀，加入少许盐和白胡椒。", "平底锅多放一点油，倒入淀粉糊，放海蛎和切碎的小白菜。", "淀粉边缘凝固后打入鸡蛋，煎至两面微焦熟透即可。"]
+      },
+      {
+        id: "lychee-pork", name: "荔枝肉", region: "闽菜", spice: 0, spiceLabel: "酸甜不辣",
+        time: "35 分钟", serving: "2–3 人份", flavor: "酸甜酥香", category: "pork", colors: ["#df754d", "#86a166", "#e4ae55"],
+        description: "名字有荔枝，菜里却不放荔枝；酸甜酱汁裹着酥香肉块，非常下饭。",
+        tip: "肉块切花刀后轻轻卷起，炸好自然有荔枝般的纹路。",
+        ingredients: ["猪里脊 300 g", "土豆 1 个", "番茄酱 2 勺", "白醋 1 勺", "淀粉、糖、蒜末适量"],
+        steps: ["里脊切小块划浅花刀，加少许盐抓匀，裹薄淀粉；土豆切滚刀块。", "锅中热油，将肉块和土豆分别炸至金黄，捞出沥油。", "留少许底油炒香蒜末，加番茄酱、白醋、糖和少量水；倒入肉块土豆快速翻匀。"]
+      },
+      {
+        id: "braised-pork", name: "江南笋干红烧肉", region: "江浙菜", spice: 0, spiceLabel: "浓香不辣",
+        time: "70 分钟", serving: "3 人份", flavor: "酱香软糯", category: "pork", colors: ["#be654a", "#8d9b63", "#e6b365"],
+        description: "五花肉炖到软糯，配上笋干的清鲜，浓油赤酱里还有一口山野香。",
+        tip: "炖煮时保持小火微微冒泡，肉块更容易软而不散。",
+        ingredients: ["五花肉 500 g", "泡发笋干 100 g", "生抽 2 勺", "老抽 1 勺", "冰糖、姜片、料酒适量"],
+        steps: ["五花肉切块冷水下锅，加姜片和料酒煮 3 分钟，捞出洗净。", "小火将冰糖炒成琥珀色，放入肉块翻匀；加生抽、老抽和热水没过肉。", "放入笋干，小火炖 50–60 分钟，最后开盖收至汤汁浓亮。"]
+      },
+      {
+        id: "scallion-noodles", name: "葱油拌面", region: "江浙菜", spice: 0, spiceLabel: "葱香不辣",
+        time: "20 分钟", serving: "2 人份", flavor: "酱香葱香", category: "noodles", colors: ["#c8764d", "#769466", "#e6b65f"],
+        description: "葱段慢慢炸出香气，和甜咸酱汁拌进面条里，简单却让人惦记。",
+        tip: "葱段用小火慢煎到焦黄，葱油才会有温柔的焦香。",
+        ingredients: ["细面 200 g", "小葱 1 把", "生抽 2 勺", "老抽半勺", "白糖 1 小勺"],
+        steps: ["小葱洗净擦干，切段；生抽、老抽和白糖调成酱汁。", "锅中放油，小火煎葱段至焦黄，捞出葱段，倒入酱汁煮至起小泡。", "面条煮熟沥干，趁热拌入葱油酱汁，放上焦葱即可。"]
+      },
+      {
+        id: "kung-pao-chicken", name: "宫保鸡丁", region: "川菜", spice: 1, spiceLabel: "微辣",
+        time: "25 分钟", serving: "2 人份", flavor: "荔枝酸甜微辣", category: "chicken", colors: ["#d9784f", "#83a066", "#e7b957"],
+        description: "鸡丁嫩、花生脆，酸甜咸鲜中带一丝干辣椒香，刚好很下饭。",
+        tip: "鸡肉先腌后快炒，炒制时间短更容易保持滑嫩。",
+        ingredients: ["鸡胸肉 250 g", "熟花生 40 g", "干辣椒 5 个", "黄瓜半根", "生抽、醋、糖、淀粉适量"],
+        steps: ["鸡肉切丁，加生抽、淀粉和少许油抓匀；调好生抽、醋、糖和少量水的碗汁。", "热锅少油，鸡丁炒至变色盛出；锅中放干辣椒和花椒炒出香气。", "倒回鸡丁和黄瓜丁，淋入碗汁快速翻炒，出锅前拌入花生。"]
+      },
+      {
+        id: "fish-fragrant-eggplant", name: "鱼香茄子", region: "川菜", spice: 1, spiceLabel: "微辣",
+        time: "25 分钟", serving: "2 人份", flavor: "咸甜微酸", category: "vegetable", colors: ["#8b6a9c", "#e48a59", "#799568"],
+        description: "鱼香调味不靠鱼，泡椒、蒜和醋把茄子煨得绵软入味。",
+        tip: "茄子切好后先蒸几分钟再炒，省油也能保持软糯。",
+        ingredients: ["长茄子 2 根", "泡椒 2 个", "蒜末 3 瓣", "生抽 1 勺", "醋、糖、淀粉适量"],
+        steps: ["茄子切条蒸 5 分钟；泡椒切碎，生抽、醋、糖和淀粉加水调成碗汁。", "锅中少油炒香蒜末和泡椒，放入茄子翻炒均匀。", "倒入碗汁，小火煨 2 分钟至汤汁挂在茄子上，撒葱花出锅。"]
+      },
+      {
+        id: "chopped-chili-fish", name: "家常剁椒鱼头", region: "湘菜", spice: 2, spiceLabel: "够味辣",
+        time: "30 分钟", serving: "2–3 人份", flavor: "鲜辣开胃", category: "seafood", colors: ["#d6523f", "#84a16a", "#e7b65d"],
+        description: "剁椒蒸出酸辣鲜香，鱼肉细嫩，汤汁拌饭也很有滋味。",
+        tip: "剁椒已有咸味，蒸鱼豉油先少放，出锅尝味再补。",
+        ingredients: ["鱼头半个约 700 g", "剁椒 4 勺", "姜片适量", "蒸鱼豉油 1 勺", "葱花、食用油适量"],
+        steps: ["鱼头洗净擦干，铺姜片；剁椒均匀铺在鱼头上。", "水开后上锅蒸 12–15 分钟，按鱼头大小调整时间，至鱼肉熟透。", "倒掉多余蒸汁，淋蒸鱼豉油和热油，撒葱花即可。"]
+      },
+      {
+        id: "stir-fried-beef", name: "小炒黄牛肉", region: "湘菜", spice: 2, spiceLabel: "香辣",
+        time: "20 分钟", serving: "2 人份", flavor: "锅气鲜辣", category: "beef", colors: ["#b95845", "#85a363", "#e1a452"],
+        description: "牛肉大火快炒，配上鲜椒、香菜和蒜香，几分钟就端出一盘锅气。",
+        tip: "逆着纹理切薄片，炒前抓一勺油锁住水分。",
+        ingredients: ["牛里脊 250 g", "青红椒各 1 个", "蒜 3 瓣", "香菜 1 小把", "生抽、蚝油、淀粉适量"],
+        steps: ["牛肉逆纹切薄片，加生抽、淀粉和少许油抓匀；青红椒切圈。", "锅烧热后放油，大火滑炒牛肉至七成熟，先盛出。", "锅中炒香蒜片和辣椒，倒回牛肉，加蚝油快速炒匀，关火拌香菜。"]
+      },
+      {
+        id: "yugan-pork", name: "余干辣椒炒肉", region: "赣菜", spice: 2, spiceLabel: "江西辣香",
+        time: "25 分钟", serving: "2 人份", flavor: "酱香浓辣", category: "pork", colors: ["#b95846", "#759563", "#e6af55"],
+        description: "鲜椒和猪肉一起旺火煸炒，咸香有锅气，是江西人熟悉的下饭菜。",
+        tip: "选肉厚不太辣的青椒，先干煸出虎皮，再放肉炒香。",
+        ingredients: ["猪前腿肉 250 g", "青椒 4 个", "蒜 3 瓣", "生抽 1 勺", "豆豉、料酒少许"],
+        steps: ["猪肉切薄片，肥瘦分开；青椒拍松切段，蒜切片。", "不放油先煸青椒至表皮微皱，盛出；用少许肥肉煸出油。", "放瘦肉和蒜片炒至变色，加豆豉、生抽和料酒，倒回青椒大火翻炒。"]
+      }
+    ];
+
+    const state = { region: "全部", spice: "全部", currentId: "steamed-egg", hasRendered: false };
+    const result = document.getElementById("recipe-result");
+    const count = document.getElementById("result-count");
+    const randomButton = document.getElementById("randomize");
+    const artHolder = document.getElementById("art-holder");
+    const artLabel = document.getElementById("art-label");
+
+    function filteredDishes() {
+      return dishes.filter((dish) => {
+        const inRegion = state.region === "全部" || dish.region === state.region;
+        const inSpice = state.spice === "全部" ||
+          (state.spice === "清淡" && dish.spice === 0) ||
+          (state.spice === "嗜辣" && dish.spice > 0);
+        return inRegion && inSpice;
+      });
+    }
+
+    function escapeHTML(value) {
+      return String(value).replace(/[&<>"']/g, (char) => ({
+        "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;", "'": "&#39;"
+      })[char]);
+    }
+
+    function makeIllustration(dish) {
+      const [colorA, colorB, colorC] = dish.colors;
+      const isNoodles = dish.category === "noodles";
+      const isSoup = dish.category === "egg";
+      const foodShape = isNoodles
+        ? `<path d="M142 167c17-17 32-16 45 0 14 17 26 15 37-1 13-18 29-17 41 1 11 17 24 16 36-2 12-17 25-16 37 2" fill="none" stroke="#e9c278" stroke-width="9" stroke-linecap="round"/><path d="M156 181c13-12 25-12 36 0s24 12 35 0 23-12 34 0 23 12 34 0 22-12 34 0" fill="none" stroke="#f4d899" stroke-width="5" stroke-linecap="round"/>`
+        : isSoup
+          ? `<ellipse cx="240" cy="170" rx="93" ry="44" fill="#efcf83"/><ellipse cx="240" cy="164" rx="75" ry="32" fill="#fff0bd"/><path d="M184 151c15-14 32-14 46 0s30 14 45 0 25-12 37 1" fill="none" stroke="${colorA}" stroke-width="13" stroke-linecap="round"/><path d="M201 172c11-10 22-10 33 0s22 10 34 0 22-10 33 0" fill="none" stroke="#fff9dc" stroke-width="7" stroke-linecap="round"/>`
+          : `<path d="M153 156c16-18 34-19 48-2 14 16 28 16 43 0 15-17 31-16 46 1 15 17 29 17 44 0 12-13 25-15 39-2l-12 34H167z" fill="${colorA}" opacity=".83"/><path d="M173 166c10-9 20-9 30 1s20 11 30 1 19-9 29 1 20 11 30 1 20-9 30 1 17 9 27 0" fill="none" stroke="#f6c87b" stroke-width="7" stroke-linecap="round"/>`;
+      const herbs = `<path d="M185 138c-6-10-4-17 4-23 8 6 10 13 4 22M266 142c-2-12 2-19 11-22 6 9 4 17-6 24M324 143c0-10 5-16 14-17 4 10 1 17-10 21" fill="${colorB}" stroke="#59794d" stroke-width="1.5"/><circle cx="215" cy="153" r="5" fill="${colorC}"/><circle cx="292" cy="158" r="4" fill="${colorC}"/><circle cx="344" cy="161" r="4" fill="#f3d37e"/>`;
+      return `<svg class="dish-art" viewBox="0 0 480 340" role="img" aria-label="${escapeHTML(dish.name)}的彩绘插画" xmlns="http://www.w3.org/2000/svg">
+        <defs>
+          <linearGradient id="wash" x1="0" x2="1" y1="0" y2="1"><stop stop-color="#f0c98e" stop-opacity=".5"/><stop offset="1" stop-color="#d8dfc7" stop-opacity=".16"/></linearGradient>
+          <filter id="soft"><feGaussianBlur stdDeviation="3"/></filter>
+          <filter id="grain"><feTurbulence type="fractalNoise" baseFrequency=".8" numOctaves="2" seed="12"/><feColorMatrix values="0 0 0 0 .4 0 0 0 0 .4 0 0 0 0 .3 0 0 0 .18 0"/></filter>
+        </defs>
+        <ellipse cx="238" cy="268" rx="165" ry="21" fill="#627353" opacity=".17" filter="url(#soft)"/>
+        <path d="M70 115c16-62 106-100 195-81 85 18 143 84 127 146-16 63-116 92-207 69-85-21-131-73-115-134Z" fill="url(#wash)"/>
+        <path d="M89 220c9 46 69 83 151 84 87 1 147-34 155-82-32 19-81 31-151 31-65 0-122-11-155-33Z" fill="#e8e1ce" opacity=".72"/>
+        <path d="M99 181c0 49 62 87 141 87s141-38 141-87c0-19-11-36-29-49H128c-18 13-29 30-29 49Z" fill="#f8f4e8" stroke="#a9a88d" stroke-width="3"/>
+        <ellipse cx="240" cy="166" rx="143" ry="67" fill="#d9d3bd" stroke="#a9a88d" stroke-width="3"/>
+        <ellipse cx="240" cy="160" rx="128" ry="56" fill="#f3e8cc"/>
+        ${foodShape}${herbs}
+        <path d="M119 177c12 33 57 57 121 58 62 1 110-21 124-54" fill="none" stroke="#fffaf0" stroke-width="4" opacity=".9"/>
+        <path d="M352 80c18-14 34-15 49-3-7 18-21 25-42 19M367 97c14-8 26-7 36 3-10 13-23 16-39 8" fill="${colorB}" opacity=".75"/>
+        <path d="M108 101c16-14 30-14 42 0-8 15-20 20-37 12M92 124c10-10 21-10 32 0-7 12-17 15-30 9" fill="${colorC}" opacity=".6"/>
+        <circle cx="373" cy="238" r="5" fill="${colorA}" opacity=".6"/><circle cx="102" cy="205" r="4" fill="${colorB}" opacity=".7"/>
+        <path class="art-grain" filter="url(#grain)" d="M0 0h480v340H0z"/>
+      </svg>`;
+    }
+
+    function renderDish(dish) {
+      state.hasRendered = true;
+      if (!dish) {
+        count.textContent = "0 道合适的菜";
+        result.innerHTML = `<div class="empty-state">这组口味条件下暂时没有菜谱。<br>试试换一种菜系或把辣度调成“不限辣度”。</div>`;
+        artHolder.innerHTML = "";
+        artLabel.textContent = "等你挑选口味";
+        return;
+      }
+
+      state.currentId = dish.id;
+      count.textContent = `当前条件下有 ${filteredDishes().length} 道菜`;
+      artHolder.innerHTML = makeIllustration(dish);
+      artLabel.textContent = `${dish.region} · ${dish.name}`;
+
+      const ingredients = dish.ingredients.map((item) => `<li>${escapeHTML(item)}</li>`).join("");
+      const steps = dish.steps.map((step) => `<li>${escapeHTML(step)}</li>`).join("");
+      result.innerHTML = `
+        <article class="recipe-card" aria-labelledby="dish-name">
+          <div class="recipe-summary">
+            <div class="dish-topline">
+              <span class="tag">${escapeHTML(dish.region)}</span>
+              <span class="tag spice">${escapeHTML(dish.spiceLabel)}</span>
+            </div>
+            <h3 class="dish-name" id="dish-name">${escapeHTML(dish.name)}</h3>
+            <p class="dish-desc">${escapeHTML(dish.description)}</p>
+            <div class="dish-meta">
+              <span><span aria-hidden="true">◷</span>${escapeHTML(dish.time)}</span>
+              <span><span aria-hidden="true">♧</span>${escapeHTML(dish.serving)}</span>
+              <span><span aria-hidden="true">✳</span>${escapeHTML(dish.flavor)}</span>
+            </div>
+            <div class="recommend-note"><span aria-hidden="true">✦</span><span><strong>小贴士</strong>　${escapeHTML(dish.tip)}</span></div>
+          </div>
+          <div class="recipe-details">
+            <section aria-labelledby="ingredients-heading">
+              <h3 id="ingredients-heading">准备食材 <span class="hint">· ${escapeHTML(dish.serving)}</span></h3>
+              <ul class="ingredient-list">${ingredients}</ul>
+            </section>
+            <div class="recipe-divider"></div>
+            <section aria-labelledby="steps-heading">
+              <h3 id="steps-heading">跟着做</h3>
+              <ol class="steps">${steps}</ol>
+            </section>
+          </div>
+        </article>`;
+    }
+
+    function chooseRandom() {
+      const choices = filteredDishes();
+      if (!choices.length) {
+        renderDish(null);
+        return;
+      }
+      const differentChoices = choices.filter((dish) => dish.id !== state.currentId);
+      const pool = differentChoices.length ? differentChoices : choices;
+      const selected = pool[Math.floor(Math.random() * pool.length)];
+      renderDish(selected);
+    }
+
+    function updateFilters() {
+      const choices = filteredDishes();
+      randomButton.disabled = choices.length === 0;
+      if (!state.hasRendered || !choices.some((dish) => dish.id === state.currentId)) {
+        renderDish(choices[0] || null);
+      } else {
+        count.textContent = `当前条件下有 ${choices.length} 道菜`;
+      }
+    }
+
+    document.getElementById("region-filters").addEventListener("click", (event) => {
+      const button = event.target.closest("button[data-region]");
+      if (!button) return;
+      state.region = button.dataset.region;
+      document.querySelectorAll("#region-filters .chip").forEach((chip) => {
+        chip.setAttribute("aria-pressed", String(chip === button));
+      });
+      updateFilters();
+    });
+
+    document.getElementById("spice-filters").addEventListener("click", (event) => {
+      const button = event.target.closest("button[data-spice]");
+      if (!button) return;
+      state.spice = button.dataset.spice;
+      document.querySelectorAll("#spice-filters .chip").forEach((chip) => {
+        chip.setAttribute("aria-pressed", String(chip === button));
+      });
+      updateFilters();
+    });
+
+    randomButton.addEventListener("click", chooseRandom);
+
+    const today = new Date();
+    document.getElementById("today-date").textContent = new Intl.DateTimeFormat("zh-CN", {
+      year: "numeric", month: "long", day: "numeric", weekday: "long"
+    }).format(today);
+
+    updateFilters();
+  </script>
+</body>
+</html>
