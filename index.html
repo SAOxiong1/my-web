@@ -53,9 +53,10 @@
     .intro-copy { max-width: 420px; margin: 0; color: #73796e; font-size: 15px; line-height: 1.9; }
     .cta-row { display: flex; align-items: center; gap: 14px; margin-top: 27px; }
     .primary-button { min-height: 52px; display: inline-flex; align-items: center; justify-content: center; gap: 10px; padding: 0 22px; border: 0; border-radius: 16px 16px 16px 5px; background: var(--green); box-shadow: 0 7px 18px rgb(46 90 67 / 17%); color: #fffdf8; cursor: pointer; font-size: 15px; font-weight: 700; transition: background .2s, transform .2s, box-shadow .2s; }
+    .primary-button { text-decoration: none; }
     .primary-button:hover:not(:disabled) { transform: translateY(-2px); background: var(--green-dark); box-shadow: 0 10px 24px rgb(46 90 67 / 22%); }
     .primary-button:active:not(:disabled) { transform: translateY(0); }
-    .primary-button:focus-visible, .chip:focus-visible { outline: 3px solid #e8a181; outline-offset: 3px; }
+    .primary-button:focus-visible, .chip:focus-visible, .mode-button:focus-visible { outline: 3px solid #e8a181; outline-offset: 3px; }
     .primary-button:disabled { cursor: not-allowed; opacity: .48; }
     .button-icon { font-size: 20px; line-height: 1; }
     .hint { color: var(--muted); font-size: 12px; }
@@ -66,7 +67,8 @@
     .art-card::after { right: 12%; bottom: 23%; width: 7px; height: 7px; background: #70895c; }
     .art-label { position: absolute; z-index: 2; right: 24px; bottom: 20px; padding: 8px 12px; border: 1px solid rgb(38 58 48 / 10%); border-radius: 999px; background: rgb(255 253 248 / 82%); color: var(--green); font-size: 11px; letter-spacing: .06em; backdrop-filter: blur(6px); }
     .dish-art { display: block; width: 100%; height: 340px; }
-    .art-grain { opacity: .12; mix-blend-mode: multiply; }
+    .art-grain { opacity: .22; mix-blend-mode: multiply; }
+    .art-swirl { fill: none; stroke-linecap: round; opacity: .8; }
 
     .picker { margin-top: 39px; padding: 20px 24px 21px; border: 1px solid rgb(38 58 48 / 8%); border-radius: 20px; background: rgb(255 253 248 / 68%); }
     .picker-head { display: flex; align-items: baseline; justify-content: space-between; gap: 14px; }
@@ -78,6 +80,34 @@
     .chip { min-height: 31px; padding: 0 12px; border: 1px solid transparent; border-radius: 999px; background: #f0eee5; color: #687067; cursor: pointer; font-size: 12px; transition: background .18s, color .18s, border-color .18s; }
     .chip:hover { border-color: #bac6b6; }
     .chip[aria-pressed="true"] { border-color: #c9d6c6; background: #e4ecdf; color: var(--green-dark); font-weight: 700; }
+
+    .spin-panel { display: grid; grid-template-columns: minmax(0, .8fr) minmax(310px, 1fr); align-items: center; gap: 30px; margin-top: 25px; padding: 28px 34px; overflow: hidden; border: 1px solid rgb(38 58 48 / 9%); border-radius: 25px; background: linear-gradient(125deg, #fffdf8 0%, #f7f1df 58%, #e8eddf 100%); box-shadow: var(--shadow); }
+    .spin-copy h2 { margin: 8px 0 9px; font-family: Georgia, "Noto Serif SC", "Songti SC", serif; font-size: clamp(24px, 3vw, 34px); letter-spacing: -.045em; }
+    .spin-copy > p:not(.section-overline):not(.spin-status) { max-width: 370px; margin: 0; color: var(--muted); font-size: 13px; line-height: 1.8; }
+    .mode-switch { display: inline-flex; gap: 4px; margin-top: 18px; padding: 4px; border: 1px solid #e4dfd1; border-radius: 999px; background: #f0eee5; }
+    .mode-button { min-height: 35px; padding: 0 15px; border: 0; border-radius: 999px; background: transparent; color: #697064; cursor: pointer; font-size: 12px; transition: background .24s, color .24s, box-shadow .24s; }
+    .mode-button[aria-pressed="true"] { background: var(--green); box-shadow: 0 3px 10px rgb(46 90 67 / 18%); color: #fffdf8; }
+    .mode-button:disabled { cursor: wait; opacity: .6; }
+    .spin-button { display: flex; width: fit-content; margin-top: 15px; }
+    .spin-status { min-height: 20px; margin: 10px 0 0; color: var(--muted); font-size: 12px; }
+    .wheel-area { position: relative; display: grid; justify-items: center; min-height: 350px; perspective: 900px; }
+    .food-wheel { position: relative; width: min(100%, 340px); aspect-ratio: 1; border: 10px solid #fffdf8; border-radius: 50%; background: conic-gradient(from -22.5deg, #f4cb76 0 45deg, #88a97d 45deg 90deg, #ec9971 90deg 135deg, #91b9b1 135deg 180deg, #e6b45e 180deg 225deg, #af9bb6 225deg 270deg, #e78d66 270deg 315deg, #9fb47c 315deg 360deg); box-shadow: 0 13px 28px rgb(47 63 45 / 17%), inset 0 0 0 2px rgb(255 255 255 / 62%); transform: rotate(0deg); transition: transform 4.7s cubic-bezier(.12, .72, .12, 1); will-change: transform; }
+    .food-wheel::before { position: absolute; inset: 9px; border: 1px dashed rgb(255 253 248 / 82%); border-radius: 50%; content: ""; pointer-events: none; }
+    .wheel-slots { position: absolute; inset: 0; border-radius: 50%; }
+    .wheel-pointer { position: absolute; z-index: 3; top: -1px; left: 50%; color: #bd5d3b; font-size: 28px; line-height: 1; transform: translateX(-50%); filter: drop-shadow(0 3px 2px rgb(67 50 31 / 18%)); }
+    .wheel-slot { position: absolute; top: 50%; left: 50%; display: grid; width: 56px; min-height: 42px; place-items: center; padding: 3px; border: 1px solid rgb(255 253 248 / 60%); border-radius: 14px; background: rgb(255 253 248 / 83%); color: #344b39; font-family: Georgia, "Noto Serif SC", serif; font-size: 21px; font-weight: 750; line-height: 1.15; text-align: center; transform-origin: center; transition: background .3s, color .3s, box-shadow .3s, scale .3s; }
+    .wheel-slot.is-winner { z-index: 2; background: #fff4d2; box-shadow: 0 0 0 3px #fffdf8, 0 8px 18px rgb(47 63 45 / 20%); color: #a64e32; font-size: 12px; scale: 1.18; }
+    .frog-hub { position: absolute; z-index: 2; top: 50%; left: 50%; display: grid; width: 112px; height: 112px; place-items: center; border: 5px solid #fffdf8; border-radius: 50%; background: #eaf0df; box-shadow: 0 5px 15px rgb(47 63 45 / 16%); transform: translate(-50%, -50%); }
+    .frog-mascot { display: block; width: 92px; height: 92px; object-fit: contain; }
+    .wheel-area.is-spinning .frog-mascot { animation: frog-tilt .6s ease-in-out infinite alternate; }
+    .spin-reveal { position: absolute; z-index: 4; right: 2px; bottom: 4px; max-width: 225px; padding: 13px 18px; border: 1px solid #f0d7a4; border-radius: 15px 15px 15px 4px; background: #fffaf0; box-shadow: 0 10px 25px rgb(47 63 45 / 16%); color: var(--green-dark); font-family: Georgia, "Noto Serif SC", serif; font-size: 17px; font-weight: 700; opacity: 0; transform: translateY(14px) scale(.92); }
+    .spin-reveal:not([hidden]) { animation: reveal-pop .58s cubic-bezier(.2, .8, .2, 1) both; }
+    .spin-reveal small { display: block; margin-bottom: 4px; color: #a56d38; font-family: var(--font-sans, sans-serif); font-size: 10px; font-weight: 700; letter-spacing: .12em; }
+    @keyframes frog-bounce { from { transform: translateY(0) rotate(-4deg); } to { transform: translateY(-5px) rotate(4deg); } }
+    @keyframes frog-tilt { from { transform: rotate(-5deg); } to { transform: rotate(5deg); } }
+    @keyframes reveal-pop { 0% { opacity: 0; transform: translateY(14px) scale(.88); } 70% { opacity: 1; transform: translateY(-3px) scale(1.03); } 100% { opacity: 1; transform: translateY(0) scale(1); } }
+    .recipe-card { animation: recipe-arrive .65s cubic-bezier(.2, .75, .2, 1) both; }
+    @keyframes recipe-arrive { from { opacity: 0; transform: translateY(18px); } to { opacity: 1; transform: translateY(0); } }
 
     .result-section { padding-top: 43px; }
     .section-overline { margin: 0 0 9px; color: var(--orange); font-size: 11px; font-weight: 750; letter-spacing: .14em; }
@@ -106,6 +136,7 @@
     .recipe-divider { height: 1px; margin: 20px 0; background: var(--line); }
     .empty-state { padding: 35px; border: 1px dashed #c9c7b9; border-radius: 18px; background: rgb(255 253 248 / 60%); color: var(--muted); text-align: center; line-height: 1.8; }
     footer { display: flex; justify-content: space-between; gap: 16px; margin-top: 26px; padding-top: 15px; border-top: 1px solid rgb(38 58 48 / 10%); color: #929186; font-size: 11px; }
+    footer a { color: inherit; text-decoration-color: #b7ad98; text-underline-offset: 2px; }
     .sr-only { position: absolute; width: 1px; height: 1px; overflow: hidden; clip: rect(0, 0, 0, 0); white-space: nowrap; clip-path: inset(50%); }
 
     @media (max-width: 760px) {
@@ -116,6 +147,13 @@
       .intro-copy { max-width: 520px; }
       .art-card { min-height: 260px; border-radius: 32% 32% 20px 20px / 15% 15% 20px 20px; }
       .dish-art { height: 285px; }
+      .spin-panel { grid-template-columns: 1fr; gap: 16px; padding: 23px 20px 15px; }
+      .wheel-area { min-height: 310px; }
+      .food-wheel { width: min(100%, 300px); }
+      .wheel-slot { width: 49px; min-height: 38px; font-size: 19px; }
+      .frog-hub { width: 98px; height: 98px; }
+      .frog-mascot { width: 80px; height: 80px; }
+      .spin-reveal { right: 0; bottom: 0; }
       .picker { margin-top: 28px; padding: 17px 16px; }
       .picker-head { align-items: start; flex-direction: column; gap: 5px; }
       .filter-group { align-items: start; }
@@ -134,13 +172,19 @@
       .primary-button { width: 100%; }
       .art-card { min-height: 220px; }
       .dish-art { height: 245px; }
+      .spin-panel { padding-right: 16px; padding-left: 16px; }
+      .wheel-area { min-height: 275px; }
+      .food-wheel { width: min(100%, 270px); }
+      .wheel-slot { width: 43px; min-height: 34px; font-size: 17px; }
+      .frog-hub { width: 86px; height: 86px; }
+      .frog-mascot { width: 70px; height: 70px; }
       .chip { padding: 0 10px; }
       .dish-name { font-size: 26px; }
       footer { flex-direction: column; gap: 5px; }
     }
 
     @media (prefers-reduced-motion: reduce) {
-      *, *::before, *::after { scroll-behavior: auto !important; transition-duration: .01ms !important; }
+      *, *::before, *::after { scroll-behavior: auto !important; animation-duration: .01ms !important; animation-iteration-count: 1 !important; transition-duration: .01ms !important; }
     }
   </style>
 </head>
@@ -162,11 +206,11 @@
           <h1 id="page-title">今天，<br><em>吃点什么？</em></h1>
           <p class="intro-copy">把选择交给好运气。从南方家常菜里，为你挑一道合胃口的。鲜香、微辣，或是想来点热烈的？</p>
           <div class="cta-row">
-            <button class="primary-button" id="randomize" type="button">
+            <a class="primary-button" href="#spin-section">
               <span class="button-icon" aria-hidden="true">✳</span>
-              <span>随机吃一道</span>
-            </button>
-            <span class="hint">点一下，灵感就上桌</span>
+              <span>去转转盘</span>
+            </a>
+            <span class="hint">让奶蛙替你揭晓</span>
           </div>
         </div>
         <div class="art-card" id="art-card" aria-label="今日菜品彩绘插画">
@@ -202,6 +246,33 @@
         </div>
       </section>
 
+      <section class="spin-panel" id="spin-section" aria-labelledby="spin-heading">
+        <div class="spin-copy">
+          <p class="section-overline">LET THE FROG DECIDE</p>
+          <h2 id="spin-heading">让奶蛙帮你挑</h2>
+          <p>先选今天想吃家常菜，还是点一份外卖。转盘上的菜单暂时保密，停下后再揭晓惊喜。</p>
+          <div class="mode-switch" role="group" aria-label="选择随机菜单类型">
+            <button class="mode-button" type="button" data-mode="home" aria-pressed="true">家常菜</button>
+            <button class="mode-button" type="button" data-mode="takeout" aria-pressed="false">随机外卖</button>
+          </div>
+          <button class="primary-button spin-button" id="randomize" type="button">
+            <span class="button-icon" aria-hidden="true">✳</span>
+            <span id="spin-button-label">奶蛙，转起来</span>
+          </button>
+          <p class="spin-status" id="spin-status" aria-live="polite">转盘准备好了，等你来揭晓。</p>
+        </div>
+        <div class="wheel-area" id="wheel-area">
+          <span class="wheel-pointer" aria-hidden="true">▼</span>
+          <div class="food-wheel" id="food-wheel" role="img" aria-label="八格神秘菜单转盘">
+            <div class="wheel-slots" id="wheel-slots" aria-hidden="true"></div>
+          </div>
+          <div class="frog-hub" aria-hidden="true">
+            <img class="frog-mascot" src="assets/naiwa-frog.png" alt="">
+          </div>
+          <div class="spin-reveal" id="spin-reveal" role="status" aria-live="polite" aria-atomic="true" hidden></div>
+        </div>
+      </section>
+
       <section class="result-section" aria-labelledby="result-heading">
         <p class="section-overline">TODAY'S LITTLE MENU</p>
         <div class="result-heading">
@@ -215,6 +286,7 @@
     <footer>
       <span>愿每一餐，都有一点期待。</span>
       <span>家常做法仅供参考，食材请按口味调整。</span>
+      <span>奶蛙形象：<a href="https://github.com/yugh6/Naiwa" target="_blank" rel="noreferrer">yugh6/Naiwa</a> · <a href="https://polyformproject.org/licenses/noncommercial/1.0.0/" target="_blank" rel="noreferrer">PolyForm Noncommercial 1.0.0</a></span>
     </footer>
   </div>
 
@@ -318,12 +390,88 @@
       }
     ];
 
-    const state = { region: "全部", spice: "全部", currentId: "steamed-egg", hasRendered: false };
+    const takeoutDishes = [
+      {
+        id: "delivery-braised-chicken", name: "黄焖鸡米饭", region: "外卖·米饭", spice: 1, spiceLabel: "微辣可选",
+        time: "约 30 分钟", serving: "1 人份", flavor: "酱香浓郁", category: "chicken", colors: ["#cb6d45", "#85a365", "#e7bb67"],
+        description: "软嫩鸡块裹着浓郁酱汁，配上热米饭，是外卖里的踏实选择。",
+        tip: "点单时备注土豆和青椒分开放，送到后口感更好。",
+        ingredients: ["鸡腿肉 250 g", "土豆半个", "青椒半个", "香菇 2 朵", "米饭 1 碗"],
+        steps: ["鸡腿肉切块，和生抽、料酒、姜片抓匀腌 10 分钟。", "锅中少油煎香鸡块，加入土豆、香菇和黄焖酱汁，加水焖 15 分钟。", "放入青椒再煮 2 分钟，连同浓汁浇在热米饭上。"]
+      },
+      {
+        id: "delivery-tomato-beef-noodles", name: "番茄肥牛米线", region: "外卖·米线", spice: 0, spiceLabel: "酸甜不辣",
+        time: "约 20 分钟", serving: "1 人份", flavor: "番茄酸鲜", category: "noodles", colors: ["#d85e4a", "#7d9d64", "#e4bb63"],
+        description: "番茄汤底酸甜开胃，肥牛和米线一口热乎，适合想吃清爽汤粉的时候。",
+        tip: "备注汤粉分装，送到后米线不容易泡软。",
+        ingredients: ["肥牛卷 120 g", "番茄 2 个", "米线 150 g", "金针菇半把", "葱花少许"],
+        steps: ["番茄切块炒出汁，加水煮成汤底，放入金针菇煮软。", "肥牛卷下锅烫熟，另将米线煮熟后沥水。", "米线盛入碗中，浇番茄汤和肥牛，撒葱花即可。"]
+      },
+      {
+        id: "delivery-sour-fish", name: "酸菜鱼米饭", region: "外卖·鱼鲜", spice: 2, spiceLabel: "酸辣",
+        time: "约 35 分钟", serving: "1–2 人份", flavor: "酸爽鲜辣", category: "seafood", colors: ["#d95d46", "#7a9d67", "#e5bd63"],
+        description: "鱼片鲜嫩、酸菜爽脆，汤汁配米饭特别下饭。",
+        tip: "点单时可选择鱼片和汤分装，减少路上余温把鱼肉焖老。",
+        ingredients: ["鱼片 250 g", "酸菜 150 g", "泡椒 2 个", "米饭 1–2 碗", "姜蒜适量"],
+        steps: ["鱼片用盐、白胡椒和淀粉轻轻抓匀，酸菜切段。", "炒香姜蒜和泡椒，放入酸菜翻炒，加水煮开。", "鱼片分散下锅煮熟，按口味调盐，搭配米饭食用。"]
+      },
+      {
+        id: "delivery-curry-chicken", name: "咖喱鸡排饭", region: "外卖·咖喱", spice: 1, spiceLabel: "香浓微辣",
+        time: "约 35 分钟", serving: "1 人份", flavor: "椰香咖喱", category: "chicken", colors: ["#dba24f", "#72905d", "#d66c49"],
+        description: "香浓咖喱裹着鸡排和土豆，配饭饱足又有香料暖意。",
+        tip: "想保留脆皮就把鸡排单独装，咖喱汁淋在米饭上。",
+        ingredients: ["鸡腿排 1 块", "土豆半个", "胡萝卜半根", "咖喱块 2 小块", "米饭 1 碗"],
+        steps: ["鸡腿排煎至两面金黄并熟透，取出切条。", "土豆和胡萝卜切块煮软，加入咖喱块搅至浓稠。", "米饭装碗，铺上鸡排，旁边浇入咖喱蔬菜。"]
+      },
+      {
+        id: "delivery-malatang", name: "麻辣烫自选碗", region: "外卖·自选", spice: 2, spiceLabel: "辣度可选",
+        time: "约 25 分钟", serving: "1 人份", flavor: "麻香浓郁", category: "vegetable", colors: ["#9b668c", "#e27649", "#87a36a"],
+        description: "蔬菜、豆制品和喜欢的主食都能自己搭配，一碗满足多种口感。",
+        tip: "点单选 3–4 种食材、少量宽粉，备注汤底另装更不容易坨。",
+        ingredients: ["青菜 1 把", "豆腐泡 4 个", "鱼丸 4 颗", "宽粉 1 小把", "芝麻酱适量"],
+        steps: ["青菜洗净，宽粉提前泡软；将所有食材分别煮至熟透。", "用少许芝麻酱、蒜泥和热汤调成顺滑的酱汁。", "食材放入碗中，淋上麻辣汤底和酱汁，按口味加辣油。"]
+      },
+      {
+        id: "delivery-bbq-rice", name: "烤肉拌饭", region: "外卖·烤肉", spice: 1, spiceLabel: "咸香微辣",
+        time: "约 30 分钟", serving: "1 人份", flavor: "炙烤焦香", category: "beef", colors: ["#bf6045", "#839b67", "#e7b65f"],
+        description: "焦香烤肉盖在米饭上，配清爽蔬菜和酱汁，冷热口感刚好平衡。",
+        tip: "酱汁单独装，吃之前再拌，米饭和蔬菜会更清爽。",
+        ingredients: ["牛肉片 150 g", "米饭 1 碗", "生菜几片", "洋葱半个", "烤肉酱 2 勺"],
+        steps: ["牛肉片用烤肉酱腌 10 分钟，洋葱切丝。", "牛肉和洋葱大火煎炒至熟，边缘微焦更香。", "米饭铺底，放上生菜和烤肉，淋少许酱汁拌匀。"]
+      },
+      {
+        id: "delivery-wontons", name: "鲜肉小馄饨", region: "外卖·汤点", spice: 0, spiceLabel: "清鲜不辣",
+        time: "约 20 分钟", serving: "1 人份", flavor: "皮薄汤鲜", category: "pork", colors: ["#d49c5a", "#84a16c", "#d97858"],
+        description: "薄皮裹着鲜肉，清汤里有紫菜和虾皮，是轻松又暖胃的一餐。",
+        tip: "汤和馄饨分开装，到家后再合碗能保持皮薄不破。",
+        ingredients: ["小馄饨 15 只", "紫菜少许", "虾皮 1 勺", "葱花少许", "香油几滴"],
+        steps: ["碗中放紫菜、虾皮、盐、白胡椒和少许香油。", "小馄饨下沸水煮至浮起，再加少量冷水复沸一次。", "连汤盛入碗中，撒葱花即可。"]
+      },
+      {
+        id: "delivery-chicken-cold-noodles", name: "手撕鸡凉面", region: "外卖·凉面", spice: 1, spiceLabel: "麻酱微辣",
+        time: "约 25 分钟", serving: "1 人份", flavor: "清爽芝麻香", category: "chicken", colors: ["#e0ad5d", "#7f9d65", "#d66d4e"],
+        description: "鸡丝和爽口蔬菜拌上芝麻酱，酸香中带一点辣，天气热也吃得舒服。",
+        tip: "面、酱汁和配菜分装，吃之前再拌口感最好。",
+        ingredients: ["鸡胸肉 120 g", "面条 150 g", "黄瓜半根", "芝麻酱 1 勺", "醋、生抽适量"],
+        steps: ["鸡胸肉煮熟后放凉，顺着纹理撕成细丝；黄瓜切丝。", "面条煮熟过凉水，沥干后拌少许香油。", "芝麻酱加醋、生抽和凉开水调开，和鸡丝、黄瓜一起拌匀。"]
+      }
+    ];
+
+    const state = { region: "全部", spice: "全部", mode: "home", currentId: "steamed-egg", hasRendered: false, isSpinning: false, wheelRotation: 0 };
     const result = document.getElementById("recipe-result");
     const count = document.getElementById("result-count");
     const randomButton = document.getElementById("randomize");
     const artHolder = document.getElementById("art-holder");
     const artLabel = document.getElementById("art-label");
+    const picker = document.querySelector(".picker");
+    const modeButtons = [...document.querySelectorAll(".mode-button")];
+    const wheel = document.getElementById("food-wheel");
+    const wheelSlots = document.getElementById("wheel-slots");
+    const wheelArea = document.getElementById("wheel-area");
+    const spinStatus = document.getElementById("spin-status");
+    const spinReveal = document.getElementById("spin-reveal");
+    const spinButtonLabel = document.getElementById("spin-button-label");
+    const wheelSlotCount = 8;
 
     function filteredDishes() {
       return dishes.filter((dish) => {
@@ -335,6 +483,36 @@
       });
     }
 
+    function currentChoices() {
+      return state.mode === "takeout" ? takeoutDishes : filteredDishes();
+    }
+
+    function updateCount() {
+      count.textContent = state.mode === "takeout"
+        ? `外卖菜单 · ${takeoutDishes.length} 种灵感`
+        : `当前条件下有 ${filteredDishes().length} 道家常菜`;
+    }
+
+    function resetWheelSlots() {
+      wheelSlots.querySelectorAll(".wheel-slot").forEach((slot) => {
+        slot.textContent = "？";
+        slot.classList.remove("is-winner");
+      });
+    }
+
+    function buildWheelSlots() {
+      wheelSlots.replaceChildren();
+      for (let index = 0; index < wheelSlotCount; index += 1) {
+        const angle = index * 45;
+        const slot = document.createElement("span");
+        slot.className = "wheel-slot";
+        slot.textContent = "？";
+        slot.setAttribute("aria-hidden", "true");
+        slot.style.transform = `translate(-50%, -50%) rotate(${angle}deg) translateY(-124px) rotate(${-angle}deg)`;
+        wheelSlots.append(slot);
+      }
+    }
+
     function escapeHTML(value) {
       return String(value).replace(/[&<>"']/g, (char) => ({
         "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;", "'": "&#39;"
@@ -343,38 +521,59 @@
 
     function makeIllustration(dish) {
       const [colorA, colorB, colorC] = dish.colors;
-      const isNoodles = dish.category === "noodles";
-      const isSoup = dish.category === "egg";
-      const foodShape = isNoodles
-        ? `<path d="M142 167c17-17 32-16 45 0 14 17 26 15 37-1 13-18 29-17 41 1 11 17 24 16 36-2 12-17 25-16 37 2" fill="none" stroke="#e9c278" stroke-width="9" stroke-linecap="round"/><path d="M156 181c13-12 25-12 36 0s24 12 35 0 23-12 34 0 23 12 34 0 22-12 34 0" fill="none" stroke="#f4d899" stroke-width="5" stroke-linecap="round"/>`
-        : isSoup
-          ? `<ellipse cx="240" cy="170" rx="93" ry="44" fill="#efcf83"/><ellipse cx="240" cy="164" rx="75" ry="32" fill="#fff0bd"/><path d="M184 151c15-14 32-14 46 0s30 14 45 0 25-12 37 1" fill="none" stroke="${colorA}" stroke-width="13" stroke-linecap="round"/><path d="M201 172c11-10 22-10 33 0s22 10 34 0 22-10 33 0" fill="none" stroke="#fff9dc" stroke-width="7" stroke-linecap="round"/>`
-          : `<path d="M153 156c16-18 34-19 48-2 14 16 28 16 43 0 15-17 31-16 46 1 15 17 29 17 44 0 12-13 25-15 39-2l-12 34H167z" fill="${colorA}" opacity=".83"/><path d="M173 166c10-9 20-9 30 1s20 11 30 1 19-9 29 1 20 11 30 1 20-9 30 1 17 9 27 0" fill="none" stroke="#f6c87b" stroke-width="7" stroke-linecap="round"/>`;
-      const herbs = `<path d="M185 138c-6-10-4-17 4-23 8 6 10 13 4 22M266 142c-2-12 2-19 11-22 6 9 4 17-6 24M324 143c0-10 5-16 14-17 4 10 1 17-10 21" fill="${colorB}" stroke="#59794d" stroke-width="1.5"/><circle cx="215" cy="153" r="5" fill="${colorC}"/><circle cx="292" cy="158" r="4" fill="${colorC}"/><circle cx="344" cy="161" r="4" fill="#f3d37e"/>`;
+      const food = dish.category === "egg"
+        ? `<ellipse cx="240" cy="181" rx="91" ry="38" fill="#eac66d"/><ellipse cx="238" cy="174" rx="79" ry="29" fill="#fff0b8"/><path d="M160 174c7-17 21-23 34-18 11 4 16 15 10 24-5 8-17 8-22 1m59-18c7-17 21-23 34-18 11 4 16 15 10 24-5 8-17 8-22 1m-20 28c6-15 18-20 30-16 10 4 14 13 9 20-5 7-14 7-19 1" fill="#e88763" stroke="#b85d45" stroke-width="3" stroke-linecap="round"/><g fill="none" stroke="#f5c08d" stroke-width="3" stroke-linecap="round"><path d="m168 169 4 6m5-13 4 6m5-9 4 6m45 5 4 6m5-13 4 6m5-9 4 6m-20 25 4 5m5-11 4 5m5-8 4 5"/></g><path d="M153 190c17 8 30 8 44 0m47 2c17 7 30 7 45-1" fill="none" stroke="#fff8d8" stroke-width="5" stroke-linecap="round"/><g fill="${colorB}"><path d="M211 151c-5-8-3-13 4-17 6 5 7 10 2 16m62 28c-4-7-2-12 4-15 6 5 6 10 1 15"/></g><circle cx="304" cy="158" r="4" fill="${colorC}"/>`
+        : dish.category === "noodles"
+          ? `<path d="M142 174c19-20 36-17 49 1 13 18 27 17 40 0s27-18 40 0 27 18 41 0 28-17 43 2" fill="none" stroke="#d99a45" stroke-width="12" stroke-linecap="round"/><path d="M148 188c17-14 32-12 44 1 12 13 25 13 37 0s24-13 36 0 24 13 37 0 25-13 39 1" fill="none" stroke="#f4d185" stroke-width="7" stroke-linecap="round"/><path d="M171 163c16-12 29-10 39 4m68 20c14-10 27-9 37 3" fill="none" stroke="#fff0bd" stroke-width="4" stroke-linecap="round"/><ellipse cx="209" cy="155" rx="17" ry="10" fill="#7fa269"/><ellipse cx="320" cy="160" rx="13" ry="8" fill="#cf6748"/>`
+          : dish.category === "seafood"
+            ? `<g fill="#e8b66b" stroke="#bf684b" stroke-width="3"><ellipse cx="185" cy="179" rx="31" ry="22"/><ellipse cx="239" cy="157" rx="28" ry="22"/><ellipse cx="291" cy="180" rx="31" ry="23"/><ellipse cx="230" cy="205" rx="29" ry="18"/></g><g fill="none" stroke="#fff0bf" stroke-width="4" stroke-linecap="round"><path d="M165 183q19-22 39-2m17-24q18-20 36 0m18 24q18-23 38 0m-102 28q18-18 36-2"/></g><path d="M153 157c13-15 27-12 35 1-3 10-13 16-27 14m148-17c11-13 23-11 30 2-4 9-12 13-24 12" fill="${colorA}" stroke="#fff0bf" stroke-width="3"/>`
+            : dish.category === "vegetable"
+              ? `<path d="M158 183c12-29 38-47 70-41 22 4 42 21 58 47 12 19 24 28 41 29-10 18-34 25-57 12-17-10-33-23-54-26-26-4-44 4-62-4-11-5-7-12 4-17Z" fill="#77639a" stroke="#51486e" stroke-width="4"/><path d="M161 175c-8-16-3-31 13-41 8 15 9 28-2 42m-2-1c14-14 27-17 39-8-10 13-22 18-37 12" fill="#70905a" stroke="#486647" stroke-width="3"/><path d="M179 179c23-18 49-18 70 2m-42 17c24-11 43-7 58 8" fill="none" stroke="#b7a4d0" stroke-width="5" stroke-linecap="round"/><circle cx="313" cy="169" r="13" fill="#db7954"/><circle cx="315" cy="168" r="5" fill="#f4c678"/>`
+              : `<g fill="${colorA}" stroke="#8f4b39" stroke-width="3"><path d="M160 163q12-25 34-14l18 13-6 24q-20 10-42-3Z"/><path d="M213 150q17-19 37-4l14 20-10 22q-23 5-39-11Z"/><path d="M269 163q18-18 35-2l16 19-12 22q-21 7-39-11Z"/><path d="M186 197q13-20 34-9l15 19-11 18q-20 5-36-8Z"/><path d="M247 200q16-19 35-5l14 18-11 20q-21 5-36-10Z"/></g><g fill="none" stroke="#f2bc70" stroke-width="5" stroke-linecap="round"><path d="m168 164 16-8m41 1 15-7m43 19 17-7m-104 42 15-8m39 5 15-8"/></g><path d="M157 144q14-18 26-9m94-7q13-17 28-7" fill="none" stroke="${colorB}" stroke-width="7" stroke-linecap="round"/>`;
+      const herbs = `<path d="M185 148c-9-13-6-23 5-30 11 8 13 18 5 29m52-3c-4-14 1-23 12-27 8 11 5 21-7 30m54 2c1-12 8-18 19-18 5 12 1 20-12 25" fill="${colorB}" stroke="#526d4d" stroke-width="2"/><circle cx="216" cy="157" r="6" fill="${colorC}"/><circle cx="278" cy="150" r="5" fill="#e8d17a"/><circle cx="335" cy="184" r="5" fill="${colorC}"/>`;
       return `<svg class="dish-art" viewBox="0 0 480 340" role="img" aria-label="${escapeHTML(dish.name)}的彩绘插画" xmlns="http://www.w3.org/2000/svg">
         <defs>
-          <linearGradient id="wash" x1="0" x2="1" y1="0" y2="1"><stop stop-color="#f0c98e" stop-opacity=".5"/><stop offset="1" stop-color="#d8dfc7" stop-opacity=".16"/></linearGradient>
-          <filter id="soft"><feGaussianBlur stdDeviation="3"/></filter>
-          <filter id="grain"><feTurbulence type="fractalNoise" baseFrequency=".8" numOctaves="2" seed="12"/><feColorMatrix values="0 0 0 0 .4 0 0 0 0 .4 0 0 0 0 .3 0 0 0 .18 0"/></filter>
+          <radialGradient id="night-sky" cx="48%" cy="36%" r="80%"><stop stop-color="#467c82"/><stop offset=".58" stop-color="#244e65"/><stop offset="1" stop-color="#183449"/></radialGradient>
+          <linearGradient id="porcelain" x1="0" x2=".8" y1="0" y2="1"><stop stop-color="#fff5dc"/><stop offset=".55" stop-color="#e6d9bb"/><stop offset="1" stop-color="#c5c6a9"/></linearGradient>
+          <filter id="paint-texture"><feTurbulence type="fractalNoise" baseFrequency=".72" numOctaves="2" seed="13"/><feColorMatrix values=".8 0 0 0 .1 0 .8 0 0 .1 0 0 .8 0 .08 0 0 0 .16 0"/></filter>
+          <clipPath id="plate-clip"><ellipse cx="240" cy="182" rx="125" ry="66"/></clipPath>
         </defs>
-        <ellipse cx="238" cy="268" rx="165" ry="21" fill="#627353" opacity=".17" filter="url(#soft)"/>
-        <path d="M70 115c16-62 106-100 195-81 85 18 143 84 127 146-16 63-116 92-207 69-85-21-131-73-115-134Z" fill="url(#wash)"/>
-        <path d="M89 220c9 46 69 83 151 84 87 1 147-34 155-82-32 19-81 31-151 31-65 0-122-11-155-33Z" fill="#e8e1ce" opacity=".72"/>
-        <path d="M99 181c0 49 62 87 141 87s141-38 141-87c0-19-11-36-29-49H128c-18 13-29 30-29 49Z" fill="#f8f4e8" stroke="#a9a88d" stroke-width="3"/>
-        <ellipse cx="240" cy="166" rx="143" ry="67" fill="#d9d3bd" stroke="#a9a88d" stroke-width="3"/>
-        <ellipse cx="240" cy="160" rx="128" ry="56" fill="#f3e8cc"/>
-        ${foodShape}${herbs}
-        <path d="M119 177c12 33 57 57 121 58 62 1 110-21 124-54" fill="none" stroke="#fffaf0" stroke-width="4" opacity=".9"/>
-        <path d="M352 80c18-14 34-15 49-3-7 18-21 25-42 19M367 97c14-8 26-7 36 3-10 13-23 16-39 8" fill="${colorB}" opacity=".75"/>
-        <path d="M108 101c16-14 30-14 42 0-8 15-20 20-37 12M92 124c10-10 21-10 32 0-7 12-17 15-30 9" fill="${colorC}" opacity=".6"/>
-        <circle cx="373" cy="238" r="5" fill="${colorA}" opacity=".6"/><circle cx="102" cy="205" r="4" fill="${colorB}" opacity=".7"/>
-        <path class="art-grain" filter="url(#grain)" d="M0 0h480v340H0z"/>
+        <rect width="480" height="340" fill="url(#night-sky)"/>
+        <g class="art-swirl" stroke="#f2c56c" stroke-width="9">
+          <path d="M33 87c29-32 66-37 95-13 19 16 17 38-1 48-15 9-31 1-32-12 0-9 9-15 17-12" opacity=".88"/>
+          <path d="M350 60c27-18 59-14 75 7 11 14 6 31-9 36-11 3-21-4-18-14" stroke="#9fc1a0" stroke-width="7"/>
+          <path d="M38 265c24-24 50-28 72-12 16 11 15 28 2 35-10 6-21 0-21-9" stroke="#db7958" stroke-width="8"/>
+          <path d="M365 265c22-26 48-30 69-13" stroke="#89a88a" stroke-width="7"/>
+        </g>
+        <g fill="#f5d485" opacity=".85"><circle cx="120" cy="67" r="4"/><circle cx="318" cy="88" r="3"/><circle cx="420" cy="178" r="4"/><circle cx="66" cy="191" r="3"/><circle cx="354" cy="112" r="2.5"/></g>
+        <ellipse cx="240" cy="267" rx="165" ry="18" fill="#0f2e3b" opacity=".32"/>
+        <path d="M89 188c0 51 67 91 151 91s151-40 151-91c0-17-10-33-27-46H116c-17 13-27 29-27 46Z" fill="url(#porcelain)" stroke="#d5c7a6" stroke-width="5"/>
+        <ellipse cx="240" cy="180" rx="151" ry="78" fill="#d8caa7" stroke="#fff0d0" stroke-width="8"/>
+        <ellipse cx="240" cy="179" rx="132" ry="66" fill="#f1e4c3" stroke="#738777" stroke-width="3"/>
+        <g clip-path="url(#plate-clip)">
+          <path d="M115 188c41-22 68-22 106-2 34 18 65 15 111-5 24-10 44-12 65-3v70H104Z" fill="${colorA}" opacity=".3"/>
+          <path d="M132 205c39 10 65 8 100-7 43-19 77-15 119 6" fill="none" stroke="${colorC}" stroke-width="12" stroke-linecap="round" opacity=".5"/>
+          ${food}${herbs}
+          <path d="M147 148c18 9 31 9 46-1m115-2c17 10 33 10 48-2M165 226c21-7 38-7 54 1m75-6c17-9 34-8 49 2" fill="none" stroke="#fff2c8" stroke-width="5" stroke-linecap="round" opacity=".8"/>
+          <path d="M125 179q15-9 30 1m164-30q14-10 29 1M205 237q15-9 31 0" fill="none" stroke="${colorB}" stroke-width="7" stroke-linecap="round"/>
+        </g>
+        <path d="M112 192c19 36 67 57 128 57 60 0 108-21 128-57" fill="none" stroke="#fff9e8" stroke-width="5" opacity=".85"/>
+        <g class="art-swirl" fill="none" stroke="${colorC}" stroke-width="7" opacity=".88">
+          <path d="M108 102c22-21 43-22 62-4m-47 21c19-16 35-17 49-5"/>
+          <path d="M331 94c19-17 39-17 56-3m-40 22c18-13 33-13 46-2"/>
+        </g>
+        <g fill="none" stroke-linecap="round" opacity=".86">
+          <path d="M76 220c13-14 28-17 43-8m254-18c14-11 26-11 38-2" stroke="#f4d17b" stroke-width="6"/>
+          <path d="M101 76c11-9 20-10 30-2m224 209c14-10 25-10 36-1" stroke="#c7d09a" stroke-width="5"/>
+        </g>
+        <rect class="art-grain" width="480" height="340" filter="url(#paint-texture)" fill="#c8aa77"/>
       </svg>`;
     }
 
     function renderDish(dish) {
       state.hasRendered = true;
       if (!dish) {
+        state.currentId = null;
         count.textContent = "0 道合适的菜";
         result.innerHTML = `<div class="empty-state">这组口味条件下暂时没有菜谱。<br>试试换一种菜系或把辣度调成“不限辣度”。</div>`;
         artHolder.innerHTML = "";
@@ -383,12 +582,14 @@
       }
 
       state.currentId = dish.id;
-      count.textContent = `当前条件下有 ${filteredDishes().length} 道菜`;
+      updateCount();
       artHolder.innerHTML = makeIllustration(dish);
-      artLabel.textContent = `${dish.region} · ${dish.name}`;
+      artLabel.textContent = `${state.mode === "takeout" ? "外卖灵感" : dish.region} · ${dish.name}`;
 
       const ingredients = dish.ingredients.map((item) => `<li>${escapeHTML(item)}</li>`).join("");
       const steps = dish.steps.map((step) => `<li>${escapeHTML(step)}</li>`).join("");
+      const ingredientsTitle = state.mode === "takeout" ? "这份菜单的食材" : "准备食材";
+      const stepsTitle = state.mode === "takeout" ? "在家复刻步骤" : "跟着做";
       result.innerHTML = `
         <article class="recipe-card" aria-labelledby="dish-name">
           <div class="recipe-summary">
@@ -407,39 +608,118 @@
           </div>
           <div class="recipe-details">
             <section aria-labelledby="ingredients-heading">
-              <h3 id="ingredients-heading">准备食材 <span class="hint">· ${escapeHTML(dish.serving)}</span></h3>
+              <h3 id="ingredients-heading">${ingredientsTitle} <span class="hint">· ${escapeHTML(dish.serving)}</span></h3>
               <ul class="ingredient-list">${ingredients}</ul>
             </section>
             <div class="recipe-divider"></div>
             <section aria-labelledby="steps-heading">
-              <h3 id="steps-heading">跟着做</h3>
+              <h3 id="steps-heading">${stepsTitle}</h3>
               <ol class="steps">${steps}</ol>
             </section>
           </div>
         </article>`;
     }
 
-    function chooseRandom() {
-      const choices = filteredDishes();
-      if (!choices.length) {
-        renderDish(null);
-        return;
+    function setSpinControlsDisabled(disabled) {
+      randomButton.disabled = disabled || currentChoices().length === 0;
+      modeButtons.forEach((button) => { button.disabled = disabled; });
+      document.querySelectorAll(".picker .chip").forEach((button) => { button.disabled = disabled; });
+    }
+
+    function setMode(mode) {
+      if (state.isSpinning || !["home", "takeout"].includes(mode)) return;
+      state.mode = mode;
+      state.currentId = null;
+      state.hasRendered = false;
+      picker.hidden = mode === "takeout";
+      modeButtons.forEach((button) => {
+        button.setAttribute("aria-pressed", String(button.dataset.mode === mode));
+      });
+      resetWheelSlots();
+      spinReveal.hidden = true;
+      spinReveal.textContent = "";
+
+      if (mode === "takeout") {
+        count.textContent = `外卖菜单 · ${takeoutDishes.length} 种灵感`;
+        artHolder.innerHTML = "";
+        artLabel.textContent = "奶蛙等你点单";
+        result.innerHTML = `<div class="empty-state">转盘停下后，奶蛙会揭晓外卖灵感，再为你展开菜谱。</div>`;
+        spinStatus.textContent = "外卖菜单已经藏进转盘里。";
+        randomButton.disabled = false;
+      } else {
+        spinStatus.textContent = "家常菜转盘准备好了。";
+        updateFilters();
       }
-      const differentChoices = choices.filter((dish) => dish.id !== state.currentId);
-      const pool = differentChoices.length ? differentChoices : choices;
-      const selected = pool[Math.floor(Math.random() * pool.length)];
-      renderDish(selected);
     }
 
     function updateFilters() {
+      if (state.mode !== "home") return;
       const choices = filteredDishes();
-      randomButton.disabled = choices.length === 0;
+      randomButton.disabled = state.isSpinning || choices.length === 0;
       if (!state.hasRendered || !choices.some((dish) => dish.id === state.currentId)) {
         renderDish(choices[0] || null);
       } else {
-        count.textContent = `当前条件下有 ${choices.length} 道菜`;
+        updateCount();
       }
     }
+
+    async function spinWheel() {
+      if (state.isSpinning) return;
+      const choices = currentChoices();
+      if (!choices.length) {
+        spinStatus.textContent = "当前筛选下没有菜品，请调整口味条件。";
+        return;
+      }
+
+      const available = choices.filter((dish) => dish.id !== state.currentId);
+      const pool = available.length ? available : choices;
+      const selected = pool[Math.floor(Math.random() * pool.length)];
+      const winnerIndex = Math.floor(Math.random() * wheelSlotCount);
+      const reducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+      const spinDuration = reducedMotion ? 30 : 4800;
+      const currentAngle = ((state.wheelRotation % 360) + 360) % 360;
+      const alignment = (360 - winnerIndex * 45 - currentAngle + 360) % 360;
+      const targetRotation = state.wheelRotation + 2160 + alignment;
+
+      state.isSpinning = true;
+      setSpinControlsDisabled(true);
+      resetWheelSlots();
+      spinReveal.hidden = true;
+      wheelArea.classList.add("is-spinning");
+      wheel.classList.add("is-spinning");
+      spinButtonLabel.textContent = "奶蛙正在转……";
+      spinStatus.textContent = "菜单还在保密，等转盘慢慢停下。";
+      wheel.style.transform = `rotate(${targetRotation}deg)`;
+
+      try {
+        await new Promise((resolve) => window.setTimeout(resolve, spinDuration));
+        state.wheelRotation = targetRotation;
+        const winnerSlot = wheelSlots.children[winnerIndex];
+        winnerSlot.textContent = selected.name.length > 2 ? `${selected.name.slice(0, 2)}…` : selected.name;
+        winnerSlot.classList.add("is-winner");
+        spinReveal.innerHTML = `<small>奶蛙选中啦</small>${escapeHTML(selected.name)}`;
+        spinReveal.hidden = false;
+        spinStatus.textContent = `转盘停下了：${selected.name}。菜谱马上展开。`;
+
+        await new Promise((resolve) => window.setTimeout(resolve, reducedMotion ? 30 : 850));
+        renderDish(selected);
+        document.querySelector(".result-section").scrollIntoView({
+          behavior: reducedMotion ? "auto" : "smooth",
+          block: "start"
+        });
+        spinStatus.textContent = `${selected.name}的菜谱已经准备好了。`;
+      } finally {
+        state.isSpinning = false;
+        wheelArea.classList.remove("is-spinning");
+        wheel.classList.remove("is-spinning");
+        spinButtonLabel.textContent = "再转一次";
+        setSpinControlsDisabled(false);
+      }
+    }
+
+    modeButtons.forEach((button) => {
+      button.addEventListener("click", () => setMode(button.dataset.mode));
+    });
 
     document.getElementById("region-filters").addEventListener("click", (event) => {
       const button = event.target.closest("button[data-region]");
@@ -461,13 +741,14 @@
       updateFilters();
     });
 
-    randomButton.addEventListener("click", chooseRandom);
+    randomButton.addEventListener("click", spinWheel);
 
     const today = new Date();
     document.getElementById("today-date").textContent = new Intl.DateTimeFormat("zh-CN", {
       year: "numeric", month: "long", day: "numeric", weekday: "long"
     }).format(today);
 
+    buildWheelSlots();
     updateFilters();
   </script>
 </body>
