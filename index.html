@@ -176,6 +176,7 @@
     .food-photo { display: block; width: 100%; height: 100%; object-fit: cover; }
     .photo-credit { position: absolute; right: 8px; bottom: 8px; z-index: 1; padding: 4px 7px; border: 1px solid rgb(255 239 207 / 22%); background: rgb(20 18 15 / 72%); color: #f4e7d1; font-size: 10px; line-height: 1.3; text-decoration: none; }
     .photo-credit:hover { background: rgb(20 18 15 / 90%); color: #fff5df; }
+    .photo-credit a { color: inherit; }
     .art-swirl { fill: none; stroke-linecap: round; opacity: .8; }
     .art-grain-layer { position: absolute; inset: 0; background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='240' height='240'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.72' numOctaves='2' seed='13'/%3E%3CfeColorMatrix values='.8 0 0 0 .1 0 .8 0 0 .1 0 0 .8 0 .08 0 0 0 .16 0'/%3E%3C/filter%3E%3Crect width='240' height='240' filter='url(%23n)'/%3E%3C/svg%3E"); background-size: 240px 240px; opacity: .22; mix-blend-mode: multiply; pointer-events: none; }
 
@@ -1466,6 +1467,7 @@
       friedChicken: { file: "fried-chicken.jpeg", subject: "香辣炸鸡", photographer: "jianwei zhu", url: "https://www.pexels.com/photo/deep-fried-chicken-with-sauce-8463449/", position: "center 50%" },
       duck: { file: "duck.jpeg", subject: "烤鸭", photographer: "Nadin Sh", url: "https://www.pexels.com/photo/delicious-roast-duck-with-vegetables-on-plate-36061359/", position: "center 50%" },
       seafood: { file: "fish.jpeg", subject: "中式鱼鲜菜", photographer: "颖 徐", url: "https://www.pexels.com/photo/delicious-spicy-fish-dish-in-chinese-cuisine-29305974/", position: "center 52%" },
+      fishHead: { file: "fish-head-casserole.jpg", subject: "中式砂锅鱼头", photographer: "Jason Lam", url: "https://commons.wikimedia.org/wiki/File:Braised_fish_head_casserole.jpg", license: "CC BY-SA 2.0", licenseUrl: "https://creativecommons.org/licenses/by-sa/2.0/", source: "Wikimedia Commons", position: "center 50%" },
       shrimp: { file: "shrimp.jpeg", subject: "鲜虾菜", photographer: "Ruandom Zhong", url: "https://www.pexels.com/photo/a-close-up-shot-of-a-delicious-shrimp-dish-5858115/", position: "center 50%" },
       shellfish: { file: "clams.jpeg", subject: "蒜蓉贝类", photographer: "Kantharos Sangsuwan", url: "https://www.pexels.com/photo/a-delicious-clam-topped-with-fried-garlic-on-a-white-dish-plate-6383812/", position: "center 50%" },
       eel: { file: "eel.jpeg", subject: "鳗鱼饭", photographer: "FOX ^.ᆽ.^= ∫", url: "https://www.pexels.com/photo/delicious-eel-bowl-with-rice-and-seaweed-37290960/", position: "center 50%" },
@@ -1501,6 +1503,7 @@
       if (isNoodleDish && /汤|米线|云吞|拉面|粉|沙茶面|牛肉面|片儿川/.test(name)) photoKey = "noodleSoup";
       else if (isNoodleDish) photoKey = "noodles";
       else if (/汤包|小笼/.test(name)) photoKey = "baozi";
+      else if (/鱼头/.test(name)) photoKey = "fishHead";
       else if (/粥/.test(name)) photoKey = "porridge";
       else if (/汤|麻辣烫|关东煮/.test(name)) photoKey = "soup";
       else if (/南瓜/.test(name)) photoKey = "pumpkin";
@@ -1531,8 +1534,11 @@
       else if (/饼|馍|抓饼|盒子/.test(name)) photoKey = "pastry";
 
       const photo = FOOD_PHOTOS[photoKey] || FOOD_PHOTOS.snack;
+      const credit = photo.license
+        ? `<span class="photo-credit">实拍参考 · <a href="${photo.url}" target="_blank" rel="noopener noreferrer">${escapeHTML(photo.photographer)} / ${escapeHTML(photo.source)}</a> · <a href="${photo.licenseUrl}" target="_blank" rel="noopener noreferrer">${escapeHTML(photo.license)}</a></span>`
+        : `<a class="photo-credit" href="${photo.url}" target="_blank" rel="noopener noreferrer">实拍参考 · ${escapeHTML(photo.photographer)} / Pexels</a>`;
       return `<img class="food-photo" src="assets/food-photos/${photo.file}" alt="${escapeHTML(dish.name)}（${escapeHTML(photo.subject)}实拍参考）" loading="lazy" style="object-position:${photo.position}">
-        <a class="photo-credit" href="${photo.url}" target="_blank" rel="noopener noreferrer">实拍参考 · ${escapeHTML(photo.photographer)} / Pexels</a>`;
+        ${credit}`;
     }
 
     function makeCoverIllustration() {

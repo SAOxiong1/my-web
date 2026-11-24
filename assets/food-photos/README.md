@@ -37,3 +37,4 @@
 | `baozi.jpeg` | 包子、生煎、小笼包 | Sự Minh | https://www.pexels.com/photo/baozi-boiled-in-pot-17317227/ |
 | `meat-pie.jpeg` | 馅饼、肉夹馍、手抓饼等 | 3 Change C.C. | https://www.pexels.com/photo/authentic-chinese-meat-pie-in-hand-33921268/ |
 | `tangyuan.jpeg` | 汤圆、甜品 | Cats Coming | https://www.pexels.com/photo/pig-themed-food-1938266/ |
+| `fish-head-casserole.jpg` | 鱼头菜（包括鄱阳湖鱼头汤） | Jason Lam | [Wikimedia Commons](https://commons.wikimedia.org/wiki/File:Braised_fish_head_casserole.jpg) · [CC BY-SA 2.0](https://creativecommons.org/licenses/by-sa/2.0/) |
