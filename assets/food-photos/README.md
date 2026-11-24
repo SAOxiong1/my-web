@@ -49,7 +49,7 @@
 | `beef-chow-fun.jpg` | 干炒牛河 | Ceeseven | [Wikimedia Commons](https://commons.wikimedia.org/wiki/File:Beefchowfoon.jpg) · [CC0](https://creativecommons.org/publicdomain/zero/1.0/) |
 | `boiled-beef.jpg` | 水煮牛肉 | N509FZ | [Wikimedia Commons](https://commons.wikimedia.org/wiki/File:Spicy_boiled_beef_on_T7_(20170606181441).jpg) · [CC BY-SA 4.0](https://creativecommons.org/licenses/by-sa/4.0/) |
 | `rice-vermicelli-xiamen.jpg` | 福建炒米粉、南昌炒粉 | Hhaithait | [Wikimedia Commons](https://commons.wikimedia.org/wiki/File:Fried_Rice_vermicelli_Xiamen.jpg) · [CC BY-SA 3.0](https://creativecommons.org/licenses/by-sa/3.0/) |
-| `fish-head-soup.jpg` | 鄱阳湖鱼头汤 | Alpha | [Wikimedia Commons](https://commons.wikimedia.org/wiki/File:Fish_Head_Noodle_in_Malaysia.jpg) · [CC BY-SA 2.0](https://creativecommons.org/licenses/by-sa/2.0/) |
+| `fish-head-soup.jpg` | 鄱阳湖鱼头汤 | 唐戈 | [Wikimedia Commons](https://commons.wikimedia.org/wiki/File:千岛湖鱼头豆腐汤.jpg) · [CC BY-SA 4.0](https://creativecommons.org/licenses/by-sa/4.0/) |
 | `chinese-herbal-soup.jpeg` | 南昌瓦罐汤、腌笃鲜（中式炖汤参考） | 女子 正真 | [Pexels](https://www.pexels.com/photo/traditional-chinese-herbal-soup-in-ceramic-bowl-40253364/) · [Pexels License](https://www.pexels.com/license/) |
 | `malatang.jpeg` | 麻辣烫自选碗 | Markus Winkler | [Pexels](https://www.pexels.com/photo/a-soup-dish-on-a-black-bowl-10672908/) · [Pexels License](https://www.pexels.com/license/) |
 | `beef-noodle-soup.jpeg` | 番茄肥牛米线 | 颖 徐 | [Pexels](https://www.pexels.com/photo/spicy-beef-noodle-soup-with-herbs-in-a-bowl-29305560/) · [Pexels License](https://www.pexels.com/license/) |
