@@ -1378,23 +1378,79 @@
     /* ---------- 菜品实拍图 ---------- */
     const FOOD_PHOTOS = {
       pork: { file: "pork-braise.jpeg", subject: "红烧肉", photographer: "Amanda Lim", url: "https://www.pexels.com/photo/close-up-shot-of-delicious-braised-pork-on-white-ceramic-plate-8256988/", position: "center 52%" },
+      porkCutlet: { file: "pork-cutlet.jpeg", subject: "蜜汁猪肉饭", photographer: "Gerald Jake Abangan", url: "https://www.pexels.com/photo/fried-pork-slices-and-egg-for-breakfast-2689421/", position: "center 58%" },
+      porkStirFry: { file: "pork-stir-fry.jpeg", subject: "猪肉炒菜", photographer: "Gu Ko", url: "https://www.pexels.com/photo/delicious-asian-stir-fry-with-pork-and-vegetables-37297739/", position: "center 50%" },
       beef: { file: "beef-stir-fry.jpeg", subject: "牛肉炒菜", photographer: "DΛVΞ GΛRCIΛ", url: "https://www.pexels.com/photo/delicious-chinese-stir-fry-with-colorful-vegetables-37743318/", position: "center 50%" },
-      lamb: { file: "beef-stir-fry.jpeg", subject: "肉类炒菜", photographer: "DΛVΞ GΛRCIΛ", url: "https://www.pexels.com/photo/delicious-chinese-stir-fry-with-colorful-vegetables-37743318/", position: "center 50%" },
+      lamb: { file: "lamb.jpeg", subject: "烤羊排", photographer: "Saveurs Secretes", url: "https://www.pexels.com/photo/grilled-meat-with-vegetables-5410460/", position: "center 50%" },
       chicken: { file: "chicken.jpeg", subject: "中式鸡肉菜", photographer: "Yang Hao", url: "https://www.pexels.com/photo/close-up-of-soup-10692530/", position: "center 53%" },
-      duck: { file: "chicken.jpeg", subject: "禽肉菜", photographer: "Yang Hao", url: "https://www.pexels.com/photo/close-up-of-soup-10692530/", position: "center 53%" },
+      friedChicken: { file: "fried-chicken.jpeg", subject: "香辣炸鸡", photographer: "jianwei zhu", url: "https://www.pexels.com/photo/deep-fried-chicken-with-sauce-8463449/", position: "center 50%" },
+      duck: { file: "duck.jpeg", subject: "烤鸭", photographer: "Nadin Sh", url: "https://www.pexels.com/photo/delicious-roast-duck-with-vegetables-on-plate-36061359/", position: "center 50%" },
       seafood: { file: "fish.jpeg", subject: "中式鱼鲜菜", photographer: "颖 徐", url: "https://www.pexels.com/photo/delicious-spicy-fish-dish-in-chinese-cuisine-29305974/", position: "center 52%" },
+      shrimp: { file: "shrimp.jpeg", subject: "鲜虾菜", photographer: "Ruandom Zhong", url: "https://www.pexels.com/photo/a-close-up-shot-of-a-delicious-shrimp-dish-5858115/", position: "center 50%" },
+      shellfish: { file: "clams.jpeg", subject: "蒜蓉贝类", photographer: "Kantharos Sangsuwan", url: "https://www.pexels.com/photo/a-delicious-clam-topped-with-fried-garlic-on-a-white-dish-plate-6383812/", position: "center 50%" },
+      eel: { file: "eel.jpeg", subject: "鳗鱼饭", photographer: "FOX ^.ᆽ.^= ∫", url: "https://www.pexels.com/photo/delicious-eel-bowl-with-rice-and-seaweed-37290960/", position: "center 50%" },
+      salmon: { file: "salmon-rice.jpeg", subject: "三文鱼饭", photographer: "Gu Ko", url: "https://www.pexels.com/photo/salmon-and-rice-bowl-with-fresh-cilantro-37332351/", position: "center 50%" },
+      fishFillet: { file: "fish-bowl.jpeg", subject: "鱼片汤菜", photographer: "奥尼尔 孙", url: "https://www.pexels.com/photo/cooked-food-on-a-bowl-2365949/", position: "center 50%" },
       egg: { file: "tomato-egg.jpeg", subject: "番茄炒蛋", photographer: "木 灬", url: "https://www.pexels.com/photo/delicious-chinese-tomato-and-egg-stir-fry-29529570/", position: "center 52%" },
       tofu: { file: "tofu-alt.jpeg", subject: "豆腐炒菜", photographer: "Polina Tankilevitch", url: "https://www.pexels.com/photo/close-up-shot-of-a-chinese-food-5848476/", position: "center 28%" },
+      mapoTofu: { file: "mapo-pork.jpeg", subject: "肉末豆腐", photographer: "Giovanna Kamimura", url: "https://www.pexels.com/photo/spicy-tofu-and-ground-pork-bowl-with-vegetables-31962200/", position: "center 50%" },
       vegetable: { file: "greens.jpeg", subject: "中式炒蔬菜", photographer: "Yuen Tou Zan", url: "https://www.pexels.com/photo/delicious-stir-fried-chinese-vegetables-on-plate-36108993/", position: "center 52%" },
+      greenBeans: { file: "green-beans.jpeg", subject: "番茄炒四季豆", photographer: "Zehra Yılmaz", url: "https://www.pexels.com/photo/fried-vegetables-on-pan-18109103/", position: "center 72%" },
+      cauliflower: { file: "cauliflower.jpeg", subject: "香煎花菜", photographer: "Mateusz Feliksik", url: "https://www.pexels.com/photo/close-up-shot-of-cauliflower-in-a-bowl-7974813/", position: "center 52%" },
+      eggplant: { file: "eggplant.jpeg", subject: "青椒炒茄子", photographer: "Gu Ko", url: "https://www.pexels.com/photo/stir-fried-eggplant-with-green-peppers-on-plate-37297752/", position: "center 50%" },
+      pumpkin: { file: "pumpkin.jpeg", subject: "南瓜菜", photographer: "Gu Ko", url: "https://www.pexels.com/photo/delicious-asian-inspired-pumpkin-dish-in-ceramic-bowl-37297741/", position: "center 50%" },
+      potato: { file: "potato.jpeg", subject: "炒土豆丝", photographer: "Muhammad Khawar Nazir", url: "https://www.pexels.com/photo/close-up-of-steaming-potato-dish-in-pan-34475745/", position: "center 50%" },
       noodles: { file: "noodles.jpeg", subject: "中式面食", photographer: "Click Jeth", url: "https://www.pexels.com/photo/delicious-chinese-noodles-in-elegant-bowl-30676160/", position: "center 48%" },
+      noodleSoup: { file: "noodle-soup.jpeg", subject: "汤面", photographer: "CHIE KANAZAWA", url: "https://www.pexels.com/photo/chinese-soup-with-noodles-meat-and-vegetables-5649309/", position: "center 50%" },
       rice: { file: "rice.jpeg", subject: "中式米饭菜", photographer: "Usman Yousaf", url: "https://www.pexels.com/photo/close-up-shot-of-a-chinese-rice-dish-on-a-plate-5720819/", position: "center 52%" },
+      riceBowl: { file: "rice-bowl.jpeg", subject: "米饭配菜", photographer: "Rachel Claire", url: "https://www.pexels.com/photo/dish-with-rice-and-meat-5863614/", position: "center 50%" },
       soup: { file: "soup.jpeg", subject: "中式汤品", photographer: "J.D. Books", url: "https://www.pexels.com/photo/delicious-chinese-soup-with-leafy-greens-in-bowl-37185612/", position: "center 50%" },
+      porridge: { file: "congee.jpeg", subject: "中式粥", photographer: "ivi nnnnnn", url: "https://www.pexels.com/photo/delicious-asian-congee-breakfast-with-tea-set-36340265/", position: "center 72%" },
       snack: { file: "dumplings.jpeg", subject: "中式点心", photographer: "Anush Gorak", url: "https://www.pexels.com/photo/dumplings-in-bowl-1431306/", position: "center 52%" },
+      baozi: { file: "baozi.jpeg", subject: "蒸包子", photographer: "Sự Minh", url: "https://www.pexels.com/photo/baozi-boiled-in-pot-17317227/", position: "center 50%" },
+      pastry: { file: "meat-pie.jpeg", subject: "中式肉饼", photographer: "3 Change C.C.", url: "https://www.pexels.com/photo/authentic-chinese-meat-pie-in-hand-33921268/", position: "center 50%" },
       dessert: { file: "tangyuan.jpeg", subject: "猪形汤圆", photographer: "Cats Coming", url: "https://www.pexels.com/photo/pig-themed-food-1938266/", position: "center 50%" }
     };
 
     function foodPhoto(dish) {
-      const photo = FOOD_PHOTOS[dish.category] || FOOD_PHOTOS.snack;
+      const name = dish.name || "";
+      let photoKey = dish.category;
+      const isNoodleDish = dish.category === "noodles" || /意面|意大利面|云吞面/.test(name);
+
+      // Prefer the actual dish or main ingredient over its broad recipe category.
+      if (isNoodleDish && /汤|米线|云吞|拉面|粉|沙茶面|牛肉面|片儿川/.test(name)) photoKey = "noodleSoup";
+      else if (isNoodleDish) photoKey = "noodles";
+      else if (/汤包|小笼/.test(name)) photoKey = "baozi";
+      else if (/粥/.test(name)) photoKey = "porridge";
+      else if (/汤|麻辣烫|关东煮/.test(name)) photoKey = "soup";
+      else if (/南瓜/.test(name)) photoKey = "pumpkin";
+      else if (/土豆|薯/.test(name)) photoKey = "potato";
+      else if (/四季豆|豆角/.test(name)) photoKey = "greenBeans";
+      else if (/花菜|菜花/.test(name)) photoKey = "cauliflower";
+      else if (/三文鱼/.test(name)) photoKey = "salmon";
+      else if (/鳗/.test(name)) photoKey = "eel";
+      else if (/虾/.test(name)) photoKey = "shrimp";
+      else if (/海蛎|牡蛎|生蚝|扇贝|花甲|蛤蜊|蛏/.test(name)) photoKey = "shellfish";
+      else if (/酸菜鱼|水煮鱼|鱼片/.test(name)) photoKey = "fishFillet";
+      else if (/鱼头|鲈鱼|鳜鱼|醋鱼|酒糟鱼/.test(name)) photoKey = "seafood";
+      else if (/焗饭|海鲜饭/.test(name)) photoKey = "riceBowl";
+      else if (/麻婆豆腐/.test(name)) photoKey = "mapoTofu";
+      else if (/茄子|茄/.test(name)) photoKey = "eggplant";
+      else if (/鸭|鹅/.test(name)) photoKey = "duck";
+      else if (/羊肉抓饭/.test(name)) photoKey = "riceBowl";
+      else if (/羊肉|羊排/.test(name)) photoKey = "lamb";
+      else if (/佛跳墙/.test(name)) photoKey = "soup";
+      else if (/鸡/.test(name) && /炸|辣子|盐酥|鸡米花|鸡翅|鸡排/.test(name)) photoKey = "friedChicken";
+      else if (/叉烧|排骨|大排|猪排|五香卷|荔枝肉/.test(name)) photoKey = "porkCutlet";
+      else if (dish.category === "pork" && /红烧肉|东坡肉|卤肉|扣肉/.test(name)) photoKey = "pork";
+      else if (dish.category === "pork") photoKey = "porkStirFry";
+      else if (/馄饨|云吞|水饺|抄手|锅贴|煎饺/.test(name)) photoKey = /汤|酸汤|小馄饨/.test(name) ? "soup" : "snack";
+      else if (/炒饭/.test(name)) photoKey = "rice";
+      else if (/饭|煲仔|盖饭|抓饭|拌饭/.test(name)) photoKey = "riceBowl";
+      else if (/包子|菜包|汤包|小笼|生煎包/.test(name)) photoKey = "baozi";
+      else if (/饼|馍|抓饼|盒子/.test(name)) photoKey = "pastry";
+
+      const photo = FOOD_PHOTOS[photoKey] || FOOD_PHOTOS.snack;
       return `<img class="food-photo" src="assets/food-photos/${photo.file}" alt="${escapeHTML(dish.name)}（${escapeHTML(photo.subject)}实拍参考）" loading="lazy" style="object-position:${photo.position}">
         <a class="photo-credit" href="${photo.url}" target="_blank" rel="noopener noreferrer">实拍参考 · ${escapeHTML(photo.photographer)} / Pexels</a>`;
     }
