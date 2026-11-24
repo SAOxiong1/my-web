@@ -768,6 +768,73 @@
     @media (prefers-reduced-motion: reduce) {
       .spin-reveal:not([hidden]), .bounty-poster { animation: none; }
     }
+    /* ---------- 营地伙伴：摸摸奶蛙 ---------- */
+    .petting-booth {
+      position: relative;
+      display: grid;
+      min-height: 142px;
+      grid-template-columns: minmax(0, 1fr) 160px;
+      align-items: center;
+      gap: 12px;
+      margin: 14px 0 8px;
+      overflow: hidden;
+      padding: 12px 22px 12px 26px;
+      border: 1px solid #69583f;
+      background:
+        radial-gradient(ellipse at 88% 100%, rgb(183 132 72 / 18%), transparent 35%),
+        linear-gradient(105deg, #302a22, #211f1b 68%, #29241d);
+      box-shadow: inset 0 1px rgb(255 243 219 / 5%), 0 8px 20px rgb(0 0 0 / 24%);
+    }
+    .petting-booth::before {
+      position: absolute;
+      inset: 7px;
+      border: 1px solid rgb(196 164 112 / 22%);
+      content: "";
+      pointer-events: none;
+    }
+    .petting-copy { position: relative; z-index: 1; min-width: 0; }
+    .petting-kicker { margin: 0 0 3px; color: #c09a66; font-size: 11px; font-weight: 700; letter-spacing: .14em; }
+    .petting-title { margin: 0; color: #f2e6cf; font-family: var(--font-serif); font-size: clamp(19px, 2vw, 24px); line-height: 1.35; }
+    .petting-status { margin: 4px 0 0; color: #bdb09a; font-size: 13px; }
+    .petting-count { color: #a99b83; font-size: 12px; }
+    .petting-count strong { margin: 0 3px 0 7px; color: #e5bc79; font-family: var(--font-serif); font-size: 18px; font-variant-numeric: tabular-nums; }
+    .frog-pet {
+      position: relative;
+      z-index: 1;
+      display: grid;
+      width: 150px;
+      height: 130px;
+      justify-self: end;
+      place-items: center;
+      padding: 0;
+      border: 0;
+      background: transparent;
+      color: inherit;
+      cursor: grab;
+      touch-action: none;
+      user-select: none;
+      -webkit-user-select: none;
+    }
+    .frog-pet:active, .frog-pet.is-petting { cursor: grabbing; }
+    .frog-pet img { width: 112px; height: 112px; object-fit: contain; filter: drop-shadow(0 7px 5px rgb(0 0 0 / 38%)); transition: transform .18s ease-out, filter .18s ease-out; pointer-events: none; }
+    .frog-pet.is-petting img { transform: scale(.96) rotate(-3deg); filter: drop-shadow(0 2px 3px rgb(0 0 0 / 34%)); }
+    .frog-pet.is-happy img { animation: frog-loved .5s cubic-bezier(.2,.8,.2,1); }
+    .frog-pet.is-happy::after { position: absolute; top: 10px; right: 17px; color: #e9bd73; content: "✦"; font-size: 20px; animation: pet-spark .65s ease-out both; pointer-events: none; }
+    .frog-pet-label { position: absolute; right: 50%; bottom: 0; padding: 2px 9px; transform: translateX(50%); border: 1px solid #826b48; background: #211e19; color: #e1c591; font-size: 10px; letter-spacing: .08em; white-space: nowrap; pointer-events: none; }
+    @keyframes frog-loved { 0% { transform: translateY(0) scale(1); } 38% { transform: translateY(-8px) scale(1.06) rotate(3deg); } 72% { transform: translateY(1px) scale(.98) rotate(-2deg); } 100% { transform: translateY(0) scale(1); } }
+    @keyframes pet-spark { 0% { opacity: 0; transform: scale(.45) rotate(-25deg); } 35% { opacity: 1; transform: scale(1.15) rotate(12deg); } 100% { opacity: 0; transform: scale(.85) rotate(25deg); } }
+    @media (max-width: 760px) {
+      .petting-booth { min-height: 124px; grid-template-columns: minmax(0, 1fr) 112px; gap: 6px; margin: 10px 0 2px; padding: 10px 14px 10px 17px; }
+      .petting-kicker { font-size: 10px; }
+      .petting-title { font-size: 18px; }
+      .petting-status { max-width: 23em; font-size: 12px; }
+      .frog-pet { width: 108px; height: 112px; }
+      .frog-pet img { width: 96px; height: 96px; }
+    }
+    @media (prefers-reduced-motion: reduce) {
+      .frog-pet img { transition: none; }
+      .frog-pet.is-happy img, .frog-pet.is-happy::after { animation: none; }
+    }
   </style>
 </head>
 <body>
@@ -804,6 +871,19 @@
       </a>
       <time class="top-date" id="today-date"></time>
     </header>
+
+    <section class="petting-booth" aria-labelledby="petting-title">
+      <div class="petting-copy">
+        <p class="petting-kicker">营地伙伴 · 奶蛙</p>
+        <h2 class="petting-title" id="petting-title">先摸摸奶蛙，再决定吃什么</h2>
+        <p class="petting-status" id="petting-status" aria-live="polite">按住奶蛙来回摸摸，它会开心起来。</p>
+        <span class="petting-count">被摸了<strong id="petting-count">0</strong>下</span>
+      </div>
+      <button class="frog-pet" id="frog-pet" type="button" aria-label="按住并左右滑动来摸摸奶蛙">
+        <img id="frog-pet-image" src="assets/naiwa/standing.png" alt="" draggable="false" decoding="async">
+        <span class="frog-pet-label">按住摸摸</span>
+      </button>
+    </section>
 
     <main>
       <section class="stage" aria-labelledby="page-title">
@@ -1801,6 +1881,61 @@
     }
 
     /* ---------- 初始化 ---------- */
+    const frogPet = $("frog-pet");
+    const frogPetImage = $("frog-pet-image");
+    const frogPetCount = $("petting-count");
+    const frogPetStatus = $("petting-status");
+    let pettingCount = 0;
+    let pettingPointer = null;
+    let lastPetPoint = null;
+    let happyTimer = 0;
+
+    function petFrog() {
+      pettingCount += 1;
+      frogPetCount.textContent = String(pettingCount);
+      frogPetImage.src = "assets/naiwa/happy.png";
+      frogPetStatus.textContent = "奶蛙舒服得眯起了眼睛。";
+      frogPet.classList.remove("is-happy");
+      void frogPet.offsetWidth;
+      frogPet.classList.add("is-happy");
+      window.clearTimeout(happyTimer);
+      happyTimer = window.setTimeout(() => {
+        frogPetImage.src = "assets/naiwa/standing.png";
+        frogPet.classList.remove("is-happy");
+        frogPetStatus.textContent = "按住奶蛙来回摸摸，它会开心起来。";
+      }, 850);
+    }
+
+    frogPet.addEventListener("pointerdown", (event) => {
+      if (event.button !== 0 && event.pointerType === "mouse") return;
+      event.preventDefault();
+      pettingPointer = event.pointerId;
+      lastPetPoint = { x: event.clientX, y: event.clientY };
+      frogPet.classList.add("is-petting");
+      frogPet.setPointerCapture(event.pointerId);
+      petFrog();
+    });
+    frogPet.addEventListener("pointermove", (event) => {
+      if (event.pointerId !== pettingPointer || !lastPetPoint) return;
+      const dx = event.clientX - lastPetPoint.x;
+      const dy = event.clientY - lastPetPoint.y;
+      if (Math.hypot(dx, dy) < 22) return;
+      lastPetPoint = { x: event.clientX, y: event.clientY };
+      petFrog();
+    });
+    const stopPetting = (event) => {
+      if (event.pointerId !== pettingPointer) return;
+      pettingPointer = null;
+      lastPetPoint = null;
+      frogPet.classList.remove("is-petting");
+    };
+    frogPet.addEventListener("pointerup", stopPetting);
+    frogPet.addEventListener("pointercancel", stopPetting);
+    frogPet.addEventListener("lostpointercapture", stopPetting);
+    frogPet.addEventListener("click", (event) => {
+      if (event.detail === 0) petFrog();
+    });
+
     modeButtons.forEach((button) => button.addEventListener("click", () => setMode(button.dataset.mode)));
     for (const [key, group] of Object.entries(filterGroups)) {
       group.addEventListener("click", (event) => {
