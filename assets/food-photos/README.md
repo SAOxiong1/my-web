@@ -49,6 +49,10 @@
 | `beef-chow-fun.jpg` | 干炒牛河 | Ceeseven | [Wikimedia Commons](https://commons.wikimedia.org/wiki/File:Beefchowfoon.jpg) · [CC0](https://creativecommons.org/publicdomain/zero/1.0/) |
 | `boiled-beef.jpg` | 水煮牛肉 | N509FZ | [Wikimedia Commons](https://commons.wikimedia.org/wiki/File:Spicy_boiled_beef_on_T7_(20170606181441).jpg) · [CC BY-SA 4.0](https://creativecommons.org/licenses/by-sa/4.0/) |
 | `rice-vermicelli-xiamen.jpg` | 福建炒米粉、南昌炒粉 | Hhaithait | [Wikimedia Commons](https://commons.wikimedia.org/wiki/File:Fried_Rice_vermicelli_Xiamen.jpg) · [CC BY-SA 3.0](https://creativecommons.org/licenses/by-sa/3.0/) |
+| `sweet-sour-ribs.jpg` | 糖醋排骨、醉排骨 | Lim Ashley | [Wikimedia Commons](https://commons.wikimedia.org/wiki/File:Tángcù_páigǔ.jpg) · [CC BY 2.0](https://creativecommons.org/licenses/by/2.0/) |
+| `black-bean-ribs.jpg` | 豉汁蒸排骨 | bryan... | [Wikimedia Commons](https://commons.wikimedia.org/wiki/File:Food_%E8%B1%89%E6%B1%81%E8%92%B8%E6%8E%92%E9%AA%A8,_%E6%96%B0%E8%91%A1%E8%8B%91,_Shin_Pu_Yuan,_%E5%8F%B0%E5%8C%97_(21531923392).jpg) · [CC BY-SA 2.0](https://creativecommons.org/licenses/by-sa/2.0/) |
+| `bamboo-shoots.jpg` | 油焖春笋 | Gaurav Dhwaj Khadka | [Wikimedia Commons](https://commons.wikimedia.org/wiki/File:Fried_Bamboo_Shoot.jpg) · [CC BY-SA 4.0](https://creativecommons.org/licenses/by-sa/4.0/) |
+| `wonton-soup.jpeg` | 鲜肉小馄饨 | J.D. Books | [Pexels](https://www.pexels.com/photo/delicious-wonton-soup-in-ceramic-bowl-37113522/) · [Pexels License](https://www.pexels.com/license/) |
 | `fish-head-soup.jpg` | 鄱阳湖鱼头汤 | 唐戈 | [Wikimedia Commons](https://commons.wikimedia.org/wiki/File:千岛湖鱼头豆腐汤.jpg) · [CC BY-SA 4.0](https://creativecommons.org/licenses/by-sa/4.0/) |
 | `chinese-herbal-soup.jpeg` | 南昌瓦罐汤、腌笃鲜（中式炖汤参考） | 女子 正真 | [Pexels](https://www.pexels.com/photo/traditional-chinese-herbal-soup-in-ceramic-bowl-40253364/) · [Pexels License](https://www.pexels.com/license/) |
 | `malatang.jpeg` | 麻辣烫自选碗 | Markus Winkler | [Pexels](https://www.pexels.com/photo/a-soup-dish-on-a-black-bowl-10672908/) · [Pexels License](https://www.pexels.com/license/) |
