@@ -1,6 +1,6 @@
 # 菜品照片来源
 
-照片下载到本目录，由页面根据菜名和主要食材选择对应实拍参考图；同一张图只会复用于相近菜品。照片来源页均标注为 Pexels 免费图片。
+照片下载到本目录。页面优先按菜品 ID 选择专用实拍图，再按菜名和主要食材匹配通用照片；尽量避免不相关的菜共用一张图。图片已缩放压缩以适配网页；Pexels 图片按其免费许可使用，Commons 图片按表中许可署名，页面署名标出已缩放。
 
 | 图片 | 适用菜品 | 摄影师 | 来源 |
 | --- | --- | --- | --- |
@@ -37,4 +37,21 @@
 | `baozi.jpeg` | 包子、生煎、小笼包 | Sự Minh | https://www.pexels.com/photo/baozi-boiled-in-pot-17317227/ |
 | `meat-pie.jpeg` | 馅饼、肉夹馍、手抓饼等 | 3 Change C.C. | https://www.pexels.com/photo/authentic-chinese-meat-pie-in-hand-33921268/ |
 | `tangyuan.jpeg` | 汤圆、甜品 | Cats Coming | https://www.pexels.com/photo/pig-themed-food-1938266/ |
-| `fish-head-casserole.jpg` | 鱼头菜（包括鄱阳湖鱼头汤） | Jason Lam | [Wikimedia Commons](https://commons.wikimedia.org/wiki/File:Braised_fish_head_casserole.jpg) · [CC BY-SA 2.0](https://creativecommons.org/licenses/by-sa/2.0/) |
+| `fish-head-casserole.jpg` | 历史文件，当前页面已停用 | Jason Lam | [Wikimedia Commons](https://commons.wikimedia.org/wiki/File:Braised_fish_head_casserole.jpg) · [CC BY-SA 2.0](https://creativecommons.org/licenses/by-sa/2.0/) |
+| `egg-custard.jpeg` | 虾仁蒸水蛋（蒸蛋底图） | RDNE Stock Project | [Pexels](https://www.pexels.com/photo/cooked-dish-on-ceramic-bowl-6646357/) · [Pexels License](https://www.pexels.com/license/) |
+| `oyster-omelette.jpg` | 闽味海蛎煎 | Limthiampoh | [Wikimedia Commons](https://commons.wikimedia.org/wiki/File:Fried_Oyster_Omelette.jpg) · 公有领域 |
+| `chopped-chili-fish-head.jpg` | 家常剁椒鱼头 | Steamed fish head in chili sauce | [Wikimedia Commons](https://commons.wikimedia.org/wiki/File:Hunan_cuisine,_steamed_fish_head_in_chili_sauce.jpg) · [CC0](https://creativecommons.org/publicdomain/zero/1.0/) |
+| `steamed-grouper.jpg` | 葱姜清蒸鲈鱼 | Kent Wang | [Wikimedia Commons](https://commons.wikimedia.org/wiki/File:Steamed_Grouper.jpg) · [CC BY-SA 2.0](https://creativecommons.org/licenses/by-sa/2.0/) |
+| `white-cut-chicken.jpg` | 白切鸡 | Benjwong | [Wikimedia Commons](https://commons.wikimedia.org/wiki/File:Whitecutchicken.jpg) · 公有领域 |
+| `three-cup-chicken.jpg` | 三杯鸡、豉油鸡、黄焖鸡米饭 | Ceeseven | [Wikimedia Commons](https://commons.wikimedia.org/wiki/File:Three_Cup_Chicken_in_Clay_Pot.jpg) · [CC BY-SA 4.0](https://creativecommons.org/licenses/by-sa/4.0/) |
+| `mapo-tofu-commons.jpg` | 麻婆豆腐 | Yaoleilei | [Wikimedia Commons](https://commons.wikimedia.org/wiki/File:Mapo_tofu.JPG) · [CC BY-SA 2.0](https://creativecommons.org/licenses/by-sa/2.0/) |
+| `pounded-pepper-century-egg.jpg` | 擂辣椒皮蛋 | N509FZ | [Wikimedia Commons](https://commons.wikimedia.org/wiki/File:Lei_Lajiao_Pidan_at_Xiangzhongyuan_Hunan_Cuisine,_Beijing_(20240127103613).jpg) · [CC BY-SA 4.0](https://creativecommons.org/licenses/by-sa/4.0/) |
+| `beef-chow-fun.jpg` | 干炒牛河 | Ceeseven | [Wikimedia Commons](https://commons.wikimedia.org/wiki/File:Beefchowfoon.jpg) · [CC0](https://creativecommons.org/publicdomain/zero/1.0/) |
+| `boiled-beef.jpg` | 水煮牛肉 | N509FZ | [Wikimedia Commons](https://commons.wikimedia.org/wiki/File:Spicy_boiled_beef_on_T7_(20170606181441).jpg) · [CC BY-SA 4.0](https://creativecommons.org/licenses/by-sa/4.0/) |
+| `rice-vermicelli-xiamen.jpg` | 福建炒米粉、南昌炒粉 | Hhaithait | [Wikimedia Commons](https://commons.wikimedia.org/wiki/File:Fried_Rice_vermicelli_Xiamen.jpg) · [CC BY-SA 3.0](https://creativecommons.org/licenses/by-sa/3.0/) |
+| `fish-head-soup.jpg` | 鄱阳湖鱼头汤 | Alpha | [Wikimedia Commons](https://commons.wikimedia.org/wiki/File:Fish_Head_Noodle_in_Malaysia.jpg) · [CC BY-SA 2.0](https://creativecommons.org/licenses/by-sa/2.0/) |
+| `chinese-herbal-soup.jpeg` | 南昌瓦罐汤、腌笃鲜（中式炖汤参考） | 女子 正真 | [Pexels](https://www.pexels.com/photo/traditional-chinese-herbal-soup-in-ceramic-bowl-40253364/) · [Pexels License](https://www.pexels.com/license/) |
+| `malatang.jpeg` | 麻辣烫自选碗 | Markus Winkler | [Pexels](https://www.pexels.com/photo/a-soup-dish-on-a-black-bowl-10672908/) · [Pexels License](https://www.pexels.com/license/) |
+| `beef-noodle-soup.jpeg` | 番茄肥牛米线 | 颖 徐 | [Pexels](https://www.pexels.com/photo/spicy-beef-noodle-soup-with-herbs-in-a-bowl-29305560/) · [Pexels License](https://www.pexels.com/license/) |
+| `tofu-soup.jpeg` | 海蛎豆腐汤（豆腐菌菇汤参考） | Fernando Hung | [Pexels](https://www.pexels.com/photo/delicious-chinese-soup-with-mushrooms-and-tofu-28996106/) · [Pexels License](https://www.pexels.com/license/) |
+| `tangyuan-real.jpg` | 汤圆 | GT#4 - thank you for your support | [Wikimedia Commons](https://commons.wikimedia.org/wiki/File:Transparent_tangyuan_(glutinous_rice_balls,_汤圆)_-_Flickr_-_GeorgeTan%5E4_-_Thanks_for_your_support.jpg) · [CC0](https://creativecommons.org/publicdomain/zero/1.0/) |
