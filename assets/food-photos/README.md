@@ -56,3 +56,15 @@
 | `beef-noodle-soup.jpeg` | 番茄肥牛米线 | 颖 徐 | [Pexels](https://www.pexels.com/photo/spicy-beef-noodle-soup-with-herbs-in-a-bowl-29305560/) · [Pexels License](https://www.pexels.com/license/) |
 | `tofu-soup.jpeg` | 海蛎豆腐汤（豆腐菌菇汤参考） | Fernando Hung | [Pexels](https://www.pexels.com/photo/delicious-chinese-soup-with-mushrooms-and-tofu-28996106/) · [Pexels License](https://www.pexels.com/license/) |
 | `tangyuan-real.jpg` | 汤圆 | GT#4 - thank you for your support | [Wikimedia Commons](https://commons.wikimedia.org/wiki/File:Transparent_tangyuan_(glutinous_rice_balls,_汤圆)_-_Flickr_-_GeorgeTan%5E4_-_Thanks_for_your_support.jpg) · [CC0](https://creativecommons.org/publicdomain/zero/1.0/) |
+| `lurou-fan.jpg` | 台式卤肉饭 | Jzest | [Wikimedia Commons](https://commons.wikimedia.org/wiki/File:Lurou_fan(Taiwanese_cuisine).jpg) · [CC BY-SA 2.5](https://creativecommons.org/licenses/by-sa/2.5/) |
+| `tw-beef-noodle.jpg` | 红烧牛肉面 | Jjj84206 | [Wikimedia Commons](https://commons.wikimedia.org/wiki/File:Taiwanese_Beef_Noodle_Soup.jpg) · [CC BY-SA 4.0](https://creativecommons.org/licenses/by-sa/4.0/) |
+| `oyster-omelet-tw.jpg` | 台式蚵仔煎 | istolethetv | [Wikimedia Commons](https://commons.wikimedia.org/wiki/File:Oyster_omelette,_Taipei,_Taiwan.(8447333000)(2).jpg) · [CC BY 2.0](https://creativecommons.org/licenses/by/2.0/) |
+| `xiansuji.jpg` | 咸酥鸡 | JeanHavoc | [Wikimedia Commons](https://commons.wikimedia.org/wiki/File:TWBC_Taiwanese_fried_chicken_20070303.jpg) · [CC BY-SA 3.0](https://creativecommons.org/licenses/by-sa/3.0/) |
+| `mayou-ji.jpg` | 麻油鸡 | Rockhsp | [Wikimedia Commons](https://commons.wikimedia.org/wiki/File:麻油雞.jpg) · [CC BY-SA 4.0](https://creativecommons.org/licenses/by-sa/4.0/) |
+| `caipu-dan.jpg` | 菜脯蛋 | JeanneChang | [Wikimedia Commons](https://commons.wikimedia.org/wiki/File:Preserved_radish_omelet-omelette.jpg) · [CC BY-SA 4.0](https://creativecommons.org/licenses/by-sa/4.0/) |
+| `tongzi-migao.jpg` | 筒仔米糕 | bryan... | [Wikimedia Commons](https://commons.wikimedia.org/wiki/File:筒仔米糕,_何家排骨酥,_台北_(14330790184).jpg) · [CC BY-SA 2.0](https://creativecommons.org/licenses/by-sa/2.0/) |
+| `danbing.jpg` | 台式蛋饼 | Đậu tương | [Wikimedia Commons](https://commons.wikimedia.org/wiki/File:Dànbǐng.jpg) · [CC BY-SA 4.0](https://creativecommons.org/licenses/by-sa/4.0/) |
+| `lubo-gao.jpg` | 菜头粿（萝卜糕） | Rick888chen | [Wikimedia Commons](https://commons.wikimedia.org/wiki/File:蘿蔔糕.jpg) · [CC BY-SA 4.0](https://creativecommons.org/licenses/by-sa/4.0/) |
+| `hakka-yongtaofu.jpg` | 客家酿豆腐 | Banej | [Wikimedia Commons](https://commons.wikimedia.org/wiki/File:Hakka_yong_tau_foo.jpg) · [CC BY-SA 3.0](https://creativecommons.org/licenses/by-sa/3.0/) |
+| `gongwan.jpg` | 贡丸汤 | Yuriy kosygin | [Wikimedia Commons](https://commons.wikimedia.org/wiki/File:Hsinchu_Pork_Ball.jpg) · [CC BY-SA 4.0](https://creativecommons.org/licenses/by-sa/4.0/) |
+| `meigan-kourou.jpg` | 梅干扣肉 | Franchin | [Wikimedia Commons](https://commons.wikimedia.org/wiki/File:Knyuk.jpg) · [CC BY 2.5](https://creativecommons.org/licenses/by/2.5/) |

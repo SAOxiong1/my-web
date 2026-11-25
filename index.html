@@ -919,6 +919,7 @@
                   <button class="chip" type="button" data-value="川菜" aria-pressed="false">川菜</button>
                   <button class="chip" type="button" data-value="湘菜" aria-pressed="false">湘菜</button>
                   <button class="chip" type="button" data-value="赣菜" aria-pressed="false">赣菜</button>
+                  <button class="chip" type="button" data-value="台湾·客家" aria-pressed="false">台湾·客家</button>
                 </div>
               </div>
               <div class="filter-group" role="group" aria-label="按辣度筛选">
@@ -1003,7 +1004,7 @@
     const SLOT_RADIUS_PERCENT = 37;
     const SPIN_TURNS_DEG = 2160;
     const SPIN_MS = 4800;
-    const REGIONS = ["全部", "粤菜", "闽菜", "江浙菜", "川菜", "湘菜", "赣菜"];
+    const REGIONS = ["全部", "粤菜", "闽菜", "江浙菜", "川菜", "湘菜", "赣菜", "台湾·客家"];
     const SPICES = ["全部", "清淡", "嗜辣"];
     const MODES = ["home", "takeout"];
     const SPICE_TEXT = ["不辣", "微辣可选", "香辣可选"];
@@ -1266,6 +1267,18 @@
     /* ---------- 菜品实拍图 ---------- */
     const FOOD_PHOTOS = {
       pork: { file: "pork-braise.jpeg", subject: "红烧肉", photographer: "Amanda Lim", url: "https://www.pexels.com/photo/close-up-shot-of-delicious-braised-pork-on-white-ceramic-plate-8256988/", position: "center 52%" },
+      lurouFan: { file: "lurou-fan.jpg", subject: "台式卤肉饭", photographer: "Jzest", url: "https://commons.wikimedia.org/wiki/File:Lurou_fan(Taiwanese_cuisine).jpg", license: "CC BY-SA 2.5", licenseUrl: "https://creativecommons.org/licenses/by-sa/2.5/", source: "Wikimedia Commons", modified: "已缩放", position: "center 50%" },
+      twBeefNoodle: { file: "tw-beef-noodle.jpg", subject: "红烧牛肉面", photographer: "Jjj84206", url: "https://commons.wikimedia.org/wiki/File:Taiwanese_Beef_Noodle_Soup.jpg", license: "CC BY-SA 4.0", licenseUrl: "https://creativecommons.org/licenses/by-sa/4.0/", source: "Wikimedia Commons", modified: "已缩放", position: "center 50%" },
+      oysterOmeletTw: { file: "oyster-omelet-tw.jpg", subject: "台式蚵仔煎", photographer: "istolethetv", url: "https://commons.wikimedia.org/wiki/File:Oyster_omelette,_Taipei,_Taiwan.(8447333000)(2).jpg", license: "CC BY 2.0", licenseUrl: "https://creativecommons.org/licenses/by/2.0/", source: "Wikimedia Commons", modified: "已缩放", position: "center 50%" },
+      xiansuji: { file: "xiansuji.jpg", subject: "咸酥鸡", photographer: "JeanHavoc", url: "https://commons.wikimedia.org/wiki/File:TWBC_Taiwanese_fried_chicken_20070303.jpg", license: "CC BY-SA 3.0", licenseUrl: "https://creativecommons.org/licenses/by-sa/3.0/", source: "Wikimedia Commons", modified: "已缩放", position: "center 50%" },
+      mayouJi: { file: "mayou-ji.jpg", subject: "麻油鸡", photographer: "Rockhsp", url: "https://commons.wikimedia.org/wiki/File:麻油雞.jpg", license: "CC BY-SA 4.0", licenseUrl: "https://creativecommons.org/licenses/by-sa/4.0/", source: "Wikimedia Commons", modified: "已缩放", position: "center 50%" },
+      caipuDan: { file: "caipu-dan.jpg", subject: "菜脯蛋", photographer: "JeanneChang", url: "https://commons.wikimedia.org/wiki/File:Preserved_radish_omelet-omelette.jpg", license: "CC BY-SA 4.0", licenseUrl: "https://creativecommons.org/licenses/by-sa/4.0/", source: "Wikimedia Commons", modified: "已缩放", position: "center 50%" },
+      tongziMigao: { file: "tongzi-migao.jpg", subject: "筒仔米糕", photographer: "bryan...", url: "https://commons.wikimedia.org/wiki/File:筒仔米糕,_何家排骨酥,_台北_(14330790184).jpg", license: "CC BY-SA 2.0", licenseUrl: "https://creativecommons.org/licenses/by-sa/2.0/", source: "Wikimedia Commons", modified: "已缩放", position: "center 50%" },
+      danbing: { file: "danbing.jpg", subject: "台式蛋饼", photographer: "Đậu tương", url: "https://commons.wikimedia.org/wiki/File:Dànbǐng.jpg", license: "CC BY-SA 4.0", licenseUrl: "https://creativecommons.org/licenses/by-sa/4.0/", source: "Wikimedia Commons", modified: "已缩放", position: "center 50%" },
+      luboGao: { file: "lubo-gao.jpg", subject: "菜头粿（萝卜糕）", photographer: "Rick888chen", url: "https://commons.wikimedia.org/wiki/File:蘿蔔糕.jpg", license: "CC BY-SA 4.0", licenseUrl: "https://creativecommons.org/licenses/by-sa/4.0/", source: "Wikimedia Commons", modified: "已缩放", position: "center 50%" },
+      hakkaYongTofu: { file: "hakka-yongtaofu.jpg", subject: "客家酿豆腐", photographer: "Banej", url: "https://commons.wikimedia.org/wiki/File:Hakka_yong_tau_foo.jpg", license: "CC BY-SA 3.0", licenseUrl: "https://creativecommons.org/licenses/by-sa/3.0/", source: "Wikimedia Commons", modified: "已缩放", position: "center 50%" },
+      gongwan: { file: "gongwan.jpg", subject: "贡丸汤", photographer: "Yuriy kosygin", url: "https://commons.wikimedia.org/wiki/File:Hsinchu_Pork_Ball.jpg", license: "CC BY-SA 4.0", licenseUrl: "https://creativecommons.org/licenses/by-sa/4.0/", source: "Wikimedia Commons", modified: "已缩放", position: "center 50%" },
+      meiganKourou: { file: "meigan-kourou.jpg", subject: "梅干扣肉", photographer: "Franchin", url: "https://commons.wikimedia.org/wiki/File:Knyuk.jpg", license: "CC BY 2.5", licenseUrl: "https://creativecommons.org/licenses/by/2.5/", source: "Wikimedia Commons", modified: "已缩放", position: "center 50%" },
       porkCutlet: { file: "pork-cutlet.jpeg", subject: "猪肉切片菜", photographer: "Gerald Jake Abangan", url: "https://www.pexels.com/photo/fried-pork-slices-and-egg-for-breakfast-2689421/", position: "center 58%" },
       porkStirFry: { file: "pork-stir-fry.jpeg", subject: "猪肉炒菜", photographer: "Gu Ko", url: "https://www.pexels.com/photo/delicious-asian-stir-fry-with-pork-and-vegetables-37297739/", position: "center 50%" },
       beef: { file: "beef-stir-fry.jpeg", subject: "牛肉炒菜", photographer: "DΛVΞ GΛRCIΛ", url: "https://www.pexels.com/photo/delicious-chinese-stir-fry-with-colorful-vegetables-37743318/", position: "center 50%" },
@@ -1322,6 +1335,19 @@
 
     const EXACT_DISH_PHOTOS = {
       "steamed-egg": "eggCustard",
+      "lurou-fan": "lurouFan",
+      "tw-beef-noodle": "twBeefNoodle",
+      "oyster-omelet-tw": "oysterOmeletTw",
+      "xiansuji": "xiansuji",
+      "mayou-ji": "mayouJi",
+      "caipu-dan": "caipuDan",
+      "tongzi-migao": "tongziMigao",
+      "lubogao": "luboGao",
+      "taishi-danbing": "danbing",
+      "gongwan-tang": "gongwan",
+      "niangdoufu": "hakkaYongTofu",
+      "meigan-kourou": "meiganKourou",
+      "tw-chaomifen": "riceVermicelli",
       "oyster-omelet": "oysterOmelette",
       "chopped-chili-fish": "choppedChiliFishHead",
       "steamed-sea-bass": "steamedGrouper",
@@ -1360,7 +1386,7 @@
 
       // Prefer the actual dish or main ingredient over its broad recipe category.
       if (EXACT_DISH_PHOTOS[dish.id]) photoKey = EXACT_DISH_PHOTOS[dish.id];
-      else if (isNoodleDish && /汤|米线|云吞|拉面|粉|沙茶面|牛肉面|片儿川/.test(name)) photoKey = "noodleSoup";
+      else if (isNoodleDish && /汤|米线|云吞|拉面|粉|沙茶面|牛肉面|片儿川|担仔面|面线/.test(name)) photoKey = "noodleSoup";
       else if (isNoodleDish) photoKey = "noodles";
       else if (/汤包|小笼/.test(name)) photoKey = "baozi";
       else if (/鱼头/.test(name)) photoKey = "fishHead";
@@ -1385,8 +1411,8 @@
       else if (/佛跳墙/.test(name)) photoKey = "soup";
       else if (/鸡/.test(name) && /炸|辣子|盐酥|鸡米花|鸡翅|鸡排/.test(name)) photoKey = "friedChicken";
       else if (/蒸排骨/.test(name)) photoKey = "blackBeanRibs";
-      else if (/叉烧|排骨|大排|猪排|五香卷|荔枝肉/.test(name)) photoKey = "porkCutlet";
-      else if (dish.category === "pork" && /红烧肉|东坡肉|卤肉|扣肉/.test(name)) photoKey = "pork";
+      else if (/叉烧|排骨|大排|猪排|五香卷|荔枝肉|红糟/.test(name)) photoKey = "porkCutlet";
+      else if (dish.category === "pork" && /红烧肉|东坡肉|卤肉|卤猪脚|扣肉/.test(name)) photoKey = "pork";
       else if (dish.category === "pork") photoKey = "porkStirFry";
       else if (/馄饨|云吞|水饺|抄手|锅贴|煎饺/.test(name)) photoKey = /汤|酸汤|小馄饨/.test(name) ? "soup" : "snack";
       else if (/炒饭/.test(name)) photoKey = "rice";
