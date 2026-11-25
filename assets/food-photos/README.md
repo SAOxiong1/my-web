@@ -19,7 +19,6 @@
 | `eel.jpeg` | 鳗鱼菜 | FOX ^.ᆽ.^= ∫ | https://www.pexels.com/photo/delicious-eel-bowl-with-rice-and-seaweed-37290960/ |
 | `salmon-rice.jpeg` | 三文鱼饭 | Gu Ko | https://www.pexels.com/photo/salmon-and-rice-bowl-with-fresh-cilantro-37332351/ |
 | `tomato-egg.jpeg` | 番茄炒蛋等蛋类菜 | 木 灬 | https://www.pexels.com/photo/delicious-chinese-tomato-and-egg-stir-fry-29529570/ |
-| `mapo-pork.jpeg` | 麻婆豆腐 | Giovanna Kamimura | https://www.pexels.com/photo/spicy-tofu-and-ground-pork-bowl-with-vegetables-31962200/ |
 | `tofu-alt.jpeg` | 其他豆腐菜 | Polina Tankilevitch | https://www.pexels.com/photo/close-up-shot-of-a-chinese-food-5848476/ |
 | `eggplant.jpeg` | 茄子菜 | Gu Ko | https://www.pexels.com/photo/stir-fried-eggplant-with-green-peppers-on-plate-37297752/ |
 | `green-beans.jpeg` | 四季豆、豆角 | Zehra Yılmaz | https://www.pexels.com/photo/fried-vegetables-on-pan-18109103/ |
@@ -36,8 +35,6 @@
 | `dumplings.jpeg` | 饺子、锅贴等 | Anush Gorak | https://www.pexels.com/photo/dumplings-in-bowl-1431306/ |
 | `baozi.jpeg` | 包子、生煎、小笼包 | Sự Minh | https://www.pexels.com/photo/baozi-boiled-in-pot-17317227/ |
 | `meat-pie.jpeg` | 馅饼、肉夹馍、手抓饼等 | 3 Change C.C. | https://www.pexels.com/photo/authentic-chinese-meat-pie-in-hand-33921268/ |
-| `tangyuan.jpeg` | 汤圆、甜品 | Cats Coming | https://www.pexels.com/photo/pig-themed-food-1938266/ |
-| `fish-head-casserole.jpg` | 历史文件，当前页面已停用 | Jason Lam | [Wikimedia Commons](https://commons.wikimedia.org/wiki/File:Braised_fish_head_casserole.jpg) · [CC BY-SA 2.0](https://creativecommons.org/licenses/by-sa/2.0/) |
 | `egg-custard.jpeg` | 虾仁蒸水蛋（蒸蛋底图） | RDNE Stock Project | [Pexels](https://www.pexels.com/photo/cooked-dish-on-ceramic-bowl-6646357/) · [Pexels License](https://www.pexels.com/license/) |
 | `oyster-omelette.jpg` | 闽味海蛎煎 | Limthiampoh | [Wikimedia Commons](https://commons.wikimedia.org/wiki/File:Fried_Oyster_Omelette.jpg) · 公有领域 |
 | `chopped-chili-fish-head.jpg` | 家常剁椒鱼头 | Steamed fish head in chili sauce | [Wikimedia Commons](https://commons.wikimedia.org/wiki/File:Hunan_cuisine,_steamed_fish_head_in_chili_sauce.jpg) · [CC0](https://creativecommons.org/publicdomain/zero/1.0/) |
