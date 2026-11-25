@@ -1277,7 +1277,7 @@
       fishHead: { file: "fish-head-soup.jpg", subject: "鱼头豆腐汤", photographer: "唐戈", url: "https://commons.wikimedia.org/wiki/File:千岛湖鱼头豆腐汤.jpg", license: "CC BY-SA 4.0", licenseUrl: "https://creativecommons.org/licenses/by-sa/4.0/", source: "Wikimedia Commons", modified: "已缩放", position: "center 50%" },
       choppedChiliFishHead: { file: "chopped-chili-fish-head.jpg", subject: "剁椒蒸鱼", photographer: "Steamed fish head in chili sauce", url: "https://commons.wikimedia.org/wiki/File:Hunan_cuisine,_steamed_fish_head_in_chili_sauce.jpg", license: "CC0", licenseUrl: "https://creativecommons.org/publicdomain/zero/1.0/", source: "Wikimedia Commons", modified: "已缩放", position: "center 50%" },
       steamedGrouper: { file: "steamed-grouper.jpg", subject: "清蒸石斑鱼", photographer: "Kent Wang", url: "https://commons.wikimedia.org/wiki/File:Steamed_Grouper.jpg", license: "CC BY-SA 2.0", licenseUrl: "https://creativecommons.org/licenses/by-sa/2.0/", source: "Wikimedia Commons", modified: "已缩放", position: "center 50%" },
-      eggCustard: { file: "egg-custard.jpeg", subject: "蒸蛋羹", photographer: "RDNE Stock Project", url: "https://www.pexels.com/photo/cooked-dish-on-ceramic-bowl-6646357/", position: "center 58%" },
+      eggCustard: { file: "steamed-egg-custard.jpg", subject: "虾仁蒸水蛋", photographer: "Pauloleong2002", url: "https://commons.wikimedia.org/wiki/File:Cuisine_of_Guangdong_6.jpg", license: "CC BY-SA 4.0", licenseUrl: "https://creativecommons.org/licenses/by-sa/4.0/", source: "Wikimedia Commons", modified: "已缩放", position: "center 50%" },
       oysterOmelette: { file: "oyster-omelette.jpg", subject: "海蛎煎蛋", photographer: "Limthiampoh", url: "https://commons.wikimedia.org/wiki/File:Fried_Oyster_Omelette.jpg", license: "公有领域", licenseUrl: "https://creativecommons.org/publicdomain/mark/1.0/", source: "Wikimedia Commons", modified: "已缩放", position: "center 50%" },
       whiteCutChicken: { file: "white-cut-chicken.jpg", subject: "白切鸡", photographer: "Benjwong", url: "https://commons.wikimedia.org/wiki/File:Whitecutchicken.jpg", license: "公有领域", licenseUrl: "https://creativecommons.org/publicdomain/mark/1.0/", source: "Wikimedia Commons", modified: "已缩放", position: "center 50%" },
       braisedChicken: { file: "three-cup-chicken.jpg", subject: "砂锅三杯鸡", photographer: "Ceeseven", url: "https://commons.wikimedia.org/wiki/File:Three_Cup_Chicken_in_Clay_Pot.jpg", license: "CC BY-SA 4.0", licenseUrl: "https://creativecommons.org/licenses/by-sa/4.0/", source: "Wikimedia Commons", modified: "已缩放", position: "center 50%" },
@@ -1346,7 +1346,7 @@
       "delivery-wontons": "wontonSoup",
       "delivery-bbq-rice": "riceBowl",
       "delivery-curry-chicken": "riceBowl",
-      "waipo-greens-eggs": "vegetable",
+      "waipo-greens-eggs": "egg",
       "yanduxian": "crockSoup",
       "delivery-tomato-beef-noodles": "beefNoodleSoup",
       "delivery-malatang": "malatang",
@@ -1378,12 +1378,13 @@
       else if (/鲈鱼|鳜鱼|醋鱼|酒糟鱼/.test(name)) photoKey = "seafood";
       else if (/焗饭|海鲜饭/.test(name)) photoKey = "riceBowl";
       else if (/麻婆豆腐/.test(name)) photoKey = "mapoTofu";
-      else if (/茄子|茄/.test(name)) photoKey = "eggplant";
+      else if (/茄子/.test(name)) photoKey = "eggplant";
       else if (/鸭|鹅/.test(name)) photoKey = "duck";
       else if (/羊肉抓饭/.test(name)) photoKey = "riceBowl";
       else if (/羊肉|羊排/.test(name)) photoKey = "lamb";
       else if (/佛跳墙/.test(name)) photoKey = "soup";
       else if (/鸡/.test(name) && /炸|辣子|盐酥|鸡米花|鸡翅|鸡排/.test(name)) photoKey = "friedChicken";
+      else if (/蒸排骨/.test(name)) photoKey = "blackBeanRibs";
       else if (/叉烧|排骨|大排|猪排|五香卷|荔枝肉/.test(name)) photoKey = "porkCutlet";
       else if (dish.category === "pork" && /红烧肉|东坡肉|卤肉|扣肉/.test(name)) photoKey = "pork";
       else if (dish.category === "pork") photoKey = "porkStirFry";
