@@ -920,6 +920,242 @@
       letter-spacing: 0.04em;
       box-shadow: 0 12px 32px rgba(0, 0, 0, 0.35);
     }
+
+    /* ========== 个人主页 ========== */
+    .topbar-right {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      flex-wrap: wrap;
+    }
+    .profile-trigger {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      padding: 6px 14px 6px 8px;
+      border-radius: 999px;
+      border: 1px solid var(--line);
+      background: var(--card);
+      color: var(--ink);
+      font-size: 14px;
+      font-weight: 500;
+      cursor: pointer;
+      transition: border-color 0.2s ease, background 0.2s ease, transform 0.15s ease;
+    }
+    .profile-trigger:hover {
+      border-color: var(--green);
+      background: var(--green-tint);
+    }
+    .profile-trigger:active {
+      transform: scale(0.97);
+    }
+    .profile-avatar {
+      width: 24px;
+      height: 24px;
+      border-radius: 50%;
+      background: var(--green);
+      color: #fffdf8;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 12px;
+      font-weight: 700;
+      flex-shrink: 0;
+    }
+    .profile-modal {
+      position: fixed;
+      inset: 0;
+      z-index: 900;
+      background: rgba(24, 34, 28, 0.45);
+      backdrop-filter: blur(4px);
+      -webkit-backdrop-filter: blur(4px);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 16px;
+    }
+    .profile-modal[hidden] {
+      display: none;
+    }
+    .profile-dialog {
+      width: 100%;
+      max-width: 560px;
+      max-height: 88vh;
+      overflow-y: auto;
+      background: var(--card);
+      border: 1px solid var(--line);
+      border-radius: var(--r-lg);
+      padding: 24px;
+      box-shadow: 0 24px 48px rgba(20, 30, 24, 0.2);
+      display: flex;
+      flex-direction: column;
+      gap: 20px;
+    }
+    .profile-head {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 12px;
+    }
+    .profile-head h2 {
+      margin: 0;
+      font-size: 20px;
+      color: var(--ink);
+    }
+    .profile-close {
+      width: 34px;
+      height: 34px;
+      border-radius: 50%;
+      border: 1px solid var(--line);
+      background: var(--surface-soft);
+      color: var(--ink);
+      font-size: 18px;
+      line-height: 1;
+      cursor: pointer;
+    }
+    .profile-close:hover {
+      background: var(--line);
+    }
+    .profile-form {
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+      padding: 16px;
+      background: var(--surface-soft);
+      border-radius: var(--r-md);
+      border: 1px solid var(--line-soft);
+    }
+    .profile-field {
+      display: flex;
+      flex-direction: column;
+      gap: 6px;
+    }
+    .profile-field label {
+      font-size: 13px;
+      font-weight: 600;
+      color: var(--ink-soft);
+    }
+    .profile-field input {
+      width: 100%;
+      box-sizing: border-box;
+      padding: 10px 12px;
+      border-radius: var(--r-sm);
+      border: 1px solid var(--line);
+      background: var(--card);
+      color: var(--ink);
+      font-size: 14px;
+      font-family: inherit;
+    }
+    .profile-field input:focus {
+      outline: 2px solid var(--focus);
+      border-color: var(--green);
+    }
+    .profile-form-actions {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 12px;
+      margin-top: 4px;
+    }
+    .profile-save-btn {
+      padding: 9px 18px;
+      border-radius: 999px;
+      border: 0;
+      background: var(--green);
+      color: #fffdf8;
+      font-size: 14px;
+      font-weight: 600;
+      cursor: pointer;
+    }
+    .profile-save-btn:hover {
+      background: var(--green-dark);
+    }
+    .profile-save-msg {
+      font-size: 13px;
+      color: var(--green);
+      font-weight: 500;
+    }
+    .profile-tabs {
+      display: flex;
+      gap: 8px;
+      border-bottom: 1px solid var(--line);
+      padding-bottom: 10px;
+    }
+    .profile-tab {
+      padding: 8px 16px;
+      border-radius: 999px;
+      border: 1px solid var(--line);
+      background: var(--surface-soft);
+      color: var(--ink-soft);
+      font-size: 14px;
+      font-weight: 500;
+      cursor: pointer;
+    }
+    .profile-tab[aria-selected="true"] {
+      background: var(--green);
+      border-color: var(--green);
+      color: #fffdf8;
+    }
+    .profile-list {
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+    }
+    .profile-item {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 12px;
+      padding: 12px 14px;
+      border-radius: var(--r-md);
+      border: 1px solid var(--line);
+      background: var(--surface-soft);
+    }
+    .profile-item-main {
+      display: flex;
+      flex-direction: column;
+      gap: 4px;
+      min-width: 0;
+      flex: 1;
+    }
+    .profile-item-title {
+      background: none;
+      border: 0;
+      padding: 0;
+      text-align: left;
+      font-size: 15px;
+      font-weight: 600;
+      color: var(--ink);
+      cursor: pointer;
+    }
+    .profile-item-title:hover {
+      color: var(--green);
+      text-decoration: underline;
+    }
+    .profile-item-meta {
+      font-size: 12px;
+      color: var(--muted);
+    }
+    .profile-item-remove {
+      padding: 6px 12px;
+      border-radius: 999px;
+      border: 1px solid var(--line);
+      background: var(--card);
+      color: var(--ink-soft);
+      font-size: 12px;
+      cursor: pointer;
+      flex-shrink: 0;
+    }
+    .profile-item-remove:hover {
+      border-color: var(--orange-text);
+      color: var(--orange-text);
+    }
+    .profile-empty {
+      text-align: center;
+      padding: 28px 12px;
+      color: var(--muted);
+      font-size: 14px;
+    }
   </style>
 </head>
 <body>
@@ -961,7 +1197,13 @@
         <span class="brand-name">食光</span>
         <span class="brand-note">家常菜和外卖菜单</span>
       </a>
-      <time class="top-date" id="today-date"></time>
+      <div class="topbar-right">
+        <time class="top-date" id="today-date"></time>
+        <button class="profile-trigger" id="profile-trigger" type="button" aria-label="打开个人主页">
+          <span class="profile-avatar" id="profile-avatar" aria-hidden="true">食</span>
+          <span id="profile-trigger-name">食光食客</span>
+        </button>
+      </div>
     </header>
 
     <section class="petting-booth" aria-labelledby="petting-title">
@@ -1074,6 +1316,34 @@
       <svg class="icon" aria-hidden="true"><use href="#i-spin"></use></svg>
       <span id="bar-spin-label">奶蛙，转起来</span>
     </button>
+  </div>
+
+  <div class="profile-modal" id="profile-modal" role="dialog" aria-modal="true" aria-labelledby="profile-modal-title" hidden>
+    <div class="profile-dialog">
+      <div class="profile-head">
+        <h2 id="profile-modal-title">个人主页</h2>
+        <button class="profile-close" id="profile-close" type="button" aria-label="关闭个人主页">×</button>
+      </div>
+      <form class="profile-form" id="profile-form">
+        <div class="profile-field">
+          <label for="profile-name-input">我的网名</label>
+          <input id="profile-name-input" type="text" maxlength="20" placeholder="给自己起个好听的网名">
+        </div>
+        <div class="profile-field">
+          <label for="profile-bio-input">个性签名</label>
+          <input id="profile-bio-input" type="text" maxlength="60" placeholder="写一句今天的干饭宣言吧">
+        </div>
+        <div class="profile-form-actions">
+          <button class="profile-save-btn" type="submit">保存资料</button>
+          <span class="profile-save-msg" id="profile-save-msg" aria-live="polite"></span>
+        </div>
+      </form>
+      <div class="profile-tabs" role="tablist" aria-label="个人菜单分类">
+        <button class="profile-tab" id="tab-favorites" type="button" role="tab" aria-selected="true" data-tab="favorites">★ 我的收藏 (<span id="count-favorites">0</span>)</button>
+        <button class="profile-tab" id="tab-liked" type="button" role="tab" aria-selected="false" data-tab="liked">♥ 我的点赞 (<span id="count-liked">0</span>)</button>
+      </div>
+      <div class="profile-list" id="profile-list"></div>
+    </div>
   </div>
 
   <script src="data.js"></script>
@@ -2031,6 +2301,154 @@
     watchSpinButton();
     // 供自动化测试观测内部状态（对生产环境无副作用）
     window.__shiguang__ = { state, byId, pools, openDish, posterCategories: POSTER_CATEGORIES };
+
+    // ========== 个人主页 ==========
+    const PROFILE_KEY = "shiguang.profile.v1";
+    const profileModal = $("profile-modal");
+    const profileTrigger = $("profile-trigger");
+    const profileClose = $("profile-close");
+    const profileAvatar = $("profile-avatar");
+    const profileTriggerName = $("profile-trigger-name");
+    const profileForm = $("profile-form");
+    const profileNameInput = $("profile-name-input");
+    const profileBioInput = $("profile-bio-input");
+    const profileSaveMsg = $("profile-save-msg");
+    const profileList = $("profile-list");
+    const countFavorites = $("count-favorites");
+    const countLiked = $("count-liked");
+    const tabFavorites = $("tab-favorites");
+    const tabLiked = $("tab-liked");
+    let activeProfileTab = "favorites";
+
+    const loadProfile = () => {
+      try {
+        const raw = JSON.parse(localStorage.getItem(PROFILE_KEY) || "{}");
+        return {
+          name: typeof raw.name === "string" && raw.name.trim() ? raw.name.trim() : "食光食客",
+          bio: typeof raw.bio === "string" && raw.bio.trim() ? raw.bio.trim() : "好好吃饭，天天开心。"
+        };
+      } catch {
+        return { name: "食光食客", bio: "好好吃饭，天天开心。" };
+      }
+    };
+
+    const syncProfileHeader = () => {
+      const profile = loadProfile();
+      if (profileTriggerName) profileTriggerName.textContent = profile.name;
+      if (profileAvatar) profileAvatar.textContent = profile.name.slice(0, 1) || "食";
+    };
+
+    const renderProfileList = () => {
+      if (!profileList) return;
+      if (countFavorites) countFavorites.textContent = String(state.favorites.length);
+      if (countLiked) countLiked.textContent = String(state.liked.length);
+      const ids = activeProfileTab === "favorites" ? state.favorites : state.liked;
+      const dishes = ids.map((id) => {
+        const homeDish = byId.home.get(id);
+        if (homeDish) return { dish: homeDish, mode: "home" };
+        const takeoutDish = byId.takeout.get(id);
+        if (takeoutDish) return { dish: takeoutDish, mode: "takeout" };
+        return null;
+      }).filter(Boolean);
+
+      if (!dishes.length) {
+        profileList.innerHTML = `<div class="profile-empty">${activeProfileTab === "favorites" ? "还没有收藏任何菜品，去转盘抽一道喜欢的菜吧～" : "还没有点赞任何菜品，去给喜欢的菜点个赞吧～"}</div>`;
+        return;
+      }
+
+      profileList.innerHTML = dishes.map(({ dish, mode }) => `
+        <div class="profile-item">
+          <div class="profile-item-main">
+            <button class="profile-item-title" type="button" data-open-id="${dish.id}" data-open-mode="${mode}">${dish.name}</button>
+            <span class="profile-item-meta">${mode === "home" ? "在家做" : "点外卖"} · ${dish.region || "家常"} · ${dish.spice || "适中"}</span>
+          </div>
+          <button class="profile-item-remove" type="button" data-remove-id="${dish.id}">${activeProfileTab === "favorites" ? "取消收藏" : "取消点赞"}</button>
+        </div>
+      `).join("");
+    };
+
+    const openProfileModal = () => {
+      const profile = loadProfile();
+      if (profileNameInput) profileNameInput.value = profile.name;
+      if (profileBioInput) profileBioInput.value = profile.bio;
+      if (profileSaveMsg) profileSaveMsg.textContent = "";
+      renderProfileList();
+      if (profileModal) profileModal.hidden = false;
+    };
+
+    const closeProfileModal = () => {
+      if (profileModal) profileModal.hidden = true;
+    };
+
+    if (profileTrigger) profileTrigger.addEventListener("click", openProfileModal);
+    if (profileClose) profileClose.addEventListener("click", closeProfileModal);
+    if (profileModal) {
+      profileModal.addEventListener("click", (e) => {
+        if (e.target === profileModal) closeProfileModal();
+      });
+    }
+    document.addEventListener("keydown", (e) => {
+      if (e.key === "Escape" && profileModal && !profileModal.hidden) closeProfileModal();
+    });
+
+    if (profileForm) {
+      profileForm.addEventListener("submit", (e) => {
+        e.preventDefault();
+        const name = (profileNameInput ? profileNameInput.value.trim() : "") || "食光食客";
+        const bio = (profileBioInput ? profileBioInput.value.trim() : "") || "好好吃饭，天天开心。";
+        try {
+          localStorage.setItem(PROFILE_KEY, JSON.stringify({ name, bio }));
+        } catch {}
+        syncProfileHeader();
+        if (profileSaveMsg) {
+          profileSaveMsg.textContent = "已保存";
+          window.setTimeout(() => { if (profileSaveMsg) profileSaveMsg.textContent = ""; }, 2000);
+        }
+      });
+    }
+
+    [tabFavorites, tabLiked].forEach((tab) => {
+      if (!tab) return;
+      tab.addEventListener("click", () => {
+        activeProfileTab = tab.dataset.tab === "liked" ? "liked" : "favorites";
+        if (tabFavorites) tabFavorites.setAttribute("aria-selected", String(activeProfileTab === "favorites"));
+        if (tabLiked) tabLiked.setAttribute("aria-selected", String(activeProfileTab === "liked"));
+        renderProfileList();
+      });
+    });
+
+    if (profileList) {
+      profileList.addEventListener("click", (e) => {
+        const openBtn = e.target.closest("[data-open-id]");
+        if (openBtn) {
+          const id = openBtn.dataset.openId;
+          const mode = openBtn.dataset.openMode;
+          const dish = byId[mode]?.get(id);
+          if (dish) {
+            closeProfileModal();
+            if (state.mode !== mode) {
+              state.mode = mode;
+              syncControls();
+              buildWheelSlots();
+              updateAvailability();
+            }
+            openDish(dish);
+          }
+          return;
+        }
+        const removeBtn = e.target.closest("[data-remove-id]");
+        if (removeBtn) {
+          const id = removeBtn.dataset.removeId;
+          const key = activeProfileTab === "favorites" ? "favorites" : "liked";
+          state[key] = state[key].filter((item) => item !== id);
+          savePrefs();
+          if (typeof renderSaved === "function") renderSaved();
+          renderProfileList();
+        }
+      });
+    }
+
+    syncProfileHeader();
   })();
 
   (() => {
