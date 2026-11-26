@@ -950,8 +950,12 @@
       transform: scale(0.97);
     }
     .profile-avatar {
-      width: 24px;
-      height: 24px;
+      width: 28px;
+      height: 28px;
+      min-width: 28px;
+      max-width: 28px;
+      min-height: 28px;
+      max-height: 28px;
       border-radius: 50%;
       background: var(--green);
       color: #fffdf8;
@@ -961,6 +965,15 @@
       font-size: 12px;
       font-weight: 700;
       flex-shrink: 0;
+      overflow: hidden;
+      border: 1.5px solid var(--green);
+    }
+    .profile-avatar img {
+      width: 28px;
+      height: 28px;
+      object-fit: cover;
+      border-radius: 50%;
+      display: block;
     }
     .profile-modal {
       position: fixed;
