@@ -2976,7 +2976,8 @@
     };
 
     const drawMusicBg = () => {
-      if (!bgCtx || !bgCanvas || !isPlayingMusic) {
+      const visualActive = isPlayingMusic || isAppleTabActive;
+      if (!bgCtx || !bgCanvas || !visualActive) {
         bgRaf = null;
         return;
       }
