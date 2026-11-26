@@ -2972,7 +2972,10 @@
         soundPrompt.hidden = true;
         video.muted = false;
         video.currentTime = 0;
-        video.play().catch(() => finishIntro());
+        video.play().catch(() => {
+          video.muted = true;
+          video.play().catch(() => finishIntro());
+        });
       });
     }
 
@@ -2984,6 +2987,12 @@
         }
       });
     }
+
+    window.setTimeout(() => {
+      if (!dismissed && video.paused && soundPrompt && soundPrompt.hidden) {
+        soundPrompt.hidden = false;
+      }
+    }, 800);
   })();
   </script>
 
