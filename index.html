@@ -86,7 +86,7 @@
 
     /* ---------- 顶栏 ---------- */
     .page-shell { max-width: 1120px; margin: 0 auto; padding: 0 32px 80px; }
-    .topbar { height: 72px; display: flex; align-items: center; justify-content: space-between; gap: 16px; border-bottom: 1px solid rgb(38 58 48 / 10%); }
+    .topbar { min-height: 72px; padding: 10px 0; display: flex; align-items: center; justify-content: space-between; gap: 16px; border-bottom: 1px solid rgb(38 58 48 / 10%); }
     .brand { display: flex; align-items: center; gap: 12px; color: var(--ink); text-decoration: none; border-radius: var(--r-sm); }
     .brand-mark { width: 36px; height: 36px; display: grid; place-items: center; border-radius: 12px 12px 12px 4px; background: var(--green); color: #fff9eb; font-size: 19px; transform: rotate(-4deg); }
     .brand-name { font-family: var(--font-serif); font-size: 20px; font-weight: 700; letter-spacing: .06em; }
@@ -273,7 +273,7 @@
 
     @media (max-width: 760px) {
       .page-shell { padding: 0 20px 112px; }
-      .topbar { height: 60px; }
+      .topbar { min-height: 60px; padding: 8px 0; }
       .stage { padding-top: 24px; gap: 16px; }
       .intro-copy { font-size: 15px; }
       .controls { padding: 16px; }
@@ -1067,6 +1067,56 @@
       border-radius: var(--r-md);
       border: 1px solid var(--line-soft);
     }
+    .profile-avatar-row {
+      display: flex;
+      align-items: center;
+      gap: 16px;
+    }
+    .profile-avatar-lg {
+      width: 72px;
+      height: 72px;
+      flex-shrink: 0;
+      border-radius: 50%;
+      background: var(--green);
+      color: #fffdf8;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 28px;
+      font-weight: 700;
+      overflow: hidden;
+      border: 2px solid var(--green);
+    }
+    .profile-avatar-lg img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      border-radius: 50%;
+      display: block;
+    }
+    .profile-avatar-actions {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+    }
+    .profile-avatar-btn {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      padding: 7px 14px;
+      border-radius: 999px;
+      border: 1px solid var(--line);
+      background: var(--card);
+      color: var(--ink);
+      font-size: 13px;
+      font-weight: 500;
+      cursor: pointer;
+      transition: border-color 0.2s ease, background 0.2s ease;
+    }
+    .profile-avatar-btn:hover {
+      border-color: var(--green);
+      background: var(--green-tint);
+    }
     .profile-field {
       display: flex;
       flex-direction: column;
@@ -1546,7 +1596,8 @@
       </div>
     </header>
 
-    <section class="petting-booth" aria-labelledby="petting-title">
+    <section class="petting-booth" id="petting-booth" aria-labelledby="petting-title">
+      <canvas class="petting-spectrum" id="petting-spectrum" aria-hidden="true"></canvas>
       <div class="petting-copy">
         <p class="petting-kicker">营地伙伴 · 奶蛙</p>
         <p class="petting-title" id="petting-title">先摸摸奶蛙，再决定吃什么</p>
@@ -2688,8 +2739,8 @@
     updateAvailability();
     if (state.mode === "takeout") spinStatus.textContent = "已切换到外卖菜单。";
     watchSpinButton();
-    // 供自动化测试观测内部状态（对生产环境无副作用）
-    window.__shiguang__ = { state, byId, pools, openDish, posterCategories: POSTER_CATEGORIES };
+    // 供自动化测试及扩展模块观测内部状态（对生产环境无副作用）
+    window.__shiguang__ = { state, byId, pools, openDish, savePrefs, updateRecent, renderDish, escapeHTML, posterCategories: POSTER_CATEGORIES };
   })();
   </script>
   <script>
@@ -2699,6 +2750,10 @@
     const state = sg.state || { liked: [], favorites: [], mode: "home" };
     const byId = sg.byId || { home: new Map(), takeout: new Map() };
     const openDish = sg.openDish || (() => {});
+    const savePrefs = sg.savePrefs || (() => {});
+    const updateRecent = sg.updateRecent || (() => {});
+    const renderDish = sg.renderDish || (() => {});
+    const escapeHTML = sg.escapeHTML || ((v) => String(v).replace(/[&<>"']/g, (c) => ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;", "'": "&#39;" })[c]));
 
     // ========== 个人主页 ==========
     const PROFILE_KEY = "shiguang.profile.v1";
@@ -2738,8 +2793,11 @@
 
     const renderAvatarEl = (el, avatarUrl, name) => {
       if (!el) return;
-      if (avatarUrl) {
-        el.innerHTML = `<img src="${avatarUrl}" alt="">`;
+      if (avatarUrl && /^data:image\//i.test(avatarUrl)) {
+        const img = document.createElement("img");
+        img.src = avatarUrl;
+        img.alt = "";
+        el.replaceChildren(img);
       } else {
         el.textContent = (name || "食").slice(0, 1);
       }
@@ -2772,10 +2830,10 @@
       profileList.innerHTML = dishes.map(({ dish, mode }) => `
         <div class="profile-item">
           <div class="profile-item-main">
-            <button class="profile-item-title" type="button" data-open-id="${dish.id}" data-open-mode="${mode}">${dish.name}</button>
-            <span class="profile-item-meta">${mode === "home" ? "在家做" : "点外卖"} · ${dish.region || "家常"} · ${dish.spice || "适中"}</span>
+            <button class="profile-item-title" type="button" data-open-id="${escapeHTML(dish.id)}" data-open-mode="${escapeHTML(mode)}">${escapeHTML(dish.name)}</button>
+            <span class="profile-item-meta">${mode === "home" ? "在家做" : "点外卖"} · ${escapeHTML(dish.region || "家常")} · ${escapeHTML(dish.spiceLabel || "适中")}</span>
           </div>
-          <button class="profile-item-remove" type="button" data-remove-id="${dish.id}">${activeProfileTab === "favorites" ? "取消收藏" : "取消点赞"}</button>
+          <button class="profile-item-remove" type="button" data-remove-id="${escapeHTML(dish.id)}">${activeProfileTab === "favorites" ? "取消收藏" : "取消点赞"}</button>
         </div>
       `).join("");
     };
@@ -2871,17 +2929,9 @@
         const openBtn = e.target.closest("[data-open-id]");
         if (openBtn) {
           const id = openBtn.dataset.openId;
-          const mode = openBtn.dataset.openMode;
-          const dish = byId[mode]?.get(id);
-          if (dish) {
+          if (id) {
             closeProfileModal();
-            if (state.mode !== mode) {
-              state.mode = mode;
-              syncControls();
-              buildWheelSlots();
-              updateAvailability();
-            }
-            openDish(dish);
+            openDish(id);
           }
           return;
         }
@@ -2891,7 +2941,12 @@
           const key = activeProfileTab === "favorites" ? "favorites" : "liked";
           state[key] = state[key].filter((item) => item !== id);
           savePrefs();
-          if (typeof renderSaved === "function") renderSaved();
+          if (state.currentId === id) {
+            const cur = byId[state.mode]?.get(id);
+            if (cur) renderDish(cur);
+          } else {
+            updateRecent();
+          }
           renderProfileList();
         }
       });
@@ -2916,21 +2971,6 @@
     const musicTabApple = $("music-tab-apple");
     const musicLocalWrap = $("music-local-wrap");
     const musicAppleWrap = $("music-apple-wrap");
-
-    if (musicTabLocal && musicTabApple && musicLocalWrap && musicAppleWrap) {
-      musicTabLocal.addEventListener("click", () => {
-        musicTabLocal.setAttribute("aria-selected", "true");
-        musicTabApple.setAttribute("aria-selected", "false");
-        musicLocalWrap.hidden = false;
-        musicAppleWrap.hidden = true;
-      });
-      musicTabApple.addEventListener("click", () => {
-        musicTabLocal.setAttribute("aria-selected", "false");
-        musicTabApple.setAttribute("aria-selected", "true");
-        musicLocalWrap.hidden = true;
-        musicAppleWrap.hidden = false;
-      });
-    }
 
     const tracks = [
       { id: "builtin-1", title: "午后食光 · 钢琴轻曲", type: "synth", notes: [261.63, 329.63, 392.00, 523.25, 392.00, 329.63, 293.66, 349.23, 440.00, 349.23], tempo: 650, wave: "sine" },
@@ -2958,10 +2998,19 @@
     const frogPetImg = $("frog-pet-image");
     let danceFrame = 0;
 
+    const syncSpectrumSize = () => {
+      if (!spectrumCanvas || !pettingBooth) return;
+      const w = Math.max(1, pettingBooth.clientWidth);
+      const h = Math.max(1, pettingBooth.clientHeight);
+      if (spectrumCanvas.width !== w) spectrumCanvas.width = w;
+      if (spectrumCanvas.height !== h) spectrumCanvas.height = h;
+    };
     const resizeBgCanvas = () => {
-      if (!bgCanvas) return;
-      bgCanvas.width = window.innerWidth;
-      bgCanvas.height = window.innerHeight;
+      if (bgCanvas) {
+        bgCanvas.width = window.innerWidth;
+        bgCanvas.height = window.innerHeight;
+      }
+      syncSpectrumSize();
     };
     window.addEventListener("resize", resizeBgCanvas);
     resizeBgCanvas();
@@ -3040,6 +3089,7 @@
       }
 
       if (spectrumCtx && spectrumCanvas) {
+        syncSpectrumSize();
         const sw = spectrumCanvas.width;
         const sh = spectrumCanvas.height;
         spectrumCtx.clearRect(0, 0, sw, sh);
@@ -3104,7 +3154,7 @@
       if (!musicPlaylist) return;
       musicPlaylist.innerHTML = tracks.map((t, idx) => `
         <button class="music-track" type="button" data-track-idx="${idx}" aria-current="${idx === currentTrackIndex}">
-          <span style="overflow:hidden;text-overflow:ellipsis;white-space:nowrap;">${t.title}</span>
+          <span style="overflow:hidden;text-overflow:ellipsis;white-space:nowrap;">${escapeHTML(t.title)}</span>
           <span style="font-size:11px;color:var(--muted);flex-shrink:0;">${t.type === "synth" ? "内置" : "本地"}</span>
         </button>
       `).join("");
@@ -3112,14 +3162,18 @@
 
     const updateMusicUI = () => {
       const track = tracks[currentTrackIndex];
-      if (musicNow && track) musicNow.textContent = track.title;
-      if (musicSub && track) musicSub.textContent = `${track.type === "synth" ? "内置轻音乐" : "本地音频"} · ${isPlayingMusic ? "正在播放" : "已暂停"}`;
+      if (musicNow) musicNow.textContent = isAppleTabActive ? "Apple Music 喜爱歌曲" : (track ? track.title : "");
+      if (musicSub) musicSub.textContent = isAppleTabActive
+        ? "Apple Music · 频谱与奶蛙律动中"
+        : (track ? `${track.type === "synth" ? "内置轻音乐" : "本地音频"} · ${isPlayingMusic ? "正在播放" : "已暂停"}` : "");
       if (musicToggle) musicToggle.textContent = isPlayingMusic ? "⏸" : "▶";
       const visualActive = isPlayingMusic || isAppleTabActive;
       if (musicDot) musicDot.classList.toggle("is-playing", visualActive);
       if (bgCanvas) bgCanvas.classList.toggle("is-active", visualActive);
       if (spectrumCanvas) spectrumCanvas.classList.toggle("is-active", visualActive);
       if (!visualActive) {
+        if (bgCtx && bgCanvas) bgCtx.clearRect(0, 0, bgCanvas.width, bgCanvas.height);
+        if (spectrumCtx && spectrumCanvas) spectrumCtx.clearRect(0, 0, spectrumCanvas.width, spectrumCanvas.height);
         if (frogPetBtn) frogPetBtn.style.transform = "";
         if (frogPetImg) frogPetImg.src = "assets/naiwa/standing.png";
       }
@@ -3162,6 +3216,25 @@
       playCurrentTrack();
     });
 
+    if (musicTabLocal && musicTabApple && musicLocalWrap && musicAppleWrap) {
+      musicTabLocal.addEventListener("click", () => {
+        musicTabLocal.setAttribute("aria-selected", "true");
+        musicTabApple.setAttribute("aria-selected", "false");
+        musicLocalWrap.hidden = false;
+        musicAppleWrap.hidden = true;
+        isAppleTabActive = false;
+        updateMusicUI();
+      });
+      musicTabApple.addEventListener("click", () => {
+        musicTabLocal.setAttribute("aria-selected", "false");
+        musicTabApple.setAttribute("aria-selected", "true");
+        musicLocalWrap.hidden = true;
+        musicAppleWrap.hidden = false;
+        isAppleTabActive = true;
+        if (isPlayingMusic) pauseCurrentTrack();
+        else updateMusicUI();
+      });
+    }
     if (musicFab && musicPanel) {
       musicFab.addEventListener("click", () => {
         const willOpen = musicPanel.hidden;
