@@ -896,7 +896,7 @@
 </head>
 <body>
   <div class="intro-overlay" id="intro-overlay" role="dialog" aria-modal="true" aria-label="开场动画">
-    <video class="intro-video" id="intro-video" src="assets/naiwa/奶蛙开场动画.mp4" autoplay playsinline preload="auto"></video>
+    <video class="intro-video" id="intro-video" src="assets/naiwa/奶蛙开场动画.mp4" playsinline preload="auto"></video>
     <button class="intro-skip" id="intro-skip" type="button">跳过开场</button>
   </div>
   <svg width="0" height="0" style="position: absolute;" aria-hidden="true" focusable="false">
@@ -2039,22 +2039,24 @@
       if (!dismissed && e.key === "Escape") finishIntro();
     });
 
-    if (soundPrompt) {
-      soundPrompt.addEventListener("click", () => {
-        soundPrompt.hidden = true;
-        video.muted = false;
-        video.currentTime = 0;
-        video.play().catch(() => finishIntro());
-      });
-    }
+    const startPlayback = () => {
+      if (dismissed || !video.paused) return;
+      const playPromise = video.play();
+      if (playPromise !== undefined) {
+        playPromise.catch(() => {
+          if (dismissed) return;
+          video.muted = true;
+          video.setAttribute("muted", "");
+          video.play().catch(() => finishIntro());
+        });
+      }
+    };
 
-    const playPromise = video.play();
-    if (playPromise !== undefined) {
-      playPromise.catch(() => {
-        if (!dismissed && soundPrompt) {
-          soundPrompt.hidden = false;
-        }
-      });
+    if (video.readyState >= 2) {
+      startPlayback();
+    } else {
+      video.addEventListener("canplay", startPlayback, { once: true });
+      startPlayback();
     }
   })();
   </script>
