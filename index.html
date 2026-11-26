@@ -1518,6 +1518,16 @@
         <button class="profile-close" id="profile-close" type="button" aria-label="关闭个人主页">×</button>
       </div>
       <form class="profile-form" id="profile-form">
+        <div class="profile-avatar-row">
+          <div class="profile-avatar-lg" id="profile-avatar-preview">食</div>
+          <div class="profile-avatar-actions">
+            <label class="profile-avatar-btn">
+              <span>上传头像</span>
+              <input id="profile-avatar-input" type="file" accept="image/*" hidden>
+            </label>
+            <button class="profile-avatar-btn" id="profile-avatar-reset" type="button">恢复默认</button>
+          </div>
+        </div>
         <div class="profile-field">
           <label for="profile-name-input">我的网名</label>
           <input id="profile-name-input" type="text" maxlength="20" placeholder="给自己起个好听的网名">
@@ -2552,22 +2562,34 @@
     const tabLiked = $("tab-liked");
     let activeProfileTab = "favorites";
 
+    let pendingAvatar = null;
+
     const loadProfile = () => {
       try {
         const raw = JSON.parse(localStorage.getItem(PROFILE_KEY) || "{}");
         return {
           name: typeof raw.name === "string" && raw.name.trim() ? raw.name.trim() : "食光食客",
-          bio: typeof raw.bio === "string" && raw.bio.trim() ? raw.bio.trim() : "好好吃饭，天天开心。"
+          bio: typeof raw.bio === "string" && raw.bio.trim() ? raw.bio.trim() : "好好吃饭，天天开心。",
+          avatar: typeof raw.avatar === "string" ? raw.avatar : ""
         };
       } catch {
-        return { name: "食光食客", bio: "好好吃饭，天天开心。" };
+        return { name: "食光食客", bio: "好好吃饭，天天开心。", avatar: "" };
+      }
+    };
+
+    const renderAvatarEl = (el, avatarUrl, name) => {
+      if (!el) return;
+      if (avatarUrl) {
+        el.innerHTML = `<img src="${avatarUrl}" alt="">`;
+      } else {
+        el.textContent = (name || "食").slice(0, 1);
       }
     };
 
     const syncProfileHeader = () => {
       const profile = loadProfile();
       if (profileTriggerName) profileTriggerName.textContent = profile.name;
-      if (profileAvatar) profileAvatar.textContent = profile.name.slice(0, 1) || "食";
+      renderAvatarEl(profileAvatar, profile.avatar, profile.name);
     };
 
     const renderProfileList = () => {
@@ -2601,8 +2623,10 @@
 
     const openProfileModal = () => {
       const profile = loadProfile();
+      pendingAvatar = profile.avatar;
       if (profileNameInput) profileNameInput.value = profile.name;
       if (profileBioInput) profileBioInput.value = profile.bio;
+      renderAvatarEl(profileAvatarPreview, pendingAvatar, profile.name);
       if (profileSaveMsg) profileSaveMsg.textContent = "";
       renderProfileList();
       if (profileModal) profileModal.hidden = false;
@@ -2623,13 +2647,47 @@
       if (e.key === "Escape" && profileModal && !profileModal.hidden) closeProfileModal();
     });
 
+    if (profileAvatarInput) {
+      profileAvatarInput.addEventListener("change", () => {
+        const file = profileAvatarInput.files?.[0];
+        if (!file) return;
+        const reader = new FileReader();
+        reader.onload = () => {
+          const img = new Image();
+          img.onload = () => {
+            const size = 160;
+            const canvas = document.createElement("canvas");
+            canvas.width = size;
+            canvas.height = size;
+            const ctx = canvas.getContext("2d");
+            const minSide = Math.min(img.width, img.height);
+            const sx = (img.width - minSide) / 2;
+            const sy = (img.height - minSide) / 2;
+            ctx.drawImage(img, sx, sy, minSide, minSide, 0, 0, size, size);
+            pendingAvatar = canvas.toDataURL("image/jpeg", 0.85);
+            renderAvatarEl(profileAvatarPreview, pendingAvatar, profileNameInput?.value || "食");
+          };
+          img.src = String(reader.result || "");
+        };
+        reader.readAsDataURL(file);
+        profileAvatarInput.value = "";
+      });
+    }
+
+    if (profileAvatarReset) {
+      profileAvatarReset.addEventListener("click", () => {
+        pendingAvatar = "";
+        renderAvatarEl(profileAvatarPreview, "", profileNameInput?.value || "食");
+      });
+    }
+
     if (profileForm) {
       profileForm.addEventListener("submit", (e) => {
         e.preventDefault();
         const name = (profileNameInput ? profileNameInput.value.trim() : "") || "食光食客";
         const bio = (profileBioInput ? profileBioInput.value.trim() : "") || "好好吃饭，天天开心。";
         try {
-          localStorage.setItem(PROFILE_KEY, JSON.stringify({ name, bio }));
+          localStorage.setItem(PROFILE_KEY, JSON.stringify({ name, bio, avatar: pendingAvatar || "" }));
         } catch {}
         syncProfileHeader();
         if (profileSaveMsg) {
