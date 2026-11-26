@@ -3107,14 +3107,15 @@
       if (musicNow && track) musicNow.textContent = track.title;
       if (musicSub && track) musicSub.textContent = `${track.type === "synth" ? "内置轻音乐" : "本地音频"} · ${isPlayingMusic ? "正在播放" : "已暂停"}`;
       if (musicToggle) musicToggle.textContent = isPlayingMusic ? "⏸" : "▶";
-      if (musicDot) musicDot.classList.toggle("is-playing", isPlayingMusic);
-      if (bgCanvas) bgCanvas.classList.toggle("is-active", isPlayingMusic);
-      if (spectrumCanvas) spectrumCanvas.classList.toggle("is-active", isPlayingMusic);
-      if (!isPlayingMusic) {
+      const visualActive = isPlayingMusic || isAppleTabActive;
+      if (musicDot) musicDot.classList.toggle("is-playing", visualActive);
+      if (bgCanvas) bgCanvas.classList.toggle("is-active", visualActive);
+      if (spectrumCanvas) spectrumCanvas.classList.toggle("is-active", visualActive);
+      if (!visualActive) {
         if (frogPetBtn) frogPetBtn.style.transform = "";
         if (frogPetImg) frogPetImg.src = "assets/naiwa/standing.png";
       }
-      if (isPlayingMusic && !bgRaf) drawMusicBg();
+      if (visualActive && !bgRaf) drawMusicBg();
       renderPlaylist();
     };
 
