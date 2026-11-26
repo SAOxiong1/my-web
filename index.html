@@ -2609,6 +2609,15 @@
     watchSpinButton();
     // 供自动化测试观测内部状态（对生产环境无副作用）
     window.__shiguang__ = { state, byId, pools, openDish, posterCategories: POSTER_CATEGORIES };
+  })();
+  </script>
+  <script>
+  (() => {
+    const $ = (id) => document.getElementById(id);
+    const sg = window.__shiguang__ || {};
+    const state = sg.state || { liked: [], favorites: [], mode: "home" };
+    const byId = sg.byId || { home: new Map(), takeout: new Map() };
+    const openDish = sg.openDish || (() => {});
 
     // ========== 个人主页 ==========
     const PROFILE_KEY = "shiguang.profile.v1";
