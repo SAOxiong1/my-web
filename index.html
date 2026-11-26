@@ -1318,6 +1318,37 @@
       background: var(--green);
       box-shadow: 0 0 0 4px rgba(46, 90, 67, 0.2);
     }
+    .music-mode-tabs {
+      display: flex;
+      gap: 6px;
+    }
+    .music-mode-tab {
+      flex: 1;
+      padding: 6px 10px;
+      border-radius: 999px;
+      border: 1px solid var(--line);
+      background: var(--surface-soft);
+      color: var(--ink-soft);
+      font-size: 12px;
+      font-weight: 500;
+      cursor: pointer;
+    }
+    .music-mode-tab[aria-selected="true"] {
+      background: var(--green);
+      border-color: var(--green);
+      color: #fffdf8;
+    }
+    .music-apple-wrap[hidden],
+    .music-local-wrap[hidden] {
+      display: none;
+    }
+    .music-apple-frame {
+      width: 100%;
+      height: 300px;
+      border: 0;
+      border-radius: var(--r-md);
+      background: var(--surface-soft);
+    }
   </style>
 </head>
 <body>
@@ -1517,20 +1548,29 @@
         </div>
         <button class="profile-close" id="music-close" type="button" aria-label="收起音乐面板">×</button>
       </div>
-      <div class="music-controls">
-        <button class="music-btn" id="music-prev" type="button" aria-label="上一首">⏮</button>
-        <button class="music-btn is-primary" id="music-toggle" type="button" aria-label="播放或暂停">▶</button>
-        <button class="music-btn" id="music-next" type="button" aria-label="下一首">⏭</button>
+      <div class="music-mode-tabs" role="tablist" aria-label="音乐来源">
+        <button class="music-mode-tab" id="music-tab-local" type="button" role="tab" aria-selected="true">内置 / 本地</button>
+        <button class="music-mode-tab" id="music-tab-apple" type="button" role="tab" aria-selected="false">Apple Music</button>
       </div>
-      <div class="music-volume-row">
-        <span>音量</span>
-        <input id="music-volume" type="range" min="0" max="1" step="0.05" value="0.5" aria-label="音量调节">
+      <div class="music-local-wrap" id="music-local-wrap">
+        <div class="music-controls">
+          <button class="music-btn" id="music-prev" type="button" aria-label="上一首">⏮</button>
+          <button class="music-btn is-primary" id="music-toggle" type="button" aria-label="播放或暂停">▶</button>
+          <button class="music-btn" id="music-next" type="button" aria-label="下一首">⏭</button>
+        </div>
+        <div class="music-volume-row" style="margin-top:10px;">
+          <span>音量</span>
+          <input id="music-volume" type="range" min="0" max="1" step="0.05" value="0.5" aria-label="音量调节">
+        </div>
+        <div class="music-playlist" id="music-playlist" style="margin-top:10px;"></div>
+        <label class="music-upload-label" style="margin-top:10px;width:100%;box-sizing:border-box;">
+          <span>+ 添加本地音乐 (MP3/WAV)</span>
+          <input id="music-upload" type="file" accept="audio/*" multiple hidden>
+        </label>
       </div>
-      <div class="music-playlist" id="music-playlist"></div>
-      <label class="music-upload-label">
-        <span>+ 添加本地音乐 (MP3/WAV)</span>
-        <input id="music-upload" type="file" accept="audio/*" multiple hidden>
-      </label>
+      <div class="music-apple-wrap" id="music-apple-wrap" hidden>
+        <iframe class="music-apple-frame" allow="autoplay *; encrypted-media *; fullscreen *; clipboard-write" sandbox="allow-forms allow-popups allow-same-origin allow-scripts allow-storage-access-by-user-activation allow-top-navigation-by-user-activation" src="https://embed.music.apple.com/cn/playlist/%E5%96%9C%E7%88%B1%E6%AD%8C%E6%9B%B2/pl.u-DpUa98Rvk6" title="Apple Music 喜爱歌曲歌单"></iframe>
+      </div>
     </div>
     <button class="music-fab" id="music-fab" type="button" aria-expanded="false" aria-controls="music-panel">
       <span class="music-dot" id="music-dot" aria-hidden="true"></span>
@@ -2655,6 +2695,25 @@
     const musicPlaylist = $("music-playlist");
     const musicUpload = $("music-upload");
     const musicDot = $("music-dot");
+    const musicTabLocal = $("music-tab-local");
+    const musicTabApple = $("music-tab-apple");
+    const musicLocalWrap = $("music-local-wrap");
+    const musicAppleWrap = $("music-apple-wrap");
+
+    if (musicTabLocal && musicTabApple && musicLocalWrap && musicAppleWrap) {
+      musicTabLocal.addEventListener("click", () => {
+        musicTabLocal.setAttribute("aria-selected", "true");
+        musicTabApple.setAttribute("aria-selected", "false");
+        musicLocalWrap.hidden = false;
+        musicAppleWrap.hidden = true;
+      });
+      musicTabApple.addEventListener("click", () => {
+        musicTabLocal.setAttribute("aria-selected", "false");
+        musicTabApple.setAttribute("aria-selected", "true");
+        musicLocalWrap.hidden = true;
+        musicAppleWrap.hidden = false;
+      });
+    }
 
     const tracks = [
       { id: "builtin-1", title: "午后食光 · 钢琴轻曲", type: "synth", notes: [261.63, 329.63, 392.00, 523.25, 392.00, 329.63, 293.66, 349.23, 440.00, 349.23], tempo: 650, wave: "sine" },
