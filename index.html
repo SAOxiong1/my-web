@@ -931,15 +931,16 @@
     .profile-trigger {
       display: inline-flex;
       align-items: center;
-      gap: 8px;
-      padding: 6px 14px 6px 8px;
+      gap: 12px;
+      padding: 6px 18px 6px 6px;
       border-radius: 999px;
       border: 1px solid var(--line);
       background: var(--card);
       color: var(--ink);
-      font-size: 14px;
-      font-weight: 500;
+      font-size: 15px;
+      font-weight: 600;
       cursor: pointer;
+      box-shadow: 0 4px 12px rgba(24, 34, 28, 0.06);
       transition: border-color 0.2s ease, background 0.2s ease, transform 0.15s ease;
     }
     .profile-trigger:hover {
@@ -950,30 +951,47 @@
       transform: scale(0.97);
     }
     .profile-avatar {
-      width: 28px;
-      height: 28px;
-      min-width: 28px;
-      max-width: 28px;
-      min-height: 28px;
-      max-height: 28px;
+      width: 72px;
+      height: 72px;
+      min-width: 72px;
+      max-width: 72px;
+      min-height: 72px;
+      max-height: 72px;
       border-radius: 50%;
       background: var(--green);
       color: #fffdf8;
       display: inline-flex;
       align-items: center;
       justify-content: center;
-      font-size: 12px;
+      font-size: 26px;
       font-weight: 700;
       flex-shrink: 0;
       overflow: hidden;
-      border: 1.5px solid var(--green);
+      border: 2px solid var(--green);
+      box-shadow: 0 2px 8px rgba(24, 34, 28, 0.12);
     }
     .profile-avatar img {
-      width: 28px;
-      height: 28px;
+      width: 100%;
+      height: 100%;
       object-fit: cover;
       border-radius: 50%;
       display: block;
+    }
+    @media (max-width: 640px) {
+      .profile-avatar {
+        width: 56px;
+        height: 56px;
+        min-width: 56px;
+        max-width: 56px;
+        min-height: 56px;
+        max-height: 56px;
+        font-size: 20px;
+      }
+      .profile-trigger {
+        padding: 4px 14px 4px 4px;
+        gap: 10px;
+        font-size: 14px;
+      }
     }
     .profile-modal {
       position: fixed;
