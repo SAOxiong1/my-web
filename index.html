@@ -1391,6 +1391,19 @@
       border-radius: var(--r-md);
       background: var(--surface-soft);
     }
+    .music-bg-canvas {
+      position: fixed;
+      inset: 0;
+      width: 100%;
+      height: 100%;
+      z-index: 0;
+      pointer-events: none;
+      opacity: 0;
+      transition: opacity 0.6s ease;
+    }
+    .music-bg-canvas.is-active {
+      opacity: 1;
+    }
   </style>
 </head>
 <body>
@@ -2905,6 +2918,92 @@
     let audioCtx = null;
     let synthTimer = null;
     let noteStep = 0;
+    let analyser = null;
+    let mediaSourceConnected = false;
+    let synthEnergy = 0;
+    let bgRaf = null;
+    const bgCanvas = $("music-bg-canvas");
+    const bgCtx = bgCanvas ? bgCanvas.getContext("2d") : null;
+
+    const resizeBgCanvas = () => {
+      if (!bgCanvas) return;
+      bgCanvas.width = window.innerWidth;
+      bgCanvas.height = window.innerHeight;
+    };
+    window.addEventListener("resize", resizeBgCanvas);
+    resizeBgCanvas();
+
+    const ensureAnalyser = () => {
+      if (!audioCtx) audioCtx = new (window.AudioContext || window.webkitAudioContext)();
+      if (audioCtx.state === "suspended") audioCtx.resume();
+      if (!analyser) {
+        analyser = audioCtx.createAnalyser();
+        analyser.fftSize = 64;
+      }
+      if (!mediaSourceConnected) {
+        try {
+          const src = audioCtx.createMediaElementSource(audioEl);
+          src.connect(analyser);
+          analyser.connect(audioCtx.destination);
+          mediaSourceConnected = true;
+        } catch {}
+      }
+    };
+
+    const drawMusicBg = () => {
+      if (!bgCtx || !bgCanvas || !isPlayingMusic) {
+        bgRaf = null;
+        return;
+      }
+      const w = bgCanvas.width;
+      const h = bgCanvas.height;
+      bgCtx.clearRect(0, 0, w, h);
+
+      let energy = synthEnergy;
+      let bands = null;
+      if (analyser && tracks[currentTrackIndex]?.type === "file") {
+        const data = new Uint8Array(analyser.frequencyBinCount);
+        analyser.getByteFrequencyData(data);
+        bands = data;
+        let sum = 0;
+        for (let i = 0; i < data.length; i++) sum += data[i];
+        energy = sum / (data.length * 255);
+      } else {
+        synthEnergy *= 0.94;
+      }
+
+      const t = performance.now() * 0.0012;
+      const cx = w * 0.5;
+      const cy = h * 0.45;
+      const baseR = Math.min(w, h) * (0.22 + energy * 0.18);
+
+      const grad = bgCtx.createRadialGradient(cx, cy, baseR * 0.1, cx, cy, baseR * 1.9);
+      grad.addColorStop(0, `rgba(46, 90, 67, ${0.14 + energy * 0.22})`);
+      grad.addColorStop(0.55, `rgba(232, 161, 129, ${0.08 + energy * 0.14})`);
+      grad.addColorStop(1, "rgba(46, 90, 67, 0)");
+      bgCtx.fillStyle = grad;
+      bgCtx.fillRect(0, 0, w, h);
+
+      bgCtx.strokeStyle = `rgba(46, 90, 67, ${0.14 + energy * 0.2})`;
+      bgCtx.lineWidth = 2;
+      for (let ring = 0; ring < 3; ring++) {
+        bgCtx.beginPath();
+        const rBase = baseR * (0.65 + ring * 0.42);
+        for (let a = 0; a <= 64; a++) {
+          const angle = (a / 64) * Math.PI * 2;
+          const bVal = bands ? bands[a % bands.length] / 255 : Math.sin(angle * 4 + t * (ring + 1)) * 0.5 + 0.5;
+          const r = rBase + bVal * (22 + energy * 45);
+          const x = cx + Math.cos(angle) * r;
+          const y = cy + Math.sin(angle) * r;
+          if (a === 0) bgCtx.moveTo(x, y);
+          else bgCtx.lineTo(x, y);
+        }
+        bgCtx.closePath();
+        bgCtx.stroke();
+      }
+
+      bgRaf = requestAnimationFrame(drawMusicBg);
+    };
 
     const getVolume = () => (musicVolume ? Number(musicVolume.value) : 0.5);
 
@@ -2930,6 +3029,7 @@
       gain.connect(audioCtx.destination);
       osc.start();
       osc.stop(audioCtx.currentTime + 0.58);
+      synthEnergy = 0.85;
     };
 
     const renderPlaylist = () => {
@@ -2948,6 +3048,8 @@
       if (musicSub && track) musicSub.textContent = `${track.type === "synth" ? "内置轻音乐" : "本地音频"} · ${isPlayingMusic ? "正在播放" : "已暂停"}`;
       if (musicToggle) musicToggle.textContent = isPlayingMusic ? "⏸" : "▶";
       if (musicDot) musicDot.classList.toggle("is-playing", isPlayingMusic);
+      if (bgCanvas) bgCanvas.classList.toggle("is-active", isPlayingMusic);
+      if (isPlayingMusic && !bgRaf) drawMusicBg();
       renderPlaylist();
     };
 
@@ -2966,6 +3068,7 @@
           playSynthNote(track.notes[noteStep], track.wave);
         }, track.tempo);
       } else {
+        ensureAnalyser();
         audioEl.src = track.url;
         audioEl.volume = getVolume();
         audioEl.play().catch(() => { isPlayingMusic = false; updateMusicUI(); });
