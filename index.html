@@ -1359,6 +1359,72 @@
     </button>
     <button class="intro-skip" id="intro-skip" type="button">跳过开场</button>
   </div>
+  <script>
+  (() => {
+    const overlay = document.getElementById("intro-overlay");
+    const video = document.getElementById("intro-video");
+    const skipBtn = document.getElementById("intro-skip");
+    const soundPrompt = document.getElementById("intro-sound-prompt");
+    if (!overlay || !video) return;
+
+    let dismissed = false;
+    const prevOverflow = document.documentElement.style.overflow;
+    document.documentElement.style.overflow = "hidden";
+
+    const finishIntro = () => {
+      if (dismissed) return;
+      dismissed = true;
+      video.pause();
+      overlay.classList.add("is-leaving");
+      document.documentElement.style.overflow = prevOverflow;
+      window.setTimeout(() => {
+        overlay.hidden = true;
+      }, 620);
+    };
+
+    video.addEventListener("ended", finishIntro, { once: true });
+    video.addEventListener("error", () => {
+      dismissed = true;
+      document.documentElement.style.overflow = prevOverflow;
+      overlay.hidden = true;
+    }, { once: true });
+
+    if (skipBtn) {
+      skipBtn.addEventListener("click", finishIntro);
+    }
+
+    document.addEventListener("keydown", (e) => {
+      if (!dismissed && e.key === "Escape") finishIntro();
+    });
+
+    if (soundPrompt) {
+      soundPrompt.addEventListener("click", () => {
+        soundPrompt.hidden = true;
+        video.muted = false;
+        video.currentTime = 0;
+        video.play().catch(() => {
+          video.muted = true;
+          video.play().catch(() => finishIntro());
+        });
+      });
+    }
+
+    const playPromise = video.play();
+    if (playPromise !== undefined) {
+      playPromise.catch(() => {
+        if (!dismissed && soundPrompt) {
+          soundPrompt.hidden = false;
+        }
+      });
+    }
+
+    window.setTimeout(() => {
+      if (!dismissed && video.paused && soundPrompt && soundPrompt.hidden) {
+        soundPrompt.hidden = false;
+      }
+    }, 800);
+  })();
+  </script>
   <svg width="0" height="0" style="position: absolute;" aria-hidden="true" focusable="false">
     <symbol id="i-clock" viewBox="0 0 24 24"><circle cx="12" cy="12" r="8.5"></circle><path d="M12 7.5V12l3 2"></path></symbol>
     <symbol id="i-users" viewBox="0 0 24 24"><circle cx="9" cy="9" r="3.2"></circle><path d="M3.5 19c.6-3.2 2.8-5 5.5-5s4.9 1.8 5.5 5M15.5 6.3a3 3 0 0 1 0 5.6M17 14.4c1.9.6 3.1 2.2 3.5 4.6"></path></symbol>
@@ -2928,71 +2994,6 @@
       });
     }
     updateMusicUI();
-  })();
-
-  (() => {
-    const overlay = document.getElementById("intro-overlay");
-    const video = document.getElementById("intro-video");
-    const skipBtn = document.getElementById("intro-skip");
-    const soundPrompt = document.getElementById("intro-sound-prompt");
-    if (!overlay || !video) return;
-
-    let dismissed = false;
-    const prevOverflow = document.documentElement.style.overflow;
-    document.documentElement.style.overflow = "hidden";
-
-    const finishIntro = () => {
-      if (dismissed) return;
-      dismissed = true;
-      video.pause();
-      overlay.classList.add("is-leaving");
-      document.documentElement.style.overflow = prevOverflow;
-      window.setTimeout(() => {
-        overlay.hidden = true;
-      }, 620);
-    };
-
-    video.addEventListener("ended", finishIntro, { once: true });
-    video.addEventListener("error", () => {
-      dismissed = true;
-      document.documentElement.style.overflow = prevOverflow;
-      overlay.hidden = true;
-    }, { once: true });
-
-    if (skipBtn) {
-      skipBtn.addEventListener("click", finishIntro);
-    }
-
-    document.addEventListener("keydown", (e) => {
-      if (!dismissed && e.key === "Escape") finishIntro();
-    });
-
-    if (soundPrompt) {
-      soundPrompt.addEventListener("click", () => {
-        soundPrompt.hidden = true;
-        video.muted = false;
-        video.currentTime = 0;
-        video.play().catch(() => {
-          video.muted = true;
-          video.play().catch(() => finishIntro());
-        });
-      });
-    }
-
-    const playPromise = video.play();
-    if (playPromise !== undefined) {
-      playPromise.catch(() => {
-        if (!dismissed && soundPrompt) {
-          soundPrompt.hidden = false;
-        }
-      });
-    }
-
-    window.setTimeout(() => {
-      if (!dismissed && video.paused && soundPrompt && soundPrompt.hidden) {
-        soundPrompt.hidden = false;
-      }
-    }, 800);
   })();
   </script>
 
