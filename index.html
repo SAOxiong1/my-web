@@ -2987,13 +2987,16 @@
 
       let energy = synthEnergy;
       let bands = null;
-      if (analyser && tracks[currentTrackIndex]?.type === "file") {
+      if (analyser && tracks[currentTrackIndex]?.type === "file" && isPlayingMusic) {
         const data = new Uint8Array(analyser.frequencyBinCount);
         analyser.getByteFrequencyData(data);
         bands = data;
         let sum = 0;
         for (let i = 0; i < data.length; i++) sum += data[i];
         energy = sum / (data.length * 255);
+      } else if (isAppleTabActive) {
+        const nowT = performance.now() * 0.001;
+        energy = 0.38 + Math.sin(nowT * 4.5) * 0.24 + Math.sin(nowT * 9.2) * 0.14;
       } else {
         synthEnergy *= 0.94;
       }
