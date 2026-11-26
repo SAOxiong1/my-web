@@ -2951,6 +2951,12 @@
     let bgRaf = null;
     const bgCanvas = $("music-bg-canvas");
     const bgCtx = bgCanvas ? bgCanvas.getContext("2d") : null;
+    const pettingBooth = $("petting-booth");
+    const spectrumCanvas = $("petting-spectrum");
+    const spectrumCtx = spectrumCanvas ? spectrumCanvas.getContext("2d") : null;
+    const frogPetBtn = $("frog-pet");
+    const frogPetImg = $("frog-pet-image");
+    let danceFrame = 0;
 
     const resizeBgCanvas = () => {
       if (!bgCanvas) return;
