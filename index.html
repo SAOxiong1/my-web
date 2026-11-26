@@ -1156,6 +1156,168 @@
       color: var(--muted);
       font-size: 14px;
     }
+
+    /* ========== 音乐播放系统 ========== */
+    .music-widget {
+      position: fixed;
+      right: max(16px, env(safe-area-inset-right, 16px));
+      bottom: max(16px, env(safe-area-inset-bottom, 16px));
+      z-index: 850;
+      display: flex;
+      flex-direction: column;
+      align-items: flex-end;
+      gap: 10px;
+    }
+    .music-panel {
+      width: min(320px, calc(100vw - 32px));
+      background: var(--card);
+      border: 1px solid var(--line);
+      border-radius: var(--r-lg);
+      padding: 16px;
+      box-shadow: 0 18px 40px rgba(24, 34, 28, 0.16);
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+    }
+    .music-panel[hidden] {
+      display: none;
+    }
+    .music-panel-head {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 8px;
+    }
+    .music-now {
+      font-size: 14px;
+      font-weight: 600;
+      color: var(--ink);
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+    }
+    .music-sub {
+      font-size: 12px;
+      color: var(--muted);
+    }
+    .music-controls {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 12px;
+    }
+    .music-btn {
+      width: 36px;
+      height: 36px;
+      border-radius: 50%;
+      border: 1px solid var(--line);
+      background: var(--surface-soft);
+      color: var(--ink);
+      font-size: 14px;
+      cursor: pointer;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+    }
+    .music-btn:hover {
+      border-color: var(--green);
+      background: var(--green-tint);
+    }
+    .music-btn.is-primary {
+      width: 44px;
+      height: 44px;
+      background: var(--green);
+      border-color: var(--green);
+      color: #fffdf8;
+      font-size: 16px;
+    }
+    .music-btn.is-primary:hover {
+      background: var(--green-dark);
+    }
+    .music-volume-row {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      font-size: 12px;
+      color: var(--muted);
+    }
+    .music-volume-row input[type="range"] {
+      flex: 1;
+      accent-color: var(--green);
+    }
+    .music-playlist {
+      max-height: 150px;
+      overflow-y: auto;
+      display: flex;
+      flex-direction: column;
+      gap: 6px;
+      border-top: 1px solid var(--line-soft);
+      padding-top: 10px;
+    }
+    .music-track {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 8px;
+      padding: 7px 10px;
+      border-radius: var(--r-sm);
+      border: 1px solid transparent;
+      background: var(--surface-soft);
+      color: var(--ink);
+      font-size: 13px;
+      cursor: pointer;
+      text-align: left;
+    }
+    .music-track[aria-current="true"] {
+      border-color: var(--green);
+      background: var(--green-tint);
+      font-weight: 600;
+    }
+    .music-upload-label {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 6px;
+      padding: 8px 12px;
+      border-radius: 999px;
+      border: 1px dashed var(--green);
+      background: var(--surface-soft);
+      color: var(--green);
+      font-size: 13px;
+      font-weight: 500;
+      cursor: pointer;
+    }
+    .music-upload-label:hover {
+      background: var(--green-tint);
+    }
+    .music-fab {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      padding: 10px 16px;
+      border-radius: 999px;
+      border: 1px solid var(--line);
+      background: var(--card);
+      color: var(--ink);
+      font-size: 14px;
+      font-weight: 600;
+      box-shadow: 0 10px 24px rgba(24, 34, 28, 0.14);
+      cursor: pointer;
+    }
+    .music-fab:hover {
+      border-color: var(--green);
+      background: var(--green-tint);
+    }
+    .music-dot {
+      width: 8px;
+      height: 8px;
+      border-radius: 50%;
+      background: var(--muted);
+    }
+    .music-dot.is-playing {
+      background: var(--green);
+      box-shadow: 0 0 0 4px rgba(46, 90, 67, 0.2);
+    }
   </style>
 </head>
 <body>
@@ -1344,6 +1506,36 @@
       </div>
       <div class="profile-list" id="profile-list"></div>
     </div>
+  </div>
+
+  <div class="music-widget" id="music-widget" aria-label="音乐播放系统">
+    <div class="music-panel" id="music-panel" hidden>
+      <div class="music-panel-head">
+        <div style="min-width:0;flex:1;">
+          <div class="music-now" id="music-now">午后食光 · 钢琴轻曲</div>
+          <div class="music-sub" id="music-sub">内置轻音乐 · 已暂停</div>
+        </div>
+        <button class="profile-close" id="music-close" type="button" aria-label="收起音乐面板">×</button>
+      </div>
+      <div class="music-controls">
+        <button class="music-btn" id="music-prev" type="button" aria-label="上一首">⏮</button>
+        <button class="music-btn is-primary" id="music-toggle" type="button" aria-label="播放或暂停">▶</button>
+        <button class="music-btn" id="music-next" type="button" aria-label="下一首">⏭</button>
+      </div>
+      <div class="music-volume-row">
+        <span>音量</span>
+        <input id="music-volume" type="range" min="0" max="1" step="0.05" value="0.5" aria-label="音量调节">
+      </div>
+      <div class="music-playlist" id="music-playlist"></div>
+      <label class="music-upload-label">
+        <span>+ 添加本地音乐 (MP3/WAV)</span>
+        <input id="music-upload" type="file" accept="audio/*" multiple hidden>
+      </label>
+    </div>
+    <button class="music-fab" id="music-fab" type="button" aria-expanded="false" aria-controls="music-panel">
+      <span class="music-dot" id="music-dot" aria-hidden="true"></span>
+      <span>音乐</span>
+    </button>
   </div>
 
   <script src="data.js"></script>
@@ -2449,6 +2641,176 @@
     }
 
     syncProfileHeader();
+
+    // ========== 音乐播放系统 ==========
+    const musicFab = $("music-fab");
+    const musicPanel = $("music-panel");
+    const musicClose = $("music-close");
+    const musicNow = $("music-now");
+    const musicSub = $("music-sub");
+    const musicPrev = $("music-prev");
+    const musicToggle = $("music-toggle");
+    const musicNext = $("music-next");
+    const musicVolume = $("music-volume");
+    const musicPlaylist = $("music-playlist");
+    const musicUpload = $("music-upload");
+    const musicDot = $("music-dot");
+
+    const tracks = [
+      { id: "builtin-1", title: "午后食光 · 钢琴轻曲", type: "synth", notes: [261.63, 329.63, 392.00, 523.25, 392.00, 329.63, 293.66, 349.23, 440.00, 349.23], tempo: 650, wave: "sine" },
+      { id: "builtin-2", title: "青蛙营地 · 八音盒", type: "synth", notes: [392.00, 440.00, 523.25, 659.25, 587.33, 523.25, 440.00, 392.00], tempo: 520, wave: "triangle" },
+      { id: "builtin-3", title: "厨房小调 · 温暖木琴", type: "synth", notes: [293.66, 349.23, 440.00, 523.25, 440.00, 349.23, 329.63, 392.00], tempo: 580, wave: "sine" }
+    ];
+    let currentTrackIndex = 0;
+    let isPlayingMusic = false;
+    let audioEl = new Audio();
+    audioEl.loop = false;
+    let audioCtx = null;
+    let synthTimer = null;
+    let noteStep = 0;
+
+    const getVolume = () => (musicVolume ? Number(musicVolume.value) : 0.5);
+
+    const stopSynth = () => {
+      if (synthTimer) {
+        window.clearInterval(synthTimer);
+        synthTimer = null;
+      }
+    };
+
+    const playSynthNote = (freq, waveType) => {
+      if (!audioCtx) audioCtx = new (window.AudioContext || window.webkitAudioContext)();
+      if (audioCtx.state === "suspended") audioCtx.resume();
+      const osc = audioCtx.createOscillator();
+      const gain = audioCtx.createGain();
+      osc.type = waveType || "sine";
+      osc.frequency.setValueAtTime(freq, audioCtx.currentTime);
+      const vol = Math.max(0.001, getVolume() * 0.18);
+      gain.gain.setValueAtTime(0.001, audioCtx.currentTime);
+      gain.gain.exponentialRampToValueAtTime(vol, audioCtx.currentTime + 0.04);
+      gain.gain.exponentialRampToValueAtTime(0.001, audioCtx.currentTime + 0.55);
+      osc.connect(gain);
+      gain.connect(audioCtx.destination);
+      osc.start();
+      osc.stop(audioCtx.currentTime + 0.58);
+    };
+
+    const renderPlaylist = () => {
+      if (!musicPlaylist) return;
+      musicPlaylist.innerHTML = tracks.map((t, idx) => `
+        <button class="music-track" type="button" data-track-idx="${idx}" aria-current="${idx === currentTrackIndex}">
+          <span style="overflow:hidden;text-overflow:ellipsis;white-space:nowrap;">${t.title}</span>
+          <span style="font-size:11px;color:var(--muted);flex-shrink:0;">${t.type === "synth" ? "内置" : "本地"}</span>
+        </button>
+      `).join("");
+    };
+
+    const updateMusicUI = () => {
+      const track = tracks[currentTrackIndex];
+      if (musicNow && track) musicNow.textContent = track.title;
+      if (musicSub && track) musicSub.textContent = `${track.type === "synth" ? "内置轻音乐" : "本地音频"} · ${isPlayingMusic ? "正在播放" : "已暂停"}`;
+      if (musicToggle) musicToggle.textContent = isPlayingMusic ? "⏸" : "▶";
+      if (musicDot) musicDot.classList.toggle("is-playing", isPlayingMusic);
+      renderPlaylist();
+    };
+
+    const playCurrentTrack = () => {
+      const track = tracks[currentTrackIndex];
+      if (!track) return;
+      stopSynth();
+      audioEl.pause();
+      isPlayingMusic = true;
+      if (track.type === "synth") {
+        noteStep = 0;
+        playSynthNote(track.notes[0], track.wave);
+        synthTimer = window.setInterval(() => {
+          if (!isPlayingMusic) return;
+          noteStep = (noteStep + 1) % track.notes.length;
+          playSynthNote(track.notes[noteStep], track.wave);
+        }, track.tempo);
+      } else {
+        audioEl.src = track.url;
+        audioEl.volume = getVolume();
+        audioEl.play().catch(() => { isPlayingMusic = false; updateMusicUI(); });
+      }
+      updateMusicUI();
+    };
+
+    const pauseCurrentTrack = () => {
+      isPlayingMusic = false;
+      stopSynth();
+      audioEl.pause();
+      updateMusicUI();
+    };
+
+    audioEl.addEventListener("ended", () => {
+      currentTrackIndex = (currentTrackIndex + 1) % tracks.length;
+      playCurrentTrack();
+    });
+
+    if (musicFab && musicPanel) {
+      musicFab.addEventListener("click", () => {
+        const willOpen = musicPanel.hidden;
+        musicPanel.hidden = !willOpen;
+        musicFab.setAttribute("aria-expanded", String(willOpen));
+      });
+    }
+    if (musicClose && musicPanel && musicFab) {
+      musicClose.addEventListener("click", () => {
+        musicPanel.hidden = true;
+        musicFab.setAttribute("aria-expanded", "false");
+      });
+    }
+    if (musicToggle) {
+      musicToggle.addEventListener("click", () => {
+        if (isPlayingMusic) pauseCurrentTrack();
+        else playCurrentTrack();
+      });
+    }
+    if (musicPrev) {
+      musicPrev.addEventListener("click", () => {
+        currentTrackIndex = (currentTrackIndex - 1 + tracks.length) % tracks.length;
+        playCurrentTrack();
+      });
+    }
+    if (musicNext) {
+      musicNext.addEventListener("click", () => {
+        currentTrackIndex = (currentTrackIndex + 1) % tracks.length;
+        playCurrentTrack();
+      });
+    }
+    if (musicVolume) {
+      musicVolume.addEventListener("input", () => {
+        audioEl.volume = getVolume();
+      });
+    }
+    if (musicPlaylist) {
+      musicPlaylist.addEventListener("click", (e) => {
+        const btn = e.target.closest("[data-track-idx]");
+        if (!btn) return;
+        currentTrackIndex = Number(btn.dataset.trackIdx);
+        playCurrentTrack();
+      });
+    }
+    if (musicUpload) {
+      musicUpload.addEventListener("change", () => {
+        const files = Array.from(musicUpload.files || []);
+        if (!files.length) return;
+        const startIdx = tracks.length;
+        files.forEach((file) => {
+          tracks.push({
+            id: `local-${Date.now()}-${Math.random().toString(36).slice(2, 6)}`,
+            title: file.name.replace(/\.[^.]+$/, ""),
+            type: "file",
+            url: URL.createObjectURL(file)
+          });
+        });
+        currentTrackIndex = startIdx;
+        playCurrentTrack();
+        musicUpload.value = "";
+      });
+    }
+    updateMusicUI();
   })();
 
   (() => {
